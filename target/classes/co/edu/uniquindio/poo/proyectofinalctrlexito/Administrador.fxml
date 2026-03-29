@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="co.edu.uniquindio.poo.proyectofinalctrlexito.viewController.AdministradorViewController"
+            prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <Label fx:id="lblTitulo" layoutX="211.0" layoutY="72.0" prefHeight="58.0" prefWidth="178.0" text="USUARIO" textFill="#030303">
+            </Label>
+        <Label fx:id="lblInfo" layoutX="231.0" layoutY="157.0" text="Por favor inicie sesión:">
+        </Label>
+        <PasswordField fx:id="txtContrasenaCajero" layoutX="226.0" layoutY="248.0" promptText="Contraseña" />
+        <TextField fx:id="txtUsuarioCajero" layoutX="227.0" layoutY="200.0" promptText="Usuario" />
+        <Button fx:id="btnEntrar" layoutX="341.0" layoutY="306.0" mnemonicParsing="false" onAction="#abrirAdministradorMenu" text="Entrar" />
+        <Button fx:id="btnVolver" layoutX="206.0" layoutY="306.0" mnemonicParsing="false" onAction="#volver" text="Volver" />
+    </children>
+</AnchorPane>
