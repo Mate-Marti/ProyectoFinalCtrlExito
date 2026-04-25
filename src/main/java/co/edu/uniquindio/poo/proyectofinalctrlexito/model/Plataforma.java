@@ -57,6 +57,7 @@ public class Plataforma {
                Usuario user = (Usuario) persona;
                if((user.getId().equals(id))){
                    return true;
+
            }
            }
        }
@@ -74,5 +75,31 @@ public class Plataforma {
 
         System.out.println("Usuario registrado correctamente");
     }
+    public boolean actualizarUsuario(String id, String nuevoNombre, String nuevoCorreo, String nuevoTelefono , String nuevoMetodoPago) {
+        for (Persona persona : listaPersonas) {
+            if (persona instanceof Usuario) {
+                Usuario usuario = (Usuario) persona;
+                if (usuario.getId().equals(id)) {
+                    if (nuevoNombre != null && !nuevoNombre.isEmpty()) {
+                        usuario.setNombreCompleto(nuevoNombre);
+                    }
+                    if (nuevoCorreo != null && !nuevoCorreo.isEmpty()) {
+                        usuario.setCorreo(nuevoCorreo);
+                    }
+                    if (nuevoMetodoPago != null && !nuevoMetodoPago.isEmpty()) {
+                        usuario.setMetodoPago(nuevoMetodoPago);
+                    }
+                    if (nuevoTelefono != null && !nuevoTelefono.isEmpty()) {
+                        usuario.setTelefono(nuevoTelefono);
+                    }
+                    System.out.println("Usuario actualizado exitosamente.");
+                    return true;
+                }
+            }
+        }
+        System.out.println("Usuario con ID " + id + " no encontrado.");
+        return false;
     }
+}
+
 
