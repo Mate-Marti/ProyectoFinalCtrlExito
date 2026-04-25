@@ -2,6 +2,7 @@ package co.edu.uniquindio.poo.proyectofinalctrlexito.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Plataforma {
@@ -93,6 +94,22 @@ public class Plataforma {
                         usuario.setTelefono(nuevoTelefono);
                     }
                     System.out.println("Usuario actualizado exitosamente.");
+                    return true;
+                }
+            }
+        }
+        System.out.println("Usuario con ID " + id + " no encontrado.");
+        return false;
+    }
+    public boolean eliminarUsuario(String id) {
+        Iterator<Persona> iterator = listaPersonas.iterator();
+        while (iterator.hasNext()) {
+            Persona persona = iterator.next();
+            if (persona instanceof Usuario) {
+                Usuario usuario = (Usuario) persona;
+                if (usuario.getId().equals(id)) {
+                    iterator.remove();
+                    System.out.println("Usuario eliminado exitosamente.");
                     return true;
                 }
             }
