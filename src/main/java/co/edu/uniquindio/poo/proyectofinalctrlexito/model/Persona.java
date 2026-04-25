@@ -2,14 +2,14 @@ package co.edu.uniquindio.poo.proyectofinalctrlexito.model;
 
 public class Persona {
 
-    private int id;
+    private String id;
     private String nombreCompleto;
     private String correo;
     private String telefono;
 
     public Persona() {}
 
-    public Persona (int id, String nombreCompleto, String correo, String telefono) {
+    public Persona (String id, String nombreCompleto, String correo, String telefono) {
 
         this.id = id;
         this.nombreCompleto = nombreCompleto;
@@ -18,11 +18,11 @@ public class Persona {
 
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
