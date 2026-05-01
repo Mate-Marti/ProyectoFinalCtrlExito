@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fe85cae1-292e-4066-8370-ead08f3a35a3" name="Changes" comment="Cambio usuario y creacion del metodo registrar y buscar Usuario">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Evento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Evento.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Plataforma.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Plataforma.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

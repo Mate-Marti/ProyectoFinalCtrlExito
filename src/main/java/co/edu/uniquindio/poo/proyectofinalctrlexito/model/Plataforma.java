@@ -2,6 +2,7 @@ package co.edu.uniquindio.poo.proyectofinalctrlexito.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,6 +12,7 @@ public class Plataforma {
     private String descripcion;
     private LocalDate fecha;
     private List<Persona> listaPersonas;
+    private List<Evento> listaEventos;
 
     public Plataforma(int idPlataforma, String tipo, String descripcion) {
         this.idPlataforma = idPlataforma;
@@ -18,6 +20,7 @@ public class Plataforma {
         this.descripcion = descripcion;
         this.fecha = LocalDate.now();
         this.listaPersonas= new ArrayList<>();
+        this.listaEventos= new ArrayList<>();
     }
 
     public int getIdPlataforma() {
@@ -116,6 +119,26 @@ public class Plataforma {
         }
         System.out.println("Usuario con ID " + id + " no encontrado.");
         return false;
+    }
+    public boolean buscarEvento(String id){
+        for(Evento ev:listaEventos){
+            if((ev.getIdEvento().equals(id))){
+                    return true;
+
+                }
+            }
+        return false;
+    }
+    public void registrarEvento(String idEvento, String nombre, String categoria, String descripcion, String estado){
+        if (buscarUsuario(idEvento)) {
+            System.out.println("El usuario ya existe");
+            return;
+        }
+
+        Evento nuevo = new Evento(idEvento, nombre,categoria,descripcion,estado);
+        listaEventos.add(nuevo);
+
+        System.out.println("Usuario registrado correctamente");
     }
 }
 
