@@ -4,8 +4,8 @@ public class Usuario extends Persona {
 
     private String metodoPago;
 
-    public Usuario(String metodoPago) {
-
+    public Usuario(String id, String nombreCompleto, String correo, String telefono,String metodoPago) {
+        super(id,nombreCompleto,correo,telefono);
         this.metodoPago = metodoPago;
 
     }

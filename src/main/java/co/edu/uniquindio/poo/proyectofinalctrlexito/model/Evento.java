@@ -4,29 +4,29 @@ import java.util.Date;
 
 public class Evento {
 
-    private int idEvento;
+    private String idEvento;
     private String nombre;
     private String categoria;
     private String descripcion;
     private Date fecha;
     private String estado;
 
-    public Evento(int idEvento, String nombre, String categoria, String descripcion, Date fecha, String estado) {
+    public Evento(String idEvento, String nombre, String categoria, String descripcion, String estado) {
 
         this.idEvento = idEvento;
         this.nombre = nombre;
         this.categoria = categoria;
         this.descripcion = descripcion;
-        this.fecha = fecha;
+        this.fecha = new Date();
         this.estado = estado;
 
     }
 
-    public int getIdEvento() {
+    public String getIdEvento() {
         return idEvento;
     }
 
-    public void setIdEvento(int idEvento) {
+    public void setIdEvento(String idEvento) {
         this.idEvento = idEvento;
     }
 
