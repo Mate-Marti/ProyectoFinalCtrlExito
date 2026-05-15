@@ -11,7 +11,7 @@ public class Evento {
     private Date fecha;
     private EstadoEvento estado;
 
-    public Evento(int idEvento, String nombre, String categoria, String descripcion, Date fecha, EstadoEvento estado) {
+    public Evento(String idEvento, String nombre, String categoria, String descripcion, Date fecha, EstadoEvento estado) {
 
         this.idEvento = idEvento;
         this.nombre = nombre;
@@ -20,6 +20,9 @@ public class Evento {
         this.fecha = new Date();
         this.estado = estado;
 
+    }
+
+    public Evento(String idEvento, String nombre, String categoria, String descripcion, String estado) {
     }
 
     //Metodo para actualizar los datos del evento
@@ -59,7 +62,7 @@ public class Evento {
     }
 
     //getters y seters
-    public int getIdEvento() {
+    public String getIdEvento() {
         return idEvento;
     }
 
