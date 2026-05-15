@@ -1,6 +1,8 @@
 package co.edu.uniquindio.poo.proyectofinalctrlexito.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Compra {
 
@@ -8,6 +10,10 @@ public class Compra {
     private Date fechaCreacion;
     private double total;
     private EstadoCompra estadoCompra;
+    private Usuario usuario;
+    private Evento evento;
+    private List<Entrada> entradas;
+    private List<ServicioAdicional> serviciosAdicionales;
     //private List<>
     private TipoPago tipoPago;
 
@@ -17,6 +23,10 @@ public class Compra {
         this.total = builder.total;
         this.estadoCompra = new EstadoCreada();
         this.tipoPago = builder.tipoPago;
+        this.usuario= builder.usuario;
+        this.evento= builder.evento;
+        this.serviciosAdicionales = new ArrayList<>();
+        this.entradas = new ArrayList<>();
     }
     public void pagarCompra() {
         estadoCompra.pagar(this);
@@ -32,7 +42,11 @@ public class Compra {
     public String consultarCompra() {
 
         return "Numero compra: " + idCompra +
+                "\nUsuario: " + usuario.getNombreCompleto() +
+                "\nEvento: " + evento.getNombre() +
                 "\nTotal: " + total +
+                "\nCantidad entradas: " + entradas.size() +
+                "\nServicios adicionales: " + serviciosAdicionales.size() +
                 "\nEstado: " + estadoCompra.mostrarEstado() +
                 "\nTipo pago: " + tipoPago;
     }
@@ -48,6 +62,8 @@ public class Compra {
         private Date fechaCreacion;
         private double total;
         private TipoPago tipoPago;
+        private Usuario usuario;
+        private Evento evento;
 
         public Builder() {
         }
@@ -72,6 +88,14 @@ public class Compra {
             this.tipoPago = tipoPago;
             return this;
         }
+        public Builder setEvento(Evento evento) {
+            this.evento= evento;
+            return this;
+        }
+        public Builder setUsuario(Usuario usuario) {
+            this.usuario= usuario;
+            return this;
+        }
 
         public Compra build() {
             return new Compra(this);
@@ -79,7 +103,28 @@ public class Compra {
     }
 
     //getters y setters
+    public Usuario getUsuario() {
+        return usuario;
+    }
 
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Evento getEvento() {
+        return evento;
+    }
+    public List<Entrada> getEntradas() {
+        return entradas;
+    }
+
+    public List<ServicioAdicional> getServiciosAdicionales() {
+        return serviciosAdicionales;
+    }
+
+    public void setEvento(Evento evento) {
+        this.evento = evento;
+    }
     public int getIdCompra() {
         return idCompra;
     }
@@ -119,4 +164,49 @@ public class Compra {
     public void setTipoPago(TipoPago tipoPago) {
         this.tipoPago = tipoPago;
     }
+    public void agregarServicio(ServicioAdicional servicio) {
+
+        serviciosAdicionales.add(servicio);
+
+        calcularTotal();
+    }
+    public void mostrarServicios() {
+
+        for(ServicioAdicional servicio : serviciosAdicionales) {
+
+            System.out.println(servicio.mostrarServicio());
+
+            System.out.println("----------------");
+        }
+    }
+    public void agregarEntrada(Entrada entrada) {
+
+        entradas.add(entrada);
+
+        calcularTotal();
+    }
+    public void calcularTotal() {
+
+        total = 0;
+
+        for(Entrada entrada : entradas) {
+            total += entrada.getPrecioFinal();
+        }
+
+        for(ServicioAdicional servicio : serviciosAdicionales) {
+            total += servicio.getPrecio();
+        }
+    }
+    public void modificarCompra() {
+
+        if(estadoCompra instanceof EstadoCreada) {
+
+            System.out.println("Compra modificada correctamente");
+
+        } else {
+
+            System.out.println("Solo se puede modificar antes de pagar");
+        }
+    }
+
 }
