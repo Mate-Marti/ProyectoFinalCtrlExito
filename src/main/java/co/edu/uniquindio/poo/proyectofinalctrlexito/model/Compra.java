@@ -21,6 +21,17 @@ public class Compra {
 
     }
 
+    //Metodo para cancalar la compra
+    public void cancelarCompra() {
+        this.estadoCompra = EstadoCompra.CANCELADA;
+    }
+
+    //Metodo para consultar la compra
+    public String consultarCompra() {
+        return "Numero de compra:" + idCompra + "Total:" + total + "Estado de la Compra:" + estadoCompra + "TipoPago:" + tipoPago;
+    }
+
+    //getters y setters
     public int getIdCompra() {
         return idCompra;
     }

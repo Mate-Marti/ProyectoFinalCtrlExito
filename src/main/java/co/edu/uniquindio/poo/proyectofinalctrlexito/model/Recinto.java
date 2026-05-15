@@ -6,14 +6,43 @@ public class Recinto {
     private String nombre;
     private String direccion;
     private String ciudad;
+    private Zona zona;
 
-    public Recinto(int idRecinto, String nombre, String direccion, String ciudad) {
+    public Recinto(int idRecinto, String nombre, String direccion, String ciudad , Zona zona) {
 
         this.idRecinto = idRecinto;
         this.nombre = nombre;
         this.direccion = direccion;
         this.ciudad = ciudad;
+        this.zona = zona;
 
+    }
+
+    //Metodo para crear un nuevo recinto
+    public static Recinto crearRecinto(int idRecinto, String nombre, String direccion, String ciudad, Zona zona) {
+        return new Recinto(idRecinto, nombre, direccion, ciudad, zona);
+    }
+
+    //metodo para actualizar datos del recinto
+    public void actualizarRecinto(String nombre, String direccion, String ciudad, Zona zona) {
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.ciudad = ciudad;
+        this.zona = zona;
+    }
+
+    //Metodo para elinimar el recinto
+    public void eliminarRecinto() {
+        this.idRecinto = 0;
+        this.nombre = null;
+        this.direccion = null;
+        this.ciudad = null;
+        this.zona = null;
+    }
+
+    //Metodo para retornar en texto la info del recinto
+    public String listarRecinto() {
+        return "ID:" + idRecinto + "Nombre:" + nombre + "Direccion:" + direccion + "Ciudad:" + ciudad + "Zona:" + zona;
     }
 
     public int getIdRecinto() {

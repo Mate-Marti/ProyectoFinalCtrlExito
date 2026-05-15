@@ -16,6 +16,27 @@ public class Asiento {
 
     }
 
+    //Metodo para habilitar el asiento
+    public void habilitarAsiento() {
+        this.estado = "Habilitado";
+    }
+
+    //Metodo para bloquear el asiento
+    public void bloquearAsiento() {
+        this.estado = "Bloqueado";
+    }
+
+    //Metodo para liberar el asiento
+    public void liberarAsiento() {
+        this.estado = "Liberado";
+    }
+
+    //Metodo para consultar el estado del asiento
+    public String consultarAsiento() {
+        return "ID del asiento:" + this.idAsiento + "Fila:" + this.fila + "Numero:" + this.numero + "Estado:" + this.estado;
+    }
+
+    //Getters y Seters
     public int getIdAsiento() {
         return idAsiento;
     }

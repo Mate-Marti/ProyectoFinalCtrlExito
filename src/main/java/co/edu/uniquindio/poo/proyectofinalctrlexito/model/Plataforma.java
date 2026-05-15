@@ -11,11 +11,11 @@ public class Plataforma {
     private String tipo;
     private String descripcion;
     private LocalDate fecha;
-    private List<Persona> listaPersonas;
-    private List<Evento> listaEventos;
+    private final List<Persona> listaPersonas;
+    private final List<Evento> listaEventos;
 
 
-// Constructor de la clase plataforma, con sus correspondientes atributos, id de la plataforma, su respectivo tipo de evento,
+    // Constructor de la clase plataforma, con sus correspondientes atributos, id de la plataforma, su respectivo tipo de evento,
 // la descripcion de los eventos, la fecha del evento, la lista de las personas, y la lista de los eventos
     public Plataforma(int idPlataforma, String tipo, String descripcion) {
         this.idPlataforma = idPlataforma;
@@ -25,7 +25,7 @@ public class Plataforma {
         this.listaPersonas= new ArrayList<>();
         this.listaEventos= new ArrayList<>();
     }
-//seccion de getters y setters, de los metodos anteriormente declarados
+    //seccion de getters y setters, de los metodos anteriormente declarados
     public int getIdPlataforma() {
         return idPlataforma;
     }
@@ -58,24 +58,24 @@ public class Plataforma {
         this.fecha = fecha;
     }
 
-//Metodo para buscar un usuario especifico en una lista de personas en la plataforma
+    //Metodo para buscar un usuario especifico en una lista de personas en la plataforma
     public boolean buscarUsuario(String id){
-       for(Persona persona:listaPersonas){
-           if(persona instanceof Usuario){
-               Usuario user = (Usuario) persona;
-               if((user.getId().equals(id))){
-                   return true;
+        for(Persona persona:listaPersonas){
+            if(persona instanceof Usuario){
+                Usuario user = (Usuario) persona;
+                if((user.getId().equals(id))){
+                    return true;
 
-           }
-           }
-       }
+                }
+            }
+        }
 
         return false;
     }
 
- //Metodo para registrar un usuario correctamente en la plataforma
- //ademas de verificar que el usuario no sea repetido, es decir
- //no crear un usuario ya existente
+    //Metodo para registrar un usuario correctamente en la plataforma
+    //ademas de verificar que el usuario no sea repetido, es decir
+    //no crear un usuario ya existente
     public void registrarUsuario(String id,String nombre,String correo,String telefono,String metodoPago){
         if (buscarUsuario(id)) {
             System.out.println("El usuario ya existe");
@@ -88,7 +88,7 @@ public class Plataforma {
         System.out.println("Usuario registrado correctamente");
     }
 
-//Metodo que modifica la informaion ya dada y registrada por el usuario a una mas reciente
+    //Metodo que modifica la informaion ya dada y registrada por el usuario a una mas reciente
     public boolean actualizarUsuario(String id, String nuevoNombre, String nuevoCorreo, String nuevoTelefono , String nuevoMetodoPago) {
         for (Persona persona : listaPersonas) {
             if (persona instanceof Usuario) {
@@ -115,7 +115,7 @@ public class Plataforma {
         return false;
     }
 
-//Metodo que elimina a el usuario de la plataforma
+    //Metodo que elimina a el usuario de la plataforma
     public boolean eliminarUsuario(String id) {
         Iterator<Persona> iterator = listaPersonas.iterator();
         while (iterator.hasNext()) {
@@ -133,18 +133,18 @@ public class Plataforma {
         return false;
     }
 
-//Metodo para buscar un evento especifico, dentro de la lista de eventos
+    //Metodo para buscar un evento especifico, dentro de la lista de eventos
     public boolean buscarEvento(String id){
         for(Evento ev:listaEventos){
             if((ev.getIdEvento().equals(id))){
-                    return true;
+                return true;
 
-                }
             }
+        }
         return false;
     }
 
- //Metodo para registrar un evento en la plataforma
+    //Metodo para registrar un evento en la plataforma
     public void registrarEvento(String idEvento, String nombre, String categoria, String descripcion, String estado){
         if (buscarUsuario(idEvento)) {
             System.out.println("El usuario ya existe");
@@ -157,5 +157,4 @@ public class Plataforma {
         System.out.println("Usuario registrado correctamente");
     }
 }
-
 
