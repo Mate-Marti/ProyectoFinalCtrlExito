@@ -15,20 +15,28 @@ public class Compra {
         this.idCompra = builder.idCompra;
         this.fechaCreacion = builder.fechaCreacion;
         this.total = builder.total;
-        this.estadoCompra = builder.estadoCompra;
+        this.estadoCompra = new EstadoCreada();
         this.tipoPago = builder.tipoPago;
     }
-    public void cancelarCompra() {
-        this.estadoCompra = EstadoCompra.CANCELADA;
+    public void pagarCompra() {
+        estadoCompra.pagar(this);
     }
 
-    //Metodo para consultar la compra
-    public String consultarCompra() {
-        return "Numero de compra: " + idCompra +
-                " Total: " + total +
-                " Estado de la Compra: " + estadoCompra +
-                " TipoPago: " + tipoPago;
+    public void confirmarCompra() {
+        estadoCompra.confirmar(this);
     }
+
+    public void cancelarCompra() {
+        estadoCompra.cancelar(this);
+    }
+    public String consultarCompra() {
+
+        return "Numero compra: " + idCompra +
+                "\nTotal: " + total +
+                "\nEstado: " + estadoCompra.mostrarEstado() +
+                "\nTipo pago: " + tipoPago;
+    }
+
 
     //
     // Builder
@@ -39,7 +47,6 @@ public class Compra {
         private int idCompra;
         private Date fechaCreacion;
         private double total;
-        private EstadoCompra estadoCompra;
         private TipoPago tipoPago;
 
         public Builder() {
@@ -60,10 +67,6 @@ public class Compra {
             return this;
         }
 
-        public Builder setEstadoCompra(EstadoCompra estadoCompra) {
-            this.estadoCompra = estadoCompra;
-            return this;
-        }
 
         public Builder setTipoPago(TipoPago tipoPago) {
             this.tipoPago = tipoPago;
