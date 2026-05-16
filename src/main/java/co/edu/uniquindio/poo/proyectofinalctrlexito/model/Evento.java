@@ -1,8 +1,10 @@
 package co.edu.uniquindio.poo.proyectofinalctrlexito.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public class Evento {
+public class Evento implements Subject{
 
     private String idEvento;
     private String nombre;
@@ -10,16 +12,19 @@ public class Evento {
     private String descripcion;
     private Date fecha;
     private EstadoEvento estado;
+    private List<Usuario> usuarios;
+    private List<Observer> observers;
 
-    public Evento(String idEvento, String nombre, String categoria, String descripcion, Date fecha, EstadoEvento estado) {
+    public Evento(String idEvento, String nombre, String categoria, String descripcion) {
 
         this.idEvento = idEvento;
         this.nombre = nombre;
         this.categoria = categoria;
         this.descripcion = descripcion;
         this.fecha = new Date();
-        this.estado = estado;
-
+        this.usuarios=new ArrayList<>();
+        this.observers = new ArrayList<>();
+        this.estado= EstadoEvento.BORRADOR;
     }
 
     //Metodo para actualizar los datos del evento
@@ -57,6 +62,37 @@ public class Evento {
                 "Fecha: " + fecha + "\n" +
                 "Estado actual: " + estado;
     }
+    @Override
+    public void agregarObserver(Observer observer) {
+
+        observers.add(observer);
+    }
+
+    @Override
+    public void eliminarObserver(Observer observer) {
+
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notificarObservers(String mensaje) {
+
+        for (Observer observer : observers) {
+
+            observer.actualizar(mensaje);
+        }
+    }
+
+    public void cambiarEstado(EstadoEvento nuevoEstado) {
+
+        this.estado = nuevoEstado;
+
+        notificarObservers(
+                "El evento " + nombre +
+                        " cambio a estado: " + estado
+        );
+    }
+
 
     //getters y seters
     public String getIdEvento() {
@@ -105,5 +141,12 @@ public class Evento {
 
     public void setEstado(EstadoEvento estado) {
         this.estado = estado;
+    }
+    public List<Observer> getObservers() {
+        return observers;
+    }
+
+    public void setObservers(List<Observer> observers) {
+        this.observers = observers;
     }
 }

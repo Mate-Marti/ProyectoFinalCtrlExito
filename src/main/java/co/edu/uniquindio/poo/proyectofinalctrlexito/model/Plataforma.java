@@ -129,16 +129,14 @@ public class Plataforma {
             }
         return false;
     }
-    public void registrarEvento(String idEvento, String nombre, String categoria, String descripcion, String estado){
-        if (buscarUsuario(idEvento)) {
-            System.out.println("El usuario ya existe");
+    public void registrarEvento(String idEvento, String nombre, String categoria, String descripcion) {
+        if (buscarEvento(idEvento)) {
+            System.out.println("El evento ya existe");
             return;
         }
-
-        Evento nuevo = new Evento(idEvento, nombre,categoria,descripcion,estado);
+        Evento nuevo = new Evento(idEvento, nombre, categoria, descripcion);
         listaEventos.add(nuevo);
-
-        System.out.println("Usuario registrado correctamente");
+        System.out.println("Evento registrado correctamente");
     }
 }
 
