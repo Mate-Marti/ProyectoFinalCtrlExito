@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fe85cae1-292e-4066-8370-ead08f3a35a3" name="Changes" comment="metodos necesarios en la clase administrador">
-      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/EstadoAsiento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Asiento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Asiento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Compra.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Compra.java" afterDir="false" />
+    <list default="true" id="fe85cae1-292e-4066-8370-ead08f3a35a3" name="Changes" comment="modificacion de la clase Asiento">
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Entrada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Entrada.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/EstadoCreada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/EstadoCreada.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +151,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778939015819</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="modificacion de la clase Asiento">
+      <option name="closed" value="true" />
+      <created>1778940113576</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1778940113576</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -182,6 +185,7 @@
     <MESSAGE value="Patron Observer para notificar estado de un evento" />
     <MESSAGE value="Agrego detalles a la clase evento" />
     <MESSAGE value="metodos necesarios en la clase administrador" />
-    <option name="LAST_COMMIT_MESSAGE" value="metodos necesarios en la clase administrador" />
+    <MESSAGE value="modificacion de la clase Asiento" />
+    <option name="LAST_COMMIT_MESSAGE" value="modificacion de la clase Asiento" />
   </component>
 </project>
