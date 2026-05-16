@@ -1,6 +1,6 @@
 package co.edu.uniquindio.poo.proyectofinalctrlexito.model;
 
-public class Asiento {
+public class Asiento implements ComponenteRecinto{
 
     private int idAsiento;
     private String fila;
@@ -34,6 +34,15 @@ public class Asiento {
     //Metodo para consultar el estado del asiento
     public String consultarAsiento() {
         return "ID del asiento:" + this.idAsiento + "Fila:" + this.fila + "Numero:" + this.numero + "Estado:" + this.estado;
+    }
+
+    //metodo para obtener la disponibilidad
+    @Override
+    public int obtenerDisponibilidad() {
+        if (this.estado.equalsIgnoreCase("Disponible")) {
+            return 1;
+        }
+        return 0;
     }
 
     //Getters y Seters

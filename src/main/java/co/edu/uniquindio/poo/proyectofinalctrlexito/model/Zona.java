@@ -3,7 +3,7 @@ package co.edu.uniquindio.poo.proyectofinalctrlexito.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Zona {
+public class Zona implements ComponenteRecinto{
 
     private int idZona;
     private String nombre;
@@ -56,6 +56,16 @@ public class Zona {
             }
         }
         return capacidad;
+    }
+
+    //metodo para obtener la disponibilidad
+    @Override
+    public int obtenerDisponibilidad() {
+        int totalDisponibles = 0;
+        for (int i = 0; i < listaAsientos.size(); i++) {
+            totalDisponibles = totalDisponibles + listaAsientos.get(i).obtenerDisponibilidad();
+        }
+        return totalDisponibles;
     }
 
     //getters y setters
