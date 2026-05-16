@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyectofinalctrlexito.viewController.GestionCompraViewController">
+   <children>
+      <Label fx:id="lblTituloCompra" layoutX="51.0" layoutY="78.0" prefHeight="58.0" prefWidth="498.0" text="GESTION DE LAS COMPRAS">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnVolver" layoutX="497.0" layoutY="338.0" mnemonicParsing="false" onAction="#volver" text="Volver" />
+   </children>
+</AnchorPane>
