@@ -28,26 +28,33 @@ public class Evento implements Subject{
     }
 
     //Metodo para actualizar los datos del evento
-    public void actualizareEvento(String nombre, String categoria, String descripcion, Date fecha) {
+    public void actualizarEvento(String nombre, String categoria, String descripcion, Date fecha) {
         this.nombre = nombre;
         this.categoria = categoria;
         this.descripcion = descripcion;
         this.fecha = fecha;
     }
-
+    //Metodo para poner en estado de finalizado
+    public void finalizarEvento() {
+        this.estado = EstadoEvento.FINALIZADO;
+        notificarObservers("El evento " + nombre +" ha finalizado"        );
+    }
     //Metodo para poner en estado de publicado
     public void publicarEvento() {
         this.estado = EstadoEvento.PUBLICADO;
+        notificarObservers("El evento " + nombre +" fue publicado");
     }
 
     //Metodo para poner en estado de pausado
     public void pausarEvento() {
         this.estado = EstadoEvento.PAUSADO;
+        notificarObservers("El evento " + nombre +" ha sido pausado");
     }
 
     //Metodo para poner en estado de cancelado
     public void cancelarEvento() {
         this.estado = EstadoEvento.CANCELADO;
+        notificarObservers("El evento " + nombre +" ha sido cancelado");
     }
 
     //metodo para validar si el evento esta disponible
@@ -61,6 +68,18 @@ public class Evento implements Subject{
                 "Descripción: " + descripcion + "\n" +
                 "Fecha: " + fecha + "\n" +
                 "Estado actual: " + estado;
+    }
+    public void agregarUsuario(Usuario usuario) {
+
+        usuarios.add(usuario);
+
+        agregarObserver(usuario);
+    }
+    public void eliminarUsuario(Usuario usuario) {
+
+        usuarios.remove(usuario);
+
+        eliminarObserver(usuario);
     }
     @Override
     public void agregarObserver(Observer observer) {
@@ -82,17 +101,6 @@ public class Evento implements Subject{
             observer.actualizar(mensaje);
         }
     }
-
-    public void cambiarEstado(EstadoEvento nuevoEstado) {
-
-        this.estado = nuevoEstado;
-
-        notificarObservers(
-                "El evento " + nombre +
-                        " cambio a estado: " + estado
-        );
-    }
-
 
     //getters y seters
     public String getIdEvento() {
@@ -148,5 +156,12 @@ public class Evento implements Subject{
 
     public void setObservers(List<Observer> observers) {
         this.observers = observers;
+    }
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 }
