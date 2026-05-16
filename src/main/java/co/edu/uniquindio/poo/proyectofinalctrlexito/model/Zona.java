@@ -48,13 +48,14 @@ public class Zona implements ComponenteRecinto{
     }
 
     //Metodo para consultar la capacidad de la Zona
-    public int consultarCapacidadZona(Asiento asiento) {
+    public int consultarCapacidadZona() {
         int capacidad = 0;
-        for (Asiento asientos : listaAsientos) {
-            if (asientos.getEstado().equalsIgnoreCase("Disponible")) {
-                capacidad += 1;
+        for (Asiento asiento : listaAsientos) {
+            if (asiento.getEstado() == EstadoAsiento.DISPONIBLE) {
+                capacidad++;
             }
         }
+
         return capacidad;
     }
 

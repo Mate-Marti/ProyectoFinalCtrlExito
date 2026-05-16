@@ -49,7 +49,14 @@ public class Asiento {
 
         return estado == EstadoAsiento.DISPONIBLE;
     }
+    public int obtenerDisponibilidad() {
 
+        if (validarDisponibilidad()) {
+            return 1;
+        }
+
+        return 0;
+    }
     //Getters y Seters
     public int getIdAsiento() {
         return idAsiento;
