@@ -5,12 +5,43 @@ public class Entrada {
     private int idEntrada;
     private double precioFinal;
     private EstadoEntrada estadoEntrada;
+    private Asiento asiento;
+    private Zona zona;
+    private static int contador = 1;
 
-    public Entrada(double precioFinal, EstadoEntrada estadoEntrada) {
-
+    public Entrada(double precioFinal, EstadoEntrada estadoEntrada,Asiento asiento,Zona zona) {
+        this.idEntrada = contador++;
         this.precioFinal = precioFinal;
         this.estadoEntrada = estadoEntrada;
+        this.asiento= asiento;
+        this.zona=zona;
 
+    }
+    public void anularEntrada() {
+        this.estadoEntrada = EstadoEntrada.ANULADA;
+    }
+    public void usarEntrada() {
+        this.estadoEntrada = EstadoEntrada.USADA;
+    }
+
+    public boolean estaActiva() {
+        return this.estadoEntrada == EstadoEntrada.ACTIVA;
+    }
+
+    public Zona getZona() {
+        return zona;
+    }
+
+    public void setZona(Zona zona) {
+        this.zona = zona;
+    }
+
+    public Asiento getAsiento() {
+        return asiento;
+    }
+
+    public void setAsiento(Asiento asiento) {
+        this.asiento = asiento;
     }
 
     public int getIdEntrada() {
@@ -35,5 +66,14 @@ public class Entrada {
 
     public void setEstadoEntrada(EstadoEntrada estadoEntrada) {
         this.estadoEntrada = estadoEntrada;
+    }
+
+    public String consultarEntrada() {
+        return "Entrada{" +
+                "idEntrada=" + idEntrada +
+                ", precioFinal=" + precioFinal +
+                ", estadoEntrada=" + estadoEntrada +
+                ", asiento=" + asiento +
+                '}';
     }
 }
