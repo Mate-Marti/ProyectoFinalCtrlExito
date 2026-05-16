@@ -11,6 +11,38 @@ public class Administrador extends Persona{
         this.contrasenia = contrasenia;
 
     }
+    public void publicarEvento(Evento evento) {
+
+        evento.publicarEvento();
+
+        System.out.println("Evento publicado");
+    }
+
+    public void pausarEvento(Evento evento) {
+
+        evento.pausarEvento();
+
+        System.out.println("Evento pausado");
+    }
+
+    public void cancelarEvento(Evento evento) {
+
+        evento.cancelarEvento();
+
+        System.out.println("Evento cancelado");
+    }
+    public void finalizaEvento(Evento evento) {
+
+        evento.finalizarEvento();
+
+        System.out.println("Evento finalizado");
+    }
+    public void cancelarCompra(Compra compra) {
+
+        compra.cancelarCompra();
+
+        System.out.println("Compra cancelada");
+    }
 
     public String getUsuario() {
         return usuario;
