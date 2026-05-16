@@ -5,12 +5,22 @@ public class Entrada {
     private int idEntrada;
     private double precioFinal;
     private EstadoEntrada estadoEntrada;
+    private Asiento asiento;
 
-    public Entrada(double precioFinal, EstadoEntrada estadoEntrada) {
+    public Entrada(double precioFinal, EstadoEntrada estadoEntrada,Asiento asiento) {
 
         this.precioFinal = precioFinal;
         this.estadoEntrada = estadoEntrada;
+        this.asiento= asiento;
 
+    }
+
+    public Asiento getAsiento() {
+        return asiento;
+    }
+
+    public void setAsiento(Asiento asiento) {
+        this.asiento = asiento;
     }
 
     public int getIdEntrada() {
@@ -35,5 +45,14 @@ public class Entrada {
 
     public void setEstadoEntrada(EstadoEntrada estadoEntrada) {
         this.estadoEntrada = estadoEntrada;
+    }
+
+    public String consultarEntrada() {
+        return "Entrada{" +
+                "idEntrada=" + idEntrada +
+                ", precioFinal=" + precioFinal +
+                ", estadoEntrada=" + estadoEntrada +
+                ", asiento=" + asiento +
+                '}';
     }
 }

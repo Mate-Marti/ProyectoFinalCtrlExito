@@ -19,7 +19,7 @@ public class Compra {
 
     private Compra(Builder builder) {
         this.idCompra = builder.idCompra;
-        this.fechaCreacion = builder.fechaCreacion;
+        this.fechaCreacion = new Date();
         this.total = builder.total;
         this.estadoCompra = new EstadoCreada();
         this.tipoPago = builder.tipoPago;
@@ -59,7 +59,6 @@ public class Compra {
     public static class Builder {
 
         private int idCompra;
-        private Date fechaCreacion;
         private double total;
         private TipoPago tipoPago;
         private Usuario usuario;
@@ -73,10 +72,6 @@ public class Compra {
             return this;
         }
 
-        public Builder setFechaCreacion(Date fechaCreacion) {
-            this.fechaCreacion = fechaCreacion;
-            return this;
-        }
 
         public Builder setTotal(double total) {
             this.total = total;
@@ -180,11 +175,17 @@ public class Compra {
         }
     }
     public void agregarEntrada(Entrada entrada) {
-
-        entradas.add(entrada);
-
-        calcularTotal();
+        Asiento asiento = entrada.getAsiento();
+        if(asiento.validarDisponibilidad()) {
+            entradas.add(entrada);
+            asiento.reservarAsiento();
+            calcularTotal();
+            System.out.println("Entrada agregada correctamente");
+        } else {
+            System.out.println("El asiento no esta disponible");
+        }
     }
+
     public void calcularTotal() {
 
         total = 0;
@@ -197,9 +198,10 @@ public class Compra {
             total += servicio.getPrecio();
         }
     }
-    public void modificarCompra() {
-
+    public void modificarCompra(TipoPago nuevoTipoPago) {
         if(estadoCompra instanceof EstadoCreada) {
+
+            this.tipoPago = nuevoTipoPago;
 
             System.out.println("Compra modificada correctamente");
 
@@ -208,5 +210,27 @@ public class Compra {
             System.out.println("Solo se puede modificar antes de pagar");
         }
     }
+    public void mostrarEntradas() {
 
+        for(Entrada entrada : entradas) {
+
+            System.out.println(entrada.consultarEntrada());
+
+            System.out.println("----------------");
+        }
+    }
+    public void eliminarEntrada(Entrada entrada) {
+
+        entradas.remove(entrada);
+
+        entrada.getAsiento().liberarAsiento();
+
+        calcularTotal();
+    }
+    public void eliminarServicio(ServicioAdicional servicio) {
+
+        serviciosAdicionales.remove(servicio);
+
+        calcularTotal();
+    }
 }

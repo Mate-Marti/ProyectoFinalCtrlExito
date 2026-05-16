@@ -4,9 +4,14 @@ public class EstadoCreada implements EstadoCompra{
     @Override
     public void pagar(Compra compra) {
 
-        System.out.println("Compra pagada correctamente");
-
         compra.setEstadoCompra(new EstadoPagada());
+
+        for(Entrada entrada : compra.getEntradas()) {
+
+            entrada.getAsiento().venderAsiento();
+        }
+
+        System.out.println("Compra pagada correctamente");
     }
 
     @Override
@@ -17,10 +22,11 @@ public class EstadoCreada implements EstadoCompra{
 
     @Override
     public void cancelar(Compra compra) {
-
-        System.out.println("Compra cancelada");
-
         compra.setEstadoCompra(new EstadoCancelada());
+        for(Entrada entrada : compra.getEntradas()) {
+            entrada.getAsiento().liberarAsiento();
+        }
+        System.out.println("Compra cancelada");
     }
 
     @Override
