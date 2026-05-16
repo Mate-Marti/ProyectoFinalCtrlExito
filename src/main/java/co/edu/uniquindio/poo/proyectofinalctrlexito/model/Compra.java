@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Compra {
+public class Compra implements Visitor{
 
     private int idCompra;
     private Date fechaCreacion;
@@ -95,6 +95,12 @@ public class Compra {
         public Compra build() {
             return new Compra(this);
         }
+    }
+
+    //Metodo complementario al patron Visitor
+    @Override
+    public void aceptarVisitante(ReporteVisitor visitor) {
+        visitor.visitarCompra(this);
     }
 
     //getters y setters

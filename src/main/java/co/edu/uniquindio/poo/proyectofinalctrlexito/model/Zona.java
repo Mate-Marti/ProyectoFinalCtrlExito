@@ -3,7 +3,7 @@ package co.edu.uniquindio.poo.proyectofinalctrlexito.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Zona implements ComponenteRecinto{
+public class Zona implements ComponenteRecinto, Visitor {
 
     private int idZona;
     private String nombre;
@@ -67,6 +67,12 @@ public class Zona implements ComponenteRecinto{
             totalDisponibles = totalDisponibles + listaAsientos.get(i).obtenerDisponibilidad();
         }
         return totalDisponibles;
+    }
+
+    //Metodo complementario all patron Visitor
+    @Override
+    public void aceptarVisitante(ReporteVisitor visitor) {
+        visitor.visitarZona(this);
     }
 
     //getters y setters

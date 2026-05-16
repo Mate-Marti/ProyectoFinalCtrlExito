@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Evento implements Subject{
+public class Evento implements Subject, Visitor{
 
     private String idEvento;
     private String nombre;
@@ -100,6 +100,12 @@ public class Evento implements Subject{
 
             observer.actualizar(mensaje);
         }
+    }
+
+    //Metodo complementario al patron Visitor
+    @Override
+    public void aceptarVisitante(ReporteVisitor visitor){
+        visitor.visitarEvento(this);
     }
 
     //getters y seters

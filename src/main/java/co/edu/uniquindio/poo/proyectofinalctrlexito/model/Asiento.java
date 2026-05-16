@@ -1,6 +1,6 @@
 package co.edu.uniquindio.poo.proyectofinalctrlexito.model;
 
-public class Asiento {
+public class Asiento{
 
     private int idAsiento;
     private String fila;
