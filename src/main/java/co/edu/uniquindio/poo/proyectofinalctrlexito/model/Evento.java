@@ -4,7 +4,7 @@ import java.util.Date;
 
 public abstract class Evento {
 
-    private int idEvento;
+    private String idEvento;
     private String nombre;
     private String categoria;
     private String descripcion;
@@ -19,7 +19,7 @@ public abstract class Evento {
         this.nombre = nombre;
         this.categoria = categoria;
         this.descripcion = descripcion;
-        this.fecha = fecha;
+        this.fecha = new Date();
         this.estado = estado;
 
     }
@@ -65,7 +65,7 @@ public abstract class Evento {
         return idEvento;
     }
 
-    public void setIdEvento(int idEvento) {
+    public void setIdEvento(String idEvento) {
         this.idEvento = idEvento;
     }
 
