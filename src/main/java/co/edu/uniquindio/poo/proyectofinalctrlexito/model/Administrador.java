@@ -1,15 +1,30 @@
 package co.edu.uniquindio.poo.proyectofinalctrlexito.model;
 
+import java.util.ArrayList;
+
 public class Administrador extends Persona{
 
     private String usuario;
     private String contrasenia;
+    private ArrayList<Incidencia> incidencias = new ArrayList<>();
 
     public Administrador(String usuario, String contrasenia) {
 
         this.usuario = usuario;
         this.contrasenia = contrasenia;
 
+    }
+    public void registrarIncidencia(Incidencia incidencia) {
+        incidencias.add(incidencia);
+    }
+
+    public ArrayList<Incidencia> consultarIncidencias() {
+        return incidencias;
+    }
+    public void mostrarIncidencias() {
+        for (Incidencia i : incidencias) {
+            System.out.println(i);
+        }
     }
     public void publicarEvento(Evento evento) {
 

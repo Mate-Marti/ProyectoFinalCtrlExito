@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fe85cae1-292e-4066-8370-ead08f3a35a3" name="Changes" comment="modificacion de la clase Asiento">
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Entrada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Entrada.java" afterDir="false" />
+    <list default="true" id="fe85cae1-292e-4066-8370-ead08f3a35a3" name="Changes" comment="modificacion de la clase Entrada">
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/EntidadAfectada.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/TipoIncidencia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Administrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Administrador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Incidencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Incidencia.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +163,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778940113576</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="modificacion de la clase Entrada">
+      <option name="closed" value="true" />
+      <created>1778940461895</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1778940461895</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,6 +198,7 @@
     <MESSAGE value="Agrego detalles a la clase evento" />
     <MESSAGE value="metodos necesarios en la clase administrador" />
     <MESSAGE value="modificacion de la clase Asiento" />
-    <option name="LAST_COMMIT_MESSAGE" value="modificacion de la clase Asiento" />
+    <MESSAGE value="modificacion de la clase Entrada" />
+    <option name="LAST_COMMIT_MESSAGE" value="modificacion de la clase Entrada" />
   </component>
 </project>
