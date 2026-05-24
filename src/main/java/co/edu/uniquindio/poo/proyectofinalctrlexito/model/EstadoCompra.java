@@ -1,10 +1,11 @@
 package co.edu.uniquindio.poo.proyectofinalctrlexito.model;
 
-public enum EstadoCompra {
-    CREADA,
-    PAPAGADA,
-    CONFIRMADA,
-    CANCELADA,
-    REEMBOLSADA,
-    INCIDENCIA
+public interface EstadoCompra {
+    void pagar(Compra compra);
+
+    void confirmar(Compra compra);
+
+    void cancelar(Compra compra);
+
+    String mostrarEstado();
 }

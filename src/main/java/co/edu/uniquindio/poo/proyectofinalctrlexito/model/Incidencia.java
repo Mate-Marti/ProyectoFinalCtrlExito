@@ -5,17 +5,35 @@ import java.util.Date;
 public class Incidencia {
 
     private int idIncidencia;
-    private String tipo;
     private String descripcion;
     private Date fechaIncidencia;
+    private TipoIncidencia tipo;
+    private EntidadAfectada entidad;
 
-    public Incidencia (int idIncidencia, String tipo, String descripcion, Date fechaIncidencia) {
+    public Incidencia (int idIncidencia, String descripcion, Date fechaIncidencia,TipoIncidencia tipo,EntidadAfectada entidad) {
 
         this.idIncidencia = idIncidencia;
-        this.tipo = tipo;
         this.descripcion = descripcion;
         this.fechaIncidencia = fechaIncidencia;
+        this.tipo=tipo;
+        this.entidad =entidad;
+    }
 
+    public EntidadAfectada getEntidad() {
+        return entidad;
+    }
+    @Override
+    public String toString() {
+        return "Incidencia{" +
+                "id=" + idIncidencia +
+                ", descripcion='" + descripcion + '\'' +
+                ", fecha=" + fechaIncidencia +
+                ", tipo=" + tipo +
+                '}';
+    }
+
+    public void setEntidad(EntidadAfectada entidad) {
+        this.entidad = entidad;
     }
 
     public int getIdIncidencia() {
@@ -26,11 +44,11 @@ public class Incidencia {
         this.idIncidencia = idIncidencia;
     }
 
-    public String getTipo() {
+    public TipoIncidencia getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoIncidencia tipo) {
         this.tipo = tipo;
     }
 

@@ -3,7 +3,7 @@ package co.edu.uniquindio.poo.proyectofinalctrlexito.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Recinto implements ComponenteRecinto {
+public class Recinto implements ComponenteRecinto, Visitor {
 
     private int idRecinto;
     private String nombre;
@@ -52,6 +52,7 @@ public class Recinto implements ComponenteRecinto {
         return "ID:" + idRecinto + "Nombre:" + nombre + "Direccion:" + direccion + "Ciudad:" + ciudad;
     }
 
+    //Metodo para obtener la disponibilidad del recinto
     @Override
     public int obtenerDisponibilidad() {
         int totalDisponibles = 0;
@@ -61,6 +62,13 @@ public class Recinto implements ComponenteRecinto {
         return totalDisponibles;
     }
 
+    //Metodo complementario al patron Visitor
+    @Override
+    public void aceptarVisitante(ReporteVisitor visitor){
+        visitor.visitarRecinto(this);
+    }
+
+    //getters y setters
     public int getIdRecinto() {
         return idRecinto;
     }
