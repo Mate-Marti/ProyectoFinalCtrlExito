@@ -136,7 +136,7 @@ public class Plataforma {
     //Metodo para buscar un evento especifico, dentro de la lista de eventos
     public boolean buscarEvento(String id){
         for(Evento ev:listaEventos){
-            if((ev.getIdEvento().equals(id))){
+            if((ev.getIdEvento().equals(int))){
                 return true;
 
             }
@@ -145,7 +145,7 @@ public class Plataforma {
     }
 
     //Metodo para registrar un evento en la plataforma
-    public void registrarEvento(String idEvento, String nombre, String categoria, String descripcion, String estado){
+    public void registrarEvento(String idEvento, String nombre, String categoria, String descripcion,Date fecha, EstadoEvento estado){
         if (buscarUsuario(idEvento)) {
             System.out.println("El usuario ya existe");
             return;
