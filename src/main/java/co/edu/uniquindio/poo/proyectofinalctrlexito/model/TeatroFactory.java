@@ -5,8 +5,17 @@ import java.util.Date;
 public class TeatroFactory extends EventoFactory {
 
     @Override
-    public Evento crearEvento(int id, String nombre, String descripcion, Date fecha) {
-        return new TeatroEvento(id, nombre, "Teatro", descripcion, fecha, EstadoEvento.BORRADOR);
+    public Evento crearEvento(int id,
+                              String nombre,
+                              String descripcion,
+                              Date fecha) {
+
+        return new TeatroEvento(
+                String.valueOf(id),
+                nombre,
+                "Teatro",
+                descripcion
+        );
     }
 
 }
