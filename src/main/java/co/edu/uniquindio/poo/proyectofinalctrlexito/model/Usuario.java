@@ -40,4 +40,53 @@ public class Usuario extends Persona implements Observer, Visitor{
 
         compras.add(compra);
     }
+
+    public List<Compra> getCompras() {
+        return compras;
+    }
+    public void seleccionarEntrada(Compra compra, Entrada entrada) {
+        if (compra == null || entrada == null) {
+            throw new IllegalArgumentException("La compra y la entrada no pueden ser nulas.");
+        }
+        if (!compras.contains(compra)) {
+            System.out.println("La compra no pertenece a este usuario.");
+            return;
+        }
+        compra.agregarEntrada(entrada);
+        System.out.println("Entrada seleccionada correctamente para: " + getNombreCompleto());
+    }
+    public void solicitarCancelacion(Compra compra) {
+        if (compra == null) {
+            throw new IllegalArgumentException("La compra no puede ser nula.");
+        }
+        if (!compras.contains(compra)) {
+            System.out.println("La compra no pertenece a este usuario.");
+            return;
+        }
+        compra.cancelarCompra();
+        System.out.println("Cancelacion solicitada por: " + getNombreCompleto());
+    }
+    public void descargarComprobante(Compra compra) {
+        if (compra == null) {
+            throw new IllegalArgumentException("La compra no puede ser nula.");
+        }
+        if (!compras.contains(compra)) {
+            System.out.println("La compra no pertenece a este usuario.");
+            return;
+        }
+        System.out.println("===== COMPROBANTE DE COMPRA =====");
+        System.out.println(compra.consultarCompra());
+        System.out.println("=================================");
+    }
+    public void agregarServicioACompra(Compra compra, ServicioAdicional servicio) {
+        if (compra == null || servicio == null) {
+            throw new IllegalArgumentException("La compra y el servicio no pueden ser nulos.");
+        }
+        if (!compras.contains(compra)) {
+            System.out.println("La compra no pertenece a este usuario.");
+            return;
+        }
+        compra.agregarServicio(servicio);
+        System.out.println("Servicio agregado correctamente a la compra de: " + getNombreCompleto());
+    }
 }
