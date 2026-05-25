@@ -1,6 +1,7 @@
 package co.edu.uniquindio.poo.proyectofinalctrlexito.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Administrador extends Persona{
 
@@ -15,13 +16,21 @@ public class Administrador extends Persona{
 
     }
     public void registrarIncidencia(Incidencia incidencia) {
+        if (incidencia == null) {
+            throw new IllegalArgumentException("La incidencia no puede ser nula.");
+        }
         incidencias.add(incidencia);
+        System.out.println("Incidencia registrada: " + incidencia);
     }
 
-    public ArrayList<Incidencia> consultarIncidencias() {
+    public List<Incidencia> consultarIncidencias() {
         return incidencias;
     }
     public void mostrarIncidencias() {
+        if (incidencias.isEmpty()) {
+            System.out.println("No hay incidencias registradas.");
+            return;
+        }
         for (Incidencia i : incidencias) {
             System.out.println(i);
         }

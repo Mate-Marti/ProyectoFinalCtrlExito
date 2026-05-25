@@ -233,4 +233,69 @@ public class Compra {
 
         calcularTotal();
     }
+    public void realizarPago(MedioPago medioPago) {
+        if (medioPago == null) {
+            throw new IllegalArgumentException("El medio de pago no puede ser nulo.");
+        }
+        this.tipoPago = medioPago.getTipoPago();
+        medioPago.procesarPago(this.total);
+        pagarCompra();
+
+        System.out.println("Pago realizado. Total cobrado: " + this.total);
+    }
+    public void modificarPago(MedioPago nuevoMedioPago) {
+        if (!(estadoCompra instanceof EstadoCreada)) {
+            System.out.println("Solo se puede modificar el pago antes de confirmar.");
+            return;
+        }
+        if (nuevoMedioPago == null) {
+            throw new IllegalArgumentException("El medio de pago no puede ser nulo.");
+        }
+        this.tipoPago = nuevoMedioPago.getTipoPago();
+        System.out.println("Medio de pago actualizado a: " + this.tipoPago);
+    }
+    public Entrada generarEntrada(Asiento asiento, Zona zona) {
+        if (asiento == null || zona == null) {
+            throw new IllegalArgumentException("El asiento y la zona no pueden ser nulos.");
+        }
+        if (!asiento.validarDisponibilidad()) {
+            System.out.println("El asiento no está disponible.");
+            return null;
+        }
+
+        Entrada entrada = new Entrada(zona.getPreciobase(), EstadoEntrada.ACTIVA, asiento, zona);
+
+        agregarEntrada(entrada);
+
+        System.out.println("------ TICKET GENERADO ------");
+        System.out.println("Compra N°:   " + idCompra);
+        System.out.println("Usuario:     " + usuario.getNombreCompleto());
+        System.out.println("Evento:      " + evento.getNombre());
+        System.out.println("Zona:        " + zona.getNombre());
+        System.out.println("Asiento:     " + asiento);
+        System.out.println("Precio:      $" + zona.getPreciobase());
+        System.out.println("Estado:      " + EstadoEntrada.ACTIVA);
+        System.out.println("-----------------------------");
+
+        return entrada;
+    }
+    public void reembolsarCompra() {
+        if (estadoCompra instanceof EstadoCreada) {
+            System.out.println("La compra aún no ha sido pagada, use cancelarCompra().");
+            return;
+        }
+        for (Entrada entrada : entradas) {
+            entrada.anularEntrada();
+            entrada.getAsiento().liberarAsiento();
+        }
+
+        this.estadoCompra = new EstadoReembolsada();
+
+        System.out.println("------ REEMBOLSO PROCESADO ------");
+        System.out.println("Compra N°:  " + idCompra);
+        System.out.println("Usuario:    " + usuario.getNombreCompleto());
+        System.out.println("Evento:     " + evento.getNombre());
+        System.out.println("Total reembolsado: $" + total);
+        System.out.println("---------------------------------");
+    }
 }

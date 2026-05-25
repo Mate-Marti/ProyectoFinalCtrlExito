@@ -145,16 +145,88 @@ public class Plataforma {
     }
 
     //Metodo para registrar un evento en la plataforma
-    public void registrarEvento(String idEvento, String nombre, String categoria, String descripcion, String estado){
-        if (buscarUsuario(idEvento)) {
-            System.out.println("El usuario ya existe");
-            return;
+    public void registrarEvento(String idEvento, String nombre, String categoria, String descripcion) {
+              for (Evento e : listaEventos) {
+            if (e.getIdEvento().equals(idEvento)) {
+                System.out.println("Ya existe un evento con el ID: " + idEvento);
+                return;
+            }
         }
-
-        Evento nuevo = new Evento(idEvento, nombre,categoria,descripcion,estado);
+            Evento nuevo = new Evento(idEvento, nombre, categoria, descripcion);
         listaEventos.add(nuevo);
 
-        System.out.println("Usuario registrado correctamente");
+        System.out.println("Evento registrado correctamente: " + nombre);
+    }
+
+    public String estadoCompra(int idCompra) {
+        for (Persona persona : listaPersonas) {
+            if (persona instanceof Usuario) {
+                Usuario usuario = (Usuario) persona;  // cast manual
+                for (Compra compra : usuario.getCompras()) {
+                    if (compra.getIdCompra() == idCompra) {
+                        return "Estado de compra " + idCompra + ": "
+                                + compra.getEstadoCompra().mostrarEstado();
+                    }
+                }
+            }
+        }
+        System.out.println("No se encontró la compra con ID: " + idCompra);
+        return null;
+    }
+
+    public void listarEventos() {
+        if (listaEventos.isEmpty()) {
+            System.out.println("No hay eventos registrados.");
+            return;
+        }
+        for (Evento evento : listaEventos) {
+            System.out.println(evento.obtenerDetalleEvento());
+            System.out.println("----------------");
+        }
+    }
+    public void listarUsuarios() {
+        boolean hayUsuarios = false;
+        for (Persona persona : listaPersonas) {
+            if (persona instanceof Usuario) {
+                Usuario usuario = (Usuario) persona;
+                System.out.println(usuario);
+                hayUsuarios = true;
+            }
+        }
+        if (!hayUsuarios) {
+            System.out.println("No hay usuarios registrados.");
+        }
+    }
+    public boolean reasignarCompra(int idCompra, Entrada entradaVieja, Asiento nuevoAsiento) {
+        if (nuevoAsiento == null || entradaVieja == null) {
+            throw new IllegalArgumentException("La entrada y el asiento no pueden ser nulos.");
+        }
+        for (Persona persona : listaPersonas) {
+            if (persona instanceof Usuario) {
+                Usuario usuario = (Usuario) persona;  // cast manual
+                for (Compra compra : usuario.getCompras()) {
+                    if (compra.getIdCompra() == idCompra) {
+                        compra.eliminarEntrada(entradaVieja);
+                        entradaVieja.setAsiento(nuevoAsiento);
+                        compra.agregarEntrada(entradaVieja);
+                        System.out.println("Compra " + idCompra + " reasignada correctamente.");
+                        return true;
+                    }
+                }
+            }
+        }
+        System.out.println("No se encontró la compra con ID: " + idCompra);
+        return false;
+    }
+    public boolean eliminarEvento(String idEvento) {
+        boolean eliminado = listaEventos.removeIf(e -> e.getIdEvento().equals(idEvento));
+        if (eliminado) {
+            System.out.println("Evento " + idEvento + " eliminado correctamente.");
+        } else {
+            System.out.println("No se encontró el evento con ID: " + idEvento);
+        }
+        return eliminado;
     }
 }
+
 
