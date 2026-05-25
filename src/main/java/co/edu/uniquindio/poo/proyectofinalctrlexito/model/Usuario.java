@@ -3,7 +3,7 @@ package co.edu.uniquindio.poo.proyectofinalctrlexito.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Usuario extends Persona implements Observer{
+public class Usuario extends Persona implements Observer, Visitor{
 
     private String metodoPago;
     private List<Compra> compras;
@@ -28,6 +28,12 @@ public class Usuario extends Persona implements Observer{
         System.out.println("Notificacion para: " + getNombreCompleto());
 
         System.out.println(mensaje);
+    }
+
+    //Metodo complementario al patron Visitor
+    @Override
+    public void aceptarVisitante(ReporteVisitor visitor) {
+        visitor.visitarUsuario(this);
     }
 
     public void agregarCompra(Compra compra) {

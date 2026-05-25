@@ -1,6 +1,6 @@
 package co.edu.uniquindio.poo.proyectofinalctrlexito.model;
 
-public class Entrada {
+public class Entrada implements Visitor{
 
     private int idEntrada;
     private double precioFinal;
@@ -26,6 +26,12 @@ public class Entrada {
 
     public boolean estaActiva() {
         return this.estadoEntrada == EstadoEntrada.ACTIVA;
+    }
+
+    //Metodo complementario al patron Visitor
+    @Override
+    public void aceptarVisitante(ReporteVisitor visitor) {
+        visitor.visitarEntrada(this);
     }
 
     public Zona getZona() {
