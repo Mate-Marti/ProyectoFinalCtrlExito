@@ -4,7 +4,11 @@ import java.util.Date;
 
 public class ConferenciaEvento extends Evento{
 
-    public ConferenciaEvento(int idEvento, String nombre, String categoria, String descripcion, Date fecha, EstadoEvento estado) {
-        super(idEvento, nombre, categoria, descripcion, fecha, estado);
+    public ConferenciaEvento(String idEvento,
+                             String nombre,
+                             String categoria,
+                             String descripcion) {
+
+        super(idEvento, nombre, categoria, descripcion);
     }
 }
