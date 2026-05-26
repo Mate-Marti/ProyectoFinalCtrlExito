@@ -57,7 +57,7 @@ public class UsuarioTest {
         // Validamos que el comprobante corresponde a la compra ID 25
         assertTrue(compra.getIdCompra() == 25);
     }
-//Test que verifica que se cree un servicio y sea agregado y verificado correctamente
+    //Test que verifica que se cree un servicio y sea agregado y verificado correctamente
     @Test
     void testAgregarServicioACompra() {
         // Creamos el usuario

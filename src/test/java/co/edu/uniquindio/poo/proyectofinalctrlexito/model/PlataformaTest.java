@@ -7,13 +7,13 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PlataformaTest {
 
     private Plataforma plataforma;
-//Creamos la plataforma de prueba
+    //Creamos la plataforma de prueba
     @BeforeEach
     void setUp() {
         plataforma = new Plataforma(1, "Virtual", "Plataforma de pruebas");
     }
 
-//Ahora, este test registra un usuario en la plataforma y verifica que esta no sea nula
+    //Ahora, este test registra un usuario en la plataforma y verifica que esta no sea nula
 // ademas, confirma que que el usuario sea correctamente el que fue agregado
     @Test
     void testRegistrarUsuario() {
@@ -51,7 +51,7 @@ public class PlataformaTest {
         assertEquals(true, encontrado);
     }
 
- //Este test registra un evento dentro de la plataforma ya creada y confirma que el evento este en la plataforma
+    //Este test registra un evento dentro de la plataforma ya creada y confirma que el evento este en la plataforma
 
     @Test
     void testRegistrarEvento() {
@@ -59,7 +59,7 @@ public class PlataformaTest {
         assertTrue(plataforma.buscarEvento("10"));
     }
 
-//Test para verificar que una compra sea reasignada correctamente
+    //Test para verificar que una compra sea reasignada correctamente
     @Test
     void testReasignarCompra() {
         // Creamos la plataforma

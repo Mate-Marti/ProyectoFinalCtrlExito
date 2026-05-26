@@ -16,7 +16,7 @@ public class EventoTest {
         assertTrue(evento.getEstado() == EstadoEvento.PAUSADO);
     }
 
-//Test que asi mismo como el anterior verifica que el estado ahora sea correctamente, cancelado
+    //Test que asi mismo como el anterior verifica que el estado ahora sea correctamente, cancelado
     @Test
     void testCancelarEvento() {
         Evento evento = new Evento("10", "Concierto", "Música", "Evento cancelado");
@@ -24,21 +24,21 @@ public class EventoTest {
         assertTrue(evento.getEstado() == EstadoEvento.CANCELADO);
     }
 
-//Test que valida la publicacion y cancelacion de un evento
+    //Test que valida la publicacion y cancelacion de un evento
     @Test
     void testValidarEventoDisponible() {
-    //Disponible
+        //Disponible
         Evento eventoDisponible = new Evento("10", "Concierto", "Música", "Evento disponible");
         eventoDisponible.publicarEvento();
         assertEquals(true, eventoDisponible.validarEventoDisponible());
 
-    //No disponible
+        //No disponible
         Evento eventoNoDisponible = new Evento("10", "Concierto", "Música", "Evento no disponible");
         eventoNoDisponible.cancelarEvento();
         assertEquals(false, eventoNoDisponible.validarEventoDisponible());
     }
 
-//Crea un evento y genera unos datos cual mensaje, y compara los mensajes entre si
+    //Crea un evento y genera unos datos cual mensaje, y compara los mensajes entre si
     @Test
     void testObtenerDetalleEvento() {
         Date fecha = new Date();

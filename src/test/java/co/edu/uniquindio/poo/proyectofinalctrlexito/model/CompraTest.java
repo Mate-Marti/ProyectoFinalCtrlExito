@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CompraTest {
 
-//Test para confirmar los datos de realizar pago
+    //Test para confirmar los datos de realizar pago
     @Test
     void testRealizarPago() {
         // Creamos el usuario
@@ -43,7 +43,7 @@ public class CompraTest {
         assertTrue(!(compra.getEstadoCompra() instanceof EstadoCreada));
     }
 
-//Test para verificar el correcto reembolso de una compra
+    //Test para verificar el correcto reembolso de una compra
     @Test
     void testReembolsarCompra() {
         // Creamos el usuario

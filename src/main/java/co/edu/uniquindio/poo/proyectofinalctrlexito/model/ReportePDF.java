@@ -16,7 +16,15 @@ public class ReportePDF implements ReporteVisitor{
     private int contadorEventos;
     private int contadorUsuarios;
 
+    /**
+     * Constructor de la clase ReportePDF.
+     * Inicializa la ruta del archivo, las variables estadísticas
+     * y el contenido inicial del reporte.
+     *
+     * @param rutaArchivo ruta donde será generado y almacenado el reporte.
+     */
     public ReportePDF(String rutaArchivo) {
+
         this.rutaArchivo = rutaArchivo;
         this.contenido = new StringBuilder();
         this.totalCompras = 0;
@@ -30,110 +38,231 @@ public class ReportePDF implements ReporteVisitor{
         contenido.append("--------------------------------------------------------\n");
         contenido.append("            REPORTE OPERATIVO - CTRL EXITO              \n");
         contenido.append("--------------------------------------------------------\n");
-
     }
 
-    //metodo para obtener los datos del recinto
+    /**
+     * Genera la sección del reporte correspondiente a un recinto,
+     * mostrando información básica y la disponibilidad total de asientos.
+     *
+     * @param recinto recinto visitado para obtener su información.
+     */
     @Override
     public void visitarRecinto(Recinto recinto) {
+
         contenido.append("--- REPORTE DEL RECINTO ---\n");
-        contenido.append("Nombre: ").append(recinto.getNombre())
-                .append("Ciudad: ").append(recinto.getCiudad()).append("\n");
-        contenido.append("Asientos Disponibles Totales: ").append(recinto.obtenerDisponibilidad()).append("\n");
+
+        contenido.append("Nombre: ")
+                .append(recinto.getNombre())
+                .append("Ciudad: ")
+                .append(recinto.getCiudad())
+                .append("\n");
+
+        contenido.append("Asientos Disponibles Totales: ")
+                .append(recinto.obtenerDisponibilidad())
+                .append("\n");
     }
 
-    //metodo para ver la capacidad de la zona y %
+    /**
+     * Genera información estadística de una zona,
+     * incluyendo capacidad, asientos ocupados,
+     * disponibles y porcentaje de ocupación.
+     *
+     * @param zona zona visitada para calcular sus estadísticas.
+     */
     @Override
     public void visitarZona(Zona zona) {
+
         int capacidadTotal = zona.getCapacidad();
         int disponibles = zona.obtenerDisponibilidad();
         int ocupados = capacidadTotal - disponibles;
 
         double porcentaje = 0.0;
+
         if (capacidadTotal > 0) {
+
             porcentaje = ((double) ocupados / capacidadTotal) * 100.0;
         }
 
-        contenido.append("ZONA: ").append(zona.getNombre()).append("\n");
-        contenido.append("Capacidad Total: ").append(capacidadTotal).append("\n");
-        contenido.append("Ocupados: ").append(ocupados).append(" (").append(String.format("%.2f", porcentaje)).append("%)\n");
-        contenido.append("Libres: ").append(disponibles).append("\n");
+        contenido.append("ZONA: ")
+                .append(zona.getNombre())
+                .append("\n");
+
+        contenido.append("Capacidad Total: ")
+                .append(capacidadTotal)
+                .append("\n");
+
+        contenido.append("Ocupados: ")
+                .append(ocupados)
+                .append(" (")
+                .append(String.format("%.2f", porcentaje))
+                .append("%)\n");
+
+        contenido.append("Libres: ")
+                .append(disponibles)
+                .append("\n");
     }
 
-    //metodo para coger los ingresos de los servicios adicionales
+    /**
+     * Registra información financiera de una compra,
+     * acumulando el total de compras y los ingresos
+     * generados por servicios adicionales.
+     *
+     * @param compra compra visitada para obtener sus datos financieros.
+     */
     @Override
     public void visitarCompra(Compra compra) {
+
         numeroCompras++;
+
         totalCompras += compra.getTotal();
 
         if (compra.getServiciosAdicionales() != null) {
+
             for (ServicioAdicional servicio : compra.getServiciosAdicionales()) {
+
                 totalIngresosServicios += servicio.getPrecio();
             }
         }
     }
 
-    //metodo para ver la cantidad de cancelaciones
+    /**
+     * Cuenta la cantidad de entradas activas y anuladas
+     * para generar estadísticas de cancelación.
+     *
+     * @param entrada entrada visitada para validar su estado.
+     */
     @Override
     public void visitarEntrada(Entrada entrada) {
+
         if (entrada.estaActiva()) {
+
             contadorEntradasActivas++;
+
         } else {
+
             contadorEntradasAnuladas++;
         }
     }
 
-    //metodo para obtener los datos de evento
+    /**
+     * Genera información básica de un evento
+     * incluyendo nombre, categoría y estado.
+     *
+     * @param evento evento visitado para obtener sus datos.
+     */
     @Override
     public void visitarEvento(Evento evento) {
+
         contadorEventos++;
-        contenido.append("EVENTO: ").append(evento.getNombre()).append(" ---\n");
-        contenido.append("Categoría: ").append(evento.getCategoria())
-                .append("Estado: ").append(evento.getEstado()).append("\n");
+
+        contenido.append("EVENTO: ")
+                .append(evento.getNombre())
+                .append(" ---\n");
+
+        contenido.append("Categoría: ")
+                .append(evento.getCategoria())
+                .append("Estado: ")
+                .append(evento.getEstado())
+                .append("\n");
     }
 
-    //metodo para obtener la cantidad de usuraios
+    /**
+     * Cuenta la cantidad de usuarios auditados
+     * durante la generación del reporte.
+     *
+     * @param usuario usuario visitado.
+     */
     @Override
     public void visitarUsuario(Usuario usuario) {
+
         contadorUsuarios++;
     }
 
-    //Metodo para generar el resumen estadistico
+    /**
+     * Genera el documento final del reporte estadístico,
+     * incluyendo información de usuarios, eventos,
+     * cancelaciones e ingresos financieros.
+     * Además, guarda el contenido en un archivo de texto.
+     */
     public void generarDocumentoReporte() {
+
         contenido.append("--------------------------------------------------------\n");
+
         contenido.append("                         RESUMEN                        \n");
+
         contenido.append("--------------------------------------------------------\n");
 
         contenido.append("1. USARIOS Y EVENTOS:\n");
-        contenido.append(" - Total Usuarios Auditados: ").append(contadorUsuarios).append("\n");
-        contenido.append(" - Total Eventos Gestionados: ").append(contadorEventos).append("\n\n");
+
+        contenido.append(" - Total Usuarios Auditados: ")
+                .append(contadorUsuarios)
+                .append("\n");
+
+        contenido.append(" - Total Eventos Gestionados: ")
+                .append(contadorEventos)
+                .append("\n\n");
 
         contenido.append("2. TASA DE CANCELACIÓN DE ENTRADAS:\n");
-        int totalEntradas = contadorEntradasActivas + contadorEntradasAnuladas;
+
+        int totalEntradas =
+                contadorEntradasActivas + contadorEntradasAnuladas;
+
         double numCancelacion = 0.0;
+
         if(totalEntradas > 0) {
-            numCancelacion = ((double) contadorEntradasAnuladas / totalEntradas) * 100.0;
+
+            numCancelacion =
+                    ((double) contadorEntradasAnuladas / totalEntradas) * 100.0;
         }
-        contenido.append(" - Entradas Activas/Usadas: ").append(contadorEntradasActivas).append("\n");
-        contenido.append(" - Entradas Anuladas: ").append(contadorEntradasAnuladas).append("\n");
-        contenido.append(" - Tasa de Cancelación: ").append(String.format("%.2f", numCancelacion)).append("%\n\n");
+
+        contenido.append(" - Entradas Activas/Usadas: ")
+                .append(contadorEntradasActivas)
+                .append("\n");
+
+        contenido.append(" - Entradas Anuladas: ")
+                .append(contadorEntradasAnuladas)
+                .append("\n");
+
+        contenido.append(" - Tasa de Cancelación: ")
+                .append(String.format("%.2f", numCancelacion))
+                .append("%\n\n");
 
         contenido.append("3. RENDIMIENTO FINANCIERO:\n");
-        contenido.append(" - Cantidad de Comprs Procesadas: ").append(numeroCompras).append("\n");
-        contenido.append(" - Ingresos por Servicios Adicionales: $").append(totalIngresosServicios).append("\n");
-        contenido.append(" - TOTAL INGRESOS EN CAJA: $").append(totalCompras).append("\n");
+
+        contenido.append(" - Cantidad de Comprs Procesadas: ")
+                .append(numeroCompras)
+                .append("\n");
+
+        contenido.append(" - Ingresos por Servicios Adicionales: $")
+                .append(totalIngresosServicios)
+                .append("\n");
+
+        contenido.append(" - TOTAL INGRESOS EN CAJA: $")
+                .append(totalCompras)
+                .append("\n");
 
         contenido.append("--------------------------------------------------------\n");
+
         contenido.append("                 FIN DEL REPORTE                        \n");
+
         contenido.append("--------------------------------------------------------\n");
 
-        //indicador de a donde va el archivo y si no se guardó
         try (FileWriter archivo = new FileWriter(this.rutaArchivo);
              PrintWriter escritor = new PrintWriter(archivo)) {
+
             escritor.print(this.contenido.toString());
-            System.out.println("Reporte generado exitosamente en: " + this.rutaArchivo);
+
+            System.out.println(
+                    "Reporte generado exitosamente en: "
+                            + this.rutaArchivo
+            );
+
         } catch (IOException ecepcion) {
-            System.out.println("Error al generar el reporte: " + ecepcion.getMessage());
+
+            System.out.println(
+                    "Error al generar el reporte: "
+                            + ecepcion.getMessage()
+            );
         }
     }
 }
