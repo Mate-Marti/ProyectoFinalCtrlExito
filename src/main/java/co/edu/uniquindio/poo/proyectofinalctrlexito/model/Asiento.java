@@ -1,41 +1,62 @@
 package co.edu.uniquindio.poo.proyectofinalctrlexito.model;
 
-public class Asiento {
+public class Asiento{
 
     private int idAsiento;
     private String fila;
     private String numero;
-    private String estado;
+    private EstadoAsiento estado;
 
-    public Asiento(int idAsiento, String fila, String numero, String estado) {
+    public Asiento(int idAsiento, String fila, String numero) {
 
         this.idAsiento = idAsiento;
         this.fila = fila;
         this.numero = numero;
-        this.estado = estado;
+        this.estado = EstadoAsiento.DISPONIBLE;
 
     }
 
     //Metodo para habilitar el asiento
     public void habilitarAsiento() {
-        this.estado = "Habilitado";
+        this.estado = EstadoAsiento.DISPONIBLE;
     }
 
     //Metodo para bloquear el asiento
     public void bloquearAsiento() {
-        this.estado = "Bloqueado";
+        this.estado = EstadoAsiento.BLOQUEADO;
     }
-
+    //Metodo para reservar el asiento
+    public void reservarAsiento() {
+        this.estado = EstadoAsiento.RESERVADO;
+    }
+    //Metodo para vender el asiento
+    public void venderAsiento() {
+        this.estado = EstadoAsiento.VENDIDO;
+    }
     //Metodo para liberar el asiento
     public void liberarAsiento() {
-        this.estado = "Liberado";
+        this.estado = EstadoAsiento.DISPONIBLE;
     }
 
     //Metodo para consultar el estado del asiento
     public String consultarAsiento() {
-        return "ID del asiento:" + this.idAsiento + "Fila:" + this.fila + "Numero:" + this.numero + "Estado:" + this.estado;
+        return "ID asiento: " + idAsiento +
+                "\nFila: " + fila +
+                "\nNumero: " + numero +
+                "\nEstado: " + estado;
     }
+    public boolean validarDisponibilidad() {
 
+        return estado == EstadoAsiento.DISPONIBLE;
+    }
+    public int obtenerDisponibilidad() {
+
+        if (validarDisponibilidad()) {
+            return 1;
+        }
+
+        return 0;
+    }
     //Getters y Seters
     public int getIdAsiento() {
         return idAsiento;
@@ -61,11 +82,11 @@ public class Asiento {
         this.numero = numero;
     }
 
-    public String getEstado() {
+    public EstadoAsiento getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(EstadoAsiento estado) {
         this.estado = estado;
     }
 }

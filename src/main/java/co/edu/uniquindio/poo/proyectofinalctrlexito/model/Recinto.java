@@ -1,34 +1,41 @@
 package co.edu.uniquindio.poo.proyectofinalctrlexito.model;
 
-public class Recinto {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Recinto implements ComponenteRecinto, Visitor {
 
     private int idRecinto;
     private String nombre;
     private String direccion;
     private String ciudad;
-    private Zona zona;
+    private List<Zona> listaZonas;
 
-    public Recinto(int idRecinto, String nombre, String direccion, String ciudad , Zona zona) {
+    public Recinto(int idRecinto, String nombre, String direccion, String ciudad) {
 
         this.idRecinto = idRecinto;
         this.nombre = nombre;
         this.direccion = direccion;
         this.ciudad = ciudad;
-        this.zona = zona;
+        this.listaZonas = new ArrayList<Zona>();
 
     }
 
     //Metodo para crear un nuevo recinto
-    public static Recinto crearRecinto(int idRecinto, String nombre, String direccion, String ciudad, Zona zona) {
-        return new Recinto(idRecinto, nombre, direccion, ciudad, zona);
+    public static Recinto crearRecinto(int idRecinto, String nombre, String direccion, String ciudad) {
+        return new Recinto(idRecinto, nombre, direccion, ciudad );
     }
 
     //metodo para actualizar datos del recinto
-    public void actualizarRecinto(String nombre, String direccion, String ciudad, Zona zona) {
+    public void actualizarRecinto(String nombre, String direccion, String ciudad) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.ciudad = ciudad;
-        this.zona = zona;
+    }
+
+    //Metodo para agregar una zona al recinto
+    public void agregarZona(Zona nuevaZona) {
+        this.listaZonas.add(nuevaZona);
     }
 
     //Metodo para elinimar el recinto
@@ -37,14 +44,31 @@ public class Recinto {
         this.nombre = null;
         this.direccion = null;
         this.ciudad = null;
-        this.zona = null;
+        this.listaZonas.clear();
     }
 
     //Metodo para retornar en texto la info del recinto
     public String listarRecinto() {
-        return "ID:" + idRecinto + "Nombre:" + nombre + "Direccion:" + direccion + "Ciudad:" + ciudad + "Zona:" + zona;
+        return "ID:" + idRecinto + "Nombre:" + nombre + "Direccion:" + direccion + "Ciudad:" + ciudad;
     }
 
+    //Metodo para obtener la disponibilidad del recinto
+    @Override
+    public int obtenerDisponibilidad() {
+        int totalDisponibles = 0;
+        for (int i = 0; i < listaZonas.size(); i++) {
+            totalDisponibles = totalDisponibles + listaZonas.get(i).obtenerDisponibilidad();
+        }
+        return totalDisponibles;
+    }
+
+    //Metodo complementario al patron Visitor
+    @Override
+    public void aceptarVisitante(ReporteVisitor visitor){
+        visitor.visitarRecinto(this);
+    }
+
+    //getters y setters
     public int getIdRecinto() {
         return idRecinto;
     }

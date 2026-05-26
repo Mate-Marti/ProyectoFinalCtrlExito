@@ -55,7 +55,49 @@ public class PlataformaTest {
 
     @Test
     void testRegistrarEvento() {
-        plataforma.registrarEvento("10", "Concierto", "Música", "Evento visible", "Activo");
+        plataforma.registrarEvento("10", "Concierto", "Música", "Evento visible");
         assertTrue(plataforma.buscarEvento("10"));
+    }
+
+//Test para verificar que una compra sea reasignada correctamente
+    @Test
+    void testReasignarCompra() {
+        // Creamos la plataforma
+        Plataforma plataforma = new Plataforma(1, "Ticketing", "Plataforma de eventos");
+
+        // Creamos el usuario y lo registramos en la plataforma
+        Usuario usuario = new Usuario("U1", "Carlos Pérez", "carlos@gmail.com", "12345", "Tarjeta");
+        plataforma.registrarUsuario("U1", "Carlos Pérez", "carlos@gmail.com", "12345", "Tarjeta");
+
+        // Creamos el evento
+        Evento evento = new Evento("10", "Concierto", "Música", "Evento de prueba");
+        plataforma.registrarEvento("10", "Concierto", "Música", "Evento de prueba");
+
+        // Creamos la compra con el Builder
+        Compra compra = new Compra.Builder()
+                .setIdCompra(25)
+                .setTotal(200.0)
+                .setTipoPago(TipoPago.CREDITO)
+                .setUsuario(usuario)
+                .setEvento(evento)
+                .build();
+
+        usuario.agregarCompra(compra);
+
+        // Creamos la zona y asiento inicial
+        Zona zonaVIP = new Zona(1, "VIP", 100, 200.0);
+        Asiento asientoA5 = new Asiento(1, "A", "5");
+        Entrada entradaVieja = new Entrada(zonaVIP.getPreciobase(), EstadoEntrada.ACTIVA, asientoA5, zonaVIP);
+        compra.agregarEntrada(entradaVieja);
+
+        // Creamos el nuevo asiento B3
+        Asiento asientoB3 = new Asiento(2, "B", "3");
+
+        // Usamos el metodo de reasignar compra
+        boolean resultado = plataforma.reasignarCompra(25, entradaVieja, asientoB3);
+
+        // Validamos que la reasignación fue exitosa
+        assertTrue(resultado);
+        assertTrue(compra.getEntradas().stream().anyMatch(e -> e.getAsiento().getNumero().equals("3")));
     }
 }

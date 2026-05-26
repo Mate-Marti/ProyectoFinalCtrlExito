@@ -1,18 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyectofinalctrlexito.viewController.IncidenciaViewController">
-   <children>
-      <Label fx:id="lblTituloIncidencia" layoutX="78.0" layoutY="68.0" prefHeight="58.0" prefWidth="443.0" text="REPORTAR INCIDENCIAS">
-         <font>
-            <Font size="40.0" />
-         </font>
-      </Label>
-      <Button fx:id="btnVolver" layoutX="471.0" layoutY="331.0" mnemonicParsing="false" onAction="#volver" text="Volver" />
-   </children>
-</AnchorPane>
+<VBox alignment="TOP_CENTER" prefHeight="550.0" prefWidth="750.0" spacing="20.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyectofinalctrlexito.viewController.IncidenciaViewController">
+<children>
+   <VBox alignment="CENTER" spacing="5.0">
+      <children>
+         <Label text="REPORTE DE INCIDENCIAS" textFill="#9B2C2C">
+            <font><Font name="System Bold" size="24.0" /></font>
+         </Label>
+         <Label text="Para notifica anomalías " textFill="#718096" />
+      </children>
+   </VBox>
+   <VBox maxWidth="500.0" spacing="15.0" style="-fx-background-color: #FFF5F5; -fx-padding: 20; -fx-background-radius: 10; -fx-border-color: #FEB2B2;">
+      <children>
+         <TextField fx:id="txtAsunto" prefHeight="35.0" promptText="Asunto crítico del fallo" />
+         <TextArea fx:id="txtDescripcion" prefHeight="150.0" promptText="Escribe detalladamente la incidencia...." wrapText="true" />
+         <Button fx:id="btnEnviarReporte" maxWidth="1.7976931348623157E308" prefHeight="40.0" style="-fx-background-color: #E53E3E; -fx-text-fill: white; -fx-font-weight: bold;" text="Enviar Reporte a Soporte" />
+      </children>
+   </VBox>
+   <Button fx:id="btnVolver" onAction="#volver" prefHeight="38.0" prefWidth="120.0" style="-fx-background-color: #EDF2F7; -fx-text-fill: #4A5568; -fx-font-weight: bold; -fx-background-radius: 8;" text="Regresar" />
+</children>
+<padding><Insets bottom="30.0" left="30.0" right="30.0" top="30.0" /></padding>
+</VBox>
