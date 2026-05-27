@@ -65,8 +65,8 @@ public class PlataformaViewController {
     }
 
     @FXML
-    void abrirUsuarioMenu(ActionEvent event) {
-        cargarVistaExterna("/co/edu/uniquindio/poo/proyectofinalctrlexito/UsuarioMenu.fxml");
+    void abrirGestionPerfil(ActionEvent event) {
+        cargarVistaExterna("/co/edu/uniquindio/poo/proyectofinalctrlexito/GestionPerfil.fxml");
     }
 
     @FXML
@@ -75,18 +75,8 @@ public class PlataformaViewController {
     }
 
     @FXML
-    void abrirEntrada(ActionEvent event) {
-        cargarVistaExterna("/co/edu/uniquindio/poo/proyectofinalctrlexito/Entrada.fxml");
-    }
-
-    @FXML
     void abrirEvento(ActionEvent event) {
         cargarVistaExterna("/co/edu/uniquindio/poo/proyectofinalctrlexito/Evento.fxml");
-    }
-
-    @FXML
-    void abrirGestionAsiento(ActionEvent event) {
-        cargarVistaExterna("/co/edu/uniquindio/poo/proyectofinalctrlexito/GestionAsiento.fxml");
     }
 
     @FXML
