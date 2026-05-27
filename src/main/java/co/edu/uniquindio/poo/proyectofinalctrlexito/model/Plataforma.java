@@ -11,9 +11,10 @@ public class Plataforma {
     private String tipo;
     private String descripcion;
     private LocalDate fecha;
-    private final List<Persona> listaPersonas;
-    private final List<Evento> listaEventos;
-
+    private static List<Persona> listaPersonas;
+    private static List<Evento> listaEventos;
+    private static List<Recinto> listaRecintos;
+    private static List<Asiento> listaAsientos;
 
     /**
      * Constructor de la clase Plataforma.
@@ -32,6 +33,8 @@ public class Plataforma {
         this.fecha = LocalDate.now();
         this.listaPersonas = new ArrayList<>();
         this.listaEventos = new ArrayList<>();
+        this.listaRecintos = new ArrayList<>();
+        this.listaAsientos = new ArrayList<>();
     }
 
     /**
@@ -452,6 +455,38 @@ public class Plataforma {
         }
 
         return eliminado;
+    }
+
+    public static List<Persona> getListaPersonas() {
+        return listaPersonas;
+    }
+
+    public static void setListaPersonas(List<Persona> listaPersonas) {
+        Plataforma.listaPersonas = listaPersonas;
+    }
+
+    public static List<Evento> getListaEventos() {
+        return listaEventos;
+    }
+
+    public static void setListaEventos(List<Evento> listaEventos) {
+        Plataforma.listaEventos = listaEventos;
+    }
+
+    public static List<Recinto> getListaRecintos() {
+        return listaRecintos;
+    }
+
+    public static void setListaRecintos(List<Recinto> listaRecintos) {
+        Plataforma.listaRecintos = listaRecintos;
+    }
+
+    public static List<Asiento> getListaAsientos() {
+        return listaAsientos;
+    }
+
+    public static void setListaAsientos(List<Asiento> listaAsientos) {
+        Plataforma.listaAsientos = listaAsientos;
     }
 }
 

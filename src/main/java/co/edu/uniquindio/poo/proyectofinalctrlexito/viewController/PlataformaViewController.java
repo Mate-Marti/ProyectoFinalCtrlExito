@@ -94,6 +94,11 @@ public class PlataformaViewController {
         cargarVistaExterna("/co/edu/uniquindio/poo/proyectofinalctrlexito/GestionCompraUsuario.fxml");
     }
 
+    @FXML
+    void abrirRegistro(ActionEvent event) {
+        cargarVistaExterna("/co/edu/uniquindio/poo/proyectofinalctrlexito/RegistroUsuario.fxml");
+    }
+
     // --- LÓGICA DE CARGA INTERNA ---
 
     public void cargarVistaExterna(String rutaFxml) {

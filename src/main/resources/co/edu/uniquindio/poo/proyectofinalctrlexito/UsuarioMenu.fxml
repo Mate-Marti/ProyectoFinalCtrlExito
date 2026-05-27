@@ -32,7 +32,7 @@
                 <VBox alignment="CENTER" prefHeight="160.0" prefWidth="200.0" style="-fx-background-color: #F7FAFC; -fx-background-radius: 12; -fx-border-color: #E2E8F0; -fx-border-width: 1.5;">
                     <children>
                         <Label style="-fx-font-size: 32;" />
-                        <Button fx:id="btnGestionPerfil" style="-fx-background-color: transparent; -fx-text-fill: #4A5568; -fx-font-weight: bold; -fx-cursor: hand;" text="Gestionar Perfil" />
+                        <Button fx:id="btnGestionPerfil" onAction="#abrirGestionPerfil" style="-fx-background-color: transparent; -fx-text-fill: #4A5568; -fx-font-weight: bold; -fx-cursor: hand;" text="Gestionar Perfil" />
                     </children>
                 </VBox>
             </children>
