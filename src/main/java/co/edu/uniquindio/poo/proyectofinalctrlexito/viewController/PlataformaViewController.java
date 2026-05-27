@@ -50,24 +50,24 @@ public class PlataformaViewController {
         cambiarVistaCompleta("/co/edu/uniquindio/poo/proyectofinalctrlexito/UsuarioMenu.fxml", event);
     }
     @FXML
-    void abrirCompra(ActionEvent event) {
-        cargarVistaExterna("/co/edu/uniquindio/poo/proyectofinalctrlexito/Compra.fxml");
+    void abrirCompra(ActionEvent event) throws IOException {
+        cambiarVistaCompleta("/co/edu/uniquindio/poo/proyectofinalctrlexito/Compra.fxml", event);
     }
     @FXML
-    void abrirEntrada(ActionEvent event) {
-        cargarVistaExterna("/co/edu/uniquindio/poo/proyectofinalctrlexito/Entrada.fxml");
+    void abrirEntrada(ActionEvent event) throws IOException {
+        cambiarVistaCompleta("/co/edu/uniquindio/poo/proyectofinalctrlexito/Entrada.fxml", event);
     }
     @FXML
-    void abrirEvento(ActionEvent event) {
-        cargarVistaExterna("/co/edu/uniquindio/poo/proyectofinalctrlexito/Evento.fxml");
+    void abrirEvento(ActionEvent event) throws IOException {
+        cambiarVistaCompleta("/co/edu/uniquindio/poo/proyectofinalctrlexito/Evento.fxml", event);
     }
     @FXML
-    void abrirGestionAsiento(ActionEvent event) {
-        cargarVistaExterna("/co/edu/uniquindio/poo/proyectofinalctrlexito/GestionAsiento.fxml");
+    void abrirGestionAsiento(ActionEvent event) throws IOException{
+        cambiarVistaCompleta("/co/edu/uniquindio/poo/proyectofinalctrlexito/GestionAsiento.fxml", event);
     }
     @FXML
-    void abrirGestionCompraUsuario(ActionEvent event) {
-        cargarVistaExterna("/co/edu/uniquindio/poo/proyectofinalctrlexito/GestionCompraUsuario.fxml");
+    void abrirGestionCompraUsuario(ActionEvent event) throws IOException{
+        cambiarVistaCompleta("/co/edu/uniquindio/poo/proyectofinalctrlexito/GestionCompraUsuario.fxml", event);
     }
     private void cambiarVistaCompleta(String ruta, ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(ruta));
