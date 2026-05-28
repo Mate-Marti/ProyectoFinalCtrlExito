@@ -1,19 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyectofinalctrlexito.viewController.PlataformaViewController">
-   <children>
-      <Label fx:id="lblTitulo" layoutX="170.0" layoutY="34.0" prefHeight="58.0" prefWidth="260.0" text="TUS EVENTOS ">
-         <font>
-            <Font size="40.0" />
-         </font></Label>
-      <Label fx:id="lblTexto1" layoutX="7.0" layoutY="100.0" prefHeight="26.0" prefWidth="585.0" text="BIENVENIDO AL SISTEMA DE GESTION DE EVENTOS, DONDE PODRAS COMPRAR ENTRADAS Y MUCHO MAS" />
-      <Button layoutX="112.0" layoutY="204.0" mnemonicParsing="false" onAction="#abrirAdministrador" text="ADMINSTRADOR" />
-      <Button layoutX="373.0" layoutY="204.0" mnemonicParsing="false" onAction="#abrirUsuario" text="USUARIO" />
-      <Label fx:id="lblTexto3" layoutX="226.0" layoutY="160.0" prefHeight="18.0" prefWidth="148.0" text="POR FAVOR INICA SESION:" />
-   </children>
-</AnchorPane>
+<BorderPane fx:id="mainBorderPane" prefHeight="700.0" prefWidth="1100.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyectofinalctrlexito.viewController.PlataformaViewController">
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="65.0" spacing="15.0" style="-fx-background-color: #F8F9FA; -fx-border-color: #E9ECEF; -fx-border-width: 0 0 1 0;">
+         <children>
+            <Label text="BOLETERÍA CTRL + EXITO" textFill="#2D3748">
+               <font><Font name="System Bold" size="16.0" /></font>
+            </Label>
+            <Region HBox.hgrow="ALWAYS" />
+            <Label text="ERES ADMINISTRADOR?:" textFill="#A0AEC0">
+               <font><Font name="System Bold" size="10.0" /></font>
+            </Label>
+            <Button fx:id="btnAdminLogin" onAction="#abrirAdministrador" style="-fx-background-color: #E2E8F0; -fx-text-fill: #4A5568; -fx-background-radius: 20; -fx-font-weight: bold; -fx-cursor: hand;" text="🔐 LOGIN ADMIN" />
+         </children>
+         <padding><Insets left="15.0" right="25.0" /></padding>
+      </HBox>
+   </top>
+   <left>
+      <VBox fx:id="menuLateral" prefWidth="250.0" spacing="8.0" style="-fx-background-color: #FFF5F5; -fx-border-color: #FFE3E3; -fx-border-width: 0 1 0 0;">
+         <children>
+            <Label text="MENÚ DE NAVEGACIÓN" textFill="#9B2C2C">
+               <font><Font name="System Bold" size="11.0" /></font>
+               <VBox.margin><Insets bottom="5.0" /></VBox.margin>
+            </Label>
+            <Button maxWidth="1.7976931348623157E308" onAction="#mostrarInicio" prefHeight="38.0" style="-fx-background-color: #EBF8FF; -fx-text-fill: #2B6CB0; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-font-weight: bold; -fx-background-radius: 6;" text=" Inicio / Cartelera" />
+            <Button maxWidth="1.7976931348623157E308" onAction="#abrirUsuario" prefHeight="38.0" style="-fx-background-color: transparent; -fx-text-fill: #4A5568; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text=" Iniciar Sesión como Usuario" />
+            <Button maxWidth="1.7976931348623157E308" onAction="#abrirGestionPerfil" prefHeight="38.0" style="-fx-background-color: transparent; -fx-text-fill: #4A5568; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text=" Gestion del Perfil" />
+            <Button maxWidth="1.7976931348623157E308" onAction="#abrirCompra" prefHeight="38.0" style="-fx-background-color: transparent; -fx-text-fill: #4A5568; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text=" Adquirir / Comprar Boletas" />
+            <Button maxWidth="1.7976931348623157E308" onAction="#abrirEvento" prefHeight="38.0" style="-fx-background-color: transparent; -fx-text-fill: #4A5568; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text=" Información de Eventos" />
+            <Button maxWidth="1.7976931348623157E308" onAction="#abrirGestionCompraUsuario" prefHeight="38.0" style="-fx-background-color: transparent; -fx-text-fill: #4A5568; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text=" Historial de mis Compras" />
+
+            <Button maxWidth="1.7976931348623157E308" onAction="#abrirRegistro" text="Registrarse como Usuario" style="-fx-background-color: #800020; -fx-text-fill: white; -fx-padding: 10; -fx-cursor: hand;"/>
+
+         </children>
+         <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
+      </VBox>
+   </left>
+   <center>
+      <StackPane fx:id="contentArea" style="-fx-background-color: #FAFAFA;">
+         <children>
+            <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: transparent;">
+               <content>
+                  <VBox spacing="25.0" style="-fx-background-color: #FFFFFF;">
+                     <children>
+                        <VBox alignment="CENTER" spacing="5.0">
+                           <children>
+                              <Label text="BIENVENIDO" textFill="#1A202C">
+                                 <font><Font name="System Bold" size="30.0" /></font>
+                              </Label>
+                              <Label text="Navega por la cartelera de eventos activos." textFill="#718096" />
+                           </children>
+                        </VBox>
+                        <VBox spacing="10.0" style="-fx-background-color: #EBF8FF; -fx-background-radius: 12; -fx-border-color: #BEE3F8; -fx-border-width: 1.5;">
+                           <children>
+                              <Label text="🔹 EVENTOS DISPONIBLES EN CARTELERA:" textFill="#2B6CB0">
+                                 <font><Font name="System Bold" size="13.0" /></font>
+                              </Label>
+                              <ScrollPane minHeight="200.0" prefHeight="220.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER">
+                                 <content>
+                                    <HBox fx:id="hboxEventosDisponibles" spacing="15.0" style="-fx-padding: 10;" />
+                                 </content>
+                              </ScrollPane>
+                           </children>
+                           <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
+                        </VBox>
+                     </children>
+                     <padding><Insets bottom="25.0" left="25.0" right="25.0" top="25.0" /></padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>

@@ -34,77 +34,12 @@ public class Recinto implements ComponenteRecinto, Visitor {
     }
 
     /**
-     * Crea una nueva instancia de un recinto.
-     *
-     * @param idRecinto identificador único del recinto.
-     * @param nombre nombre del recinto.
-     * @param direccion dirección del recinto.
-     * @param ciudad ciudad donde se encuentra el recinto.
-     * @return nuevo objeto Recinto creado.
-     */
-    public static Recinto crearRecinto(int idRecinto,
-                                       String nombre,
-                                       String direccion,
-                                       String ciudad) {
-
-        return new Recinto(
-                idRecinto,
-                nombre,
-                direccion,
-                ciudad
-        );
-    }
-
-    /**
-     * Actualiza la información básica del recinto.
-     *
-     * @param nombre nuevo nombre del recinto.
-     * @param direccion nueva dirección del recinto.
-     * @param ciudad nueva ciudad del recinto.
-     */
-    public void actualizarRecinto(String nombre,
-                                  String direccion,
-                                  String ciudad) {
-
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.ciudad = ciudad;
-    }
-
-    /**
      * Agrega una nueva zona al recinto.
      *
      * @param nuevaZona zona que será agregada al recinto.
      */
     public void agregarZona(Zona nuevaZona) {
         this.listaZonas.add(nuevaZona);
-    }
-
-    /**
-     * Elimina la información del recinto y limpia
-     * la lista de zonas registradas.
-     */
-    public void eliminarRecinto() {
-
-        this.idRecinto = 0;
-        this.nombre = null;
-        this.direccion = null;
-        this.ciudad = null;
-
-        this.listaZonas.clear();
-    }
-
-    /**
-     * Retorna en formato texto la información básica del recinto.
-     *
-     * @return información del recinto en formato String.
-     */
-    public String listarRecinto() {
-
-        return "ID:" + idRecinto +
-                " Nombre:" + nombre +
-                " Direccion:" + direccion +
-                " Ciudad:" + ciudad;
     }
 
     /**

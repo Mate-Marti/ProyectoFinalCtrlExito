@@ -55,7 +55,8 @@ public class PlataformaTest {
 
     @Test
     void testRegistrarEvento() {
-        plataforma.registrarEvento("10", "Concierto", "Música", "Evento visible", "Activo");
+        plataforma.registrarEvento("10", "Concierto", "Música", "Evento visible");
+
         assertTrue(plataforma.buscarEvento("10"));
     }
 }

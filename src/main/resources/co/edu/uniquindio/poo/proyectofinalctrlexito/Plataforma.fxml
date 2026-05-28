@@ -35,12 +35,10 @@
                <VBox.margin><Insets bottom="5.0" /></VBox.margin>
             </Label>
             <Button maxWidth="1.7976931348623157E308" onAction="#mostrarInicio" prefHeight="38.0" style="-fx-background-color: #EBF8FF; -fx-text-fill: #2B6CB0; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-font-weight: bold; -fx-background-radius: 6;" text=" Inicio / Cartelera" />
-            <Button maxWidth="1.7976931348623157E308" onAction="#abrirUsuario" prefHeight="38.0" style="-fx-background-color: transparent; -fx-text-fill: #4A5568; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text=" Iniciar Sesión / Registro" />
-            <Button maxWidth="1.7976931348623157E308" onAction="#abrirUsuarioMenu" prefHeight="38.0" style="-fx-background-color: transparent; -fx-text-fill: #4A5568; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text=" Panel Opciones Usuario" />
+            <Button maxWidth="1.7976931348623157E308" onAction="#abrirUsuario" prefHeight="38.0" style="-fx-background-color: transparent; -fx-text-fill: #4A5568; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text=" Iniciar Sesión como Usuario" />
+            <Button maxWidth="1.7976931348623157E308" onAction="#abrirGestionPerfil" prefHeight="38.0" style="-fx-background-color: transparent; -fx-text-fill: #4A5568; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text=" Gestion del Perfil" />
             <Button maxWidth="1.7976931348623157E308" onAction="#abrirCompra" prefHeight="38.0" style="-fx-background-color: transparent; -fx-text-fill: #4A5568; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text=" Adquirir / Comprar Boletas" />
-            <Button maxWidth="1.7976931348623157E308" onAction="#abrirEntrada" prefHeight="38.0" style="-fx-background-color: transparent; -fx-text-fill: #4A5568; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text=" Ver Compras de Entradas" />
             <Button maxWidth="1.7976931348623157E308" onAction="#abrirEvento" prefHeight="38.0" style="-fx-background-color: transparent; -fx-text-fill: #4A5568; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text=" Información de Eventos" />
-            <Button maxWidth="1.7976931348623157E308" onAction="#abrirGestionAsiento" prefHeight="38.0" style="-fx-background-color: transparent; -fx-text-fill: #4A5568; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text=" Distribución de Asientos" />
             <Button maxWidth="1.7976931348623157E308" onAction="#abrirGestionCompraUsuario" prefHeight="38.0" style="-fx-background-color: transparent; -fx-text-fill: #4A5568; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text=" Historial de mis Compras" />
 
             <Button maxWidth="1.7976931348623157E308" onAction="#abrirRegistro" text="Registrarse como Usuario" style="-fx-background-color: #800020; -fx-text-fill: white; -fx-padding: 10; -fx-cursor: hand;"/>

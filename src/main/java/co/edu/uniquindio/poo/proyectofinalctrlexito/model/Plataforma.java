@@ -2,7 +2,6 @@ package co.edu.uniquindio.poo.proyectofinalctrlexito.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,10 +10,28 @@ public class Plataforma {
     private String tipo;
     private String descripcion;
     private LocalDate fecha;
-    private static List<Persona> listaPersonas;
-    private static List<Evento> listaEventos;
-    private static List<Recinto> listaRecintos;
-    private static List<Asiento> listaAsientos;
+    private List<Persona> listaPersonas;
+    private List<Evento> listaEventos;
+    private List<Recinto> listaRecintos;
+    private List<Asiento> listaAsientos;
+
+    // ==========================================
+    // SINGLETON
+    // ==========================================
+    private static Plataforma instancia;
+
+    /**
+     * Retorna la única instancia de la plataforma.
+     * Si no existe, la crea con valores por defecto.
+     *
+     * @return instancia única de Plataforma.
+     */
+    public static Plataforma getInstancia() {
+        if (instancia == null) {
+            instancia = new Plataforma(1, "General", "Plataforma principal");
+        }
+        return instancia;
+    }
 
     /**
      * Constructor de la clase Plataforma.
@@ -350,6 +367,7 @@ public class Plataforma {
             System.out.println("----------------");
         }
     }
+
     /**
      * Muestra en consola todos los usuarios registrados
      * en la plataforma.
@@ -457,37 +475,110 @@ public class Plataforma {
         return eliminado;
     }
 
-    public static List<Persona> getListaPersonas() {
+    // ==========================================
+    // NUEVOS MÉTODOS ADAPTADOS PARA RECINTOS
+    // ==========================================
+
+    /**
+     * Crea una nueva instancia de un recinto y lo almacena en la lista de la plataforma.
+     *
+     * @param idRecinto identificador único del recinto.
+     * @param nombre nombre del recinto.
+     * @param direccion dirección del recinto.
+     * @param ciudad ciudad donde se encuentra el recinto.
+     * @return nuevo objeto Recinto creado.
+     */
+    public Recinto crearRecinto(int idRecinto,
+                                String nombre,
+                                String direccion,
+                                String ciudad) {
+        Recinto nuevo = new Recinto(
+                idRecinto,
+                nombre,
+                direccion,
+                ciudad
+        );
+        listaRecintos.add(nuevo);
+        return nuevo;
+    }
+
+    /**
+     * Actualiza la información básica del recinto buscando por su identificador.
+     *
+     * @param idRecinto identificador del recinto a actualizar.
+     * @param nombre nuevo nombre del recinto.
+     * @param direccion nueva dirección del recinto.
+     * @param ciudad nueva ciudad del recinto.
+     */
+    public void actualizarRecinto(int idRecinto,
+                                  String nombre,
+                                  String direccion,
+                                  String ciudad) {
+        for (Recinto recinto : listaRecintos) {
+            if (recinto.getIdRecinto() == idRecinto) {
+                recinto.setNombre(nombre);
+                recinto.setDireccion(direccion);
+                recinto.setCiudad(ciudad);
+                return;
+            }
+        }
+    }
+
+    /**
+     * Elimina un recinto de la lista global de la plataforma utilizando su ID.
+     *
+     * @param idRecinto identificador del recinto a eliminar.
+     */
+    public void eliminarRecinto(int idRecinto) {
+        listaRecintos.removeIf(recinto -> recinto.getIdRecinto() == idRecinto);
+    }
+
+    /**
+     * Retorna en formato texto la información básica de todos los recintos registrados.
+     *
+     * @return información agregada de los recintos en formato String.
+     */
+    public String listarRecinto() {
+        StringBuilder sb = new StringBuilder();
+        for (Recinto recinto : listaRecintos) {
+            sb.append("ID:").append(recinto.getIdRecinto())
+                    .append(" Nombre:").append(recinto.getNombre())
+                    .append(" Direccion:").append(recinto.getDireccion())
+                    .append(" Ciudad:").append(recinto.getCiudad())
+                    .append("\n");
+        }
+        return sb.toString().trim();
+    }
+
+    public List<Persona> getListaPersonas() {
         return listaPersonas;
     }
 
-    public static void setListaPersonas(List<Persona> listaPersonas) {
-        Plataforma.listaPersonas = listaPersonas;
+    public void setListaPersonas(List<Persona> listaPersonas) {
+        this.listaPersonas = listaPersonas;
     }
 
-    public static List<Evento> getListaEventos() {
+    public List<Evento> getListaEventos() {
         return listaEventos;
     }
 
-    public static void setListaEventos(List<Evento> listaEventos) {
-        Plataforma.listaEventos = listaEventos;
+    public void setListaEventos(List<Evento> listaEventos) {
+        this.listaEventos = listaEventos;
     }
 
-    public static List<Recinto> getListaRecintos() {
+    public List<Recinto> getListaRecintos() {
         return listaRecintos;
     }
 
-    public static void setListaRecintos(List<Recinto> listaRecintos) {
-        Plataforma.listaRecintos = listaRecintos;
+    public void setListaRecintos(List<Recinto> listaRecintos) {
+        this.listaRecintos = listaRecintos;
     }
 
-    public static List<Asiento> getListaAsientos() {
+    public List<Asiento> getListaAsientos() {
         return listaAsientos;
     }
 
-    public static void setListaAsientos(List<Asiento> listaAsientos) {
-        Plataforma.listaAsientos = listaAsientos;
+    public void setListaAsientos(List<Asiento> listaAsientos) {
+        this.listaAsientos = listaAsientos;
     }
 }
-
-

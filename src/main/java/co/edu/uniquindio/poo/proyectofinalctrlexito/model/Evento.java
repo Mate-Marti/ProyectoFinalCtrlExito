@@ -4,7 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Evento implements Subject, Visitor{
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+public class Evento implements Subject, Visitor {
 
     private String idEvento;
     private String nombre;
@@ -14,6 +22,8 @@ public class Evento implements Subject, Visitor{
     private EstadoEvento estado;
     private List<Usuario> usuarios;
     private List<Observer> observers;
+    // NUEVO: Atributo de relación con un único Recinto
+    private Recinto recinto;
 
     /**
      * Crea un nuevo evento con su información básica,
@@ -34,6 +44,7 @@ public class Evento implements Subject, Visitor{
         this.usuarios = new ArrayList<>();
         this.observers = new ArrayList<>();
         this.estado = EstadoEvento.BORRADOR;
+        // El constructor permanece intacto, no se añade el parámetro ni se inicializa aquí.
     }
 
     /**
@@ -320,5 +331,14 @@ public class Evento implements Subject, Visitor{
      */
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
+    }
+
+    // NUEVO: Getter y Setter para el recinto del evento
+    public Recinto getRecinto() {
+        return recinto;
+    }
+
+    public void setRecinto(Recinto recinto) {
+        this.recinto = recinto;
     }
 }

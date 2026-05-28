@@ -1,18 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyectofinalctrlexito.viewController.MetricaViewController">
+<VBox alignment="TOP_CENTER" prefHeight="650.0" prefWidth="950.0" spacing="25.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyectofinalctrlexito.viewController.MetricaViewController">
    <children>
-      <Label fx:id="lblTituloCompra" layoutX="206.0" layoutY="49.0" prefHeight="58.0" prefWidth="188.0" text="METRICAS">
-         <font>
-            <Font size="40.0" />
-         </font>
-      </Label>
-      <Button fx:id="btnVolver" layoutX="517.0" layoutY="358.0" mnemonicParsing="false" onAction="#volver" text="Volver" />
+      <VBox alignment="CENTER" spacing="5.0">
+         <children>
+            <Label text="TABLERO DE MÉTRICAS Y RENDIMIENTO" textFill="#2B6CB0">
+               <font><Font name="System Bold" size="26.0" /></font>
+            </Label>
+            <Label text="Estadísticas en tiempo real basadas en los eventos, compras y los usuarios" textFill="#718096" />
+         </children>
+      </VBox>
+
+      <HBox alignment="CENTER" spacing="30.0" VBox.vgrow="ALWAYS">
+         <children>
+            <VBox alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: #F7FAFC; -fx-padding: 15; -fx-background-radius: 12; -fx-border-color: #E2E8F0;" HBox.hgrow="SOMETIMES">
+               <children>
+                  <Label style="-fx-font-weight: bold;" text="Ventas de Entradas por Evento" textFill="#2D3748">
+                     <font><Font size="14.0" /></font>
+                  </Label>
+                  <PieChart fx:id="pieChartVentas" legendSide="BOTTOM" title="Distribución de Compras" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+
+            <VBox alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: #F7FAFC; -fx-padding: 15; -fx-background-radius: 12; -fx-border-color: #E2E8F0;" HBox.hgrow="SOMETIMES">
+               <children>
+                  <Label style="-fx-font-weight: bold;" text="Tasa de Ocupación de Asientos" textFill="#2D3748">
+                     <font><Font size="14.0" /></font>
+                  </Label>
+                  <PieChart fx:id="pieChartAsientos" legendSide="BOTTOM" title="Disponibles vs Reservados" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+
+      <HBox alignment="CENTER_RIGHT" prefHeight="40.0">
+         <children>
+            <Button fx:id="btnActualizarMetricas" prefHeight="38.0" prefWidth="160.0" style="-fx-background-color: #3182CE; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-margin-right: 15;" text="🔄 Actualizar Datos" />
+            <Region prefWidth="15.0" />
+            <Button fx:id="btnVolver" onAction="#volver" prefHeight="38.0" prefWidth="100.0" style="-fx-background-color: #EDF2F7; -fx-text-fill: #4A5568; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Volver" />
+         </children>
+      </HBox>
    </children>
-</AnchorPane>
+   <padding><Insets bottom="25.0" left="25.0" right="25.0" top="25.0" /></padding>
+</VBox>
