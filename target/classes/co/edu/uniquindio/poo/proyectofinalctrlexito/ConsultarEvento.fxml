@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="800.0" spacing="16.0"
+      style="-fx-background-color: #FFFFFF;"
+      xmlns="http://javafx.com/javafx/24.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="co.edu.uniquindio.poo.proyectofinalctrlexito.viewController.ConsultarEventoViewController">
+
+    <padding><Insets bottom="25.0" left="25.0" right="25.0" top="25.0" /></padding>
+    <children>
+
+        <!-- Título -->
+        <Label text="CONSULTAR EVENTO" textFill="#2D3748">
+            <font><Font name="System Bold" size="24.0" /></font>
+        </Label>
+
+        <!-- Fila de búsqueda -->
+        <HBox spacing="10.0" alignment="CENTER_LEFT">
+            <children>
+                <TextField fx:id="txtIdBuscar"
+                           prefHeight="38.0" prefWidth="220.0"
+                           promptText="ID del Evento" />
+                <Button fx:id="btnBuscar"
+                        onAction="#buscarEvento"
+                        prefHeight="38.0"
+                        style="-fx-background-color: #3182CE; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;"
+                        text="Buscar" />
+            </children>
+        </HBox>
+
+        <!-- Card: Datos generales del evento -->
+        <VBox fx:id="cardEvento" spacing="6.0" visible="false" managed="false"
+              style="-fx-background-color: #F7FAFC; -fx-border-color: #E2E8F0; -fx-background-radius: 10; -fx-border-radius: 10; -fx-padding: 16;">
+            <children>
+                <Label text="📋 INFORMACIÓN DEL EVENTO" textFill="#2B6CB0">
+                    <font><Font name="System Bold" size="14.0" /></font>
+                </Label>
+                <Label fx:id="lblId"       text="ID:"          textFill="#4A5568" />
+                <Label fx:id="lblNombre"   text="Nombre:"      textFill="#4A5568" />
+                <Label fx:id="lblCategoria" text="Categoría:"  textFill="#4A5568" />
+                <Label fx:id="lblDescripcion" text="Descripción:" textFill="#4A5568" wrapText="true" />
+                <Label fx:id="lblFecha"    text="Fecha:"       textFill="#4A5568" />
+                <Label fx:id="lblEstado"   text="Estado:"      textFill="#4A5568" />
+            </children>
+        </VBox>
+
+        <!-- Card: Recinto asociado -->
+        <VBox fx:id="cardRecinto" spacing="6.0" visible="false" managed="false"
+              style="-fx-background-color: #EBF8FF; -fx-border-color: #BEE3F8; -fx-background-radius: 10; -fx-border-radius: 10; -fx-padding: 16;">
+            <children>
+                <Label text="🏟️ RECINTO ASOCIADO" textFill="#2C5282">
+                    <font><Font name="System Bold" size="14.0" /></font>
+                </Label>
+                <Label fx:id="lblRecintoId"        text="ID Recinto:"  textFill="#4A5568" />
+                <Label fx:id="lblRecintoNombre"    text="Nombre:"      textFill="#4A5568" />
+                <Label fx:id="lblRecintoDireccion" text="Dirección:"   textFill="#4A5568" />
+                <Label fx:id="lblRecintoCiudad"    text="Ciudad:"      textFill="#4A5568" />
+                <Label fx:id="lblRecintoDisponibilidad" text="Disponibilidad total:" textFill="#4A5568" />
+            </children>
+        </VBox>
+
+        <!-- Card: Disponibilidad por zonas -->
+        <VBox fx:id="cardZonas" spacing="8.0" visible="false" managed="false"
+              style="-fx-background-color: #F0FFF4; -fx-border-color: #C6F6D5; -fx-background-radius: 10; -fx-border-radius: 10; -fx-padding: 16;">
+            <children>
+                <Label text="🪑 DISPONIBILIDAD POR ZONAS" textFill="#276749">
+                    <font><Font name="System Bold" size="14.0" /></font>
+                </Label>
+                <ScrollPane fitToWidth="true" prefHeight="200.0"
+                            style="-fx-background-color: transparent; -fx-border-color: transparent;">
+                    <content>
+                        <VBox fx:id="contenedorZonas" spacing="8.0" />
+                    </content>
+                </ScrollPane>
+            </children>
+        </VBox>
+
+        <!-- Mensaje error -->
+        <Label fx:id="lblError" textFill="#E53E3E" visible="false" managed="false"
+               style="-fx-font-weight: bold;" />
+
+        <Region VBox.vgrow="ALWAYS" />
+
+        <!-- Botón volver -->
+        <HBox alignment="CENTER_LEFT">
+            <children>
+                <Button fx:id="btnVolver" onAction="#volver"
+                        prefHeight="38.0" prefWidth="120.0"
+                        mnemonicParsing="false"
+                        style="-fx-background-color: #EDF2F7; -fx-text-fill: #4A5568; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;"
+                        text="← Volver" />
+            </children>
+        </HBox>
+
+    </children>
+</VBox>
