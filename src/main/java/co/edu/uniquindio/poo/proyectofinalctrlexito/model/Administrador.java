@@ -7,7 +7,6 @@ public class Administrador extends Persona{
 
     private String usuario;
     private String contrasenia;
-    private ArrayList<Incidencia> incidencias = new ArrayList<>();
 
     public Administrador(String usuario, String contrasenia) {
 
@@ -15,37 +14,7 @@ public class Administrador extends Persona{
         this.contrasenia = contrasenia;
 
     }
-    /**
-     * Registra una nueva incidencia en el sistema.
-     * Valida que la incidencia no sea nula antes de agregarla.
-     *
-     * @param incidencia Incidencia a registrar. No puede ser nula.
-     * @throws IllegalArgumentException si la incidencia es nula.
-     */
-    public void registrarIncidencia(Incidencia incidencia) {
-        if (incidencia == null) {
-            throw new IllegalArgumentException("La incidencia no puede ser nula.");
-        }
-        incidencias.add(incidencia);
-        System.out.println("Incidencia registrada: " + incidencia);
-    }
-    /**
-     * Retorna la lista de todas las incidencias registradas.
-     *
-     * @return Lista de incidencias. No puede ser nula.
-     */
-    public List<Incidencia> consultarIncidencias() {
-        return incidencias;
-    }
-    public void mostrarIncidencias() {
-        if (incidencias.isEmpty()) {
-            System.out.println("No hay incidencias registradas.");
-            return;
-        }
-        for (Incidencia i : incidencias) {
-            System.out.println(i);
-        }
-    }
+
     /**
      * Muestra por consola todas las incidencias registradas.
      * Si no hay incidencias, imprime un mensaje.

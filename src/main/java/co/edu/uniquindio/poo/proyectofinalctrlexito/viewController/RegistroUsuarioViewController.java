@@ -11,10 +11,8 @@ import java.util.function.UnaryOperator;
 public class RegistroUsuarioViewController {
 
     @FXML private TextField txtId, txtNombre, txtCorreo, txtTelefono;
-    // NUEVO
     @FXML private PasswordField txtContrasena, txtConfirmarContrasena;
     @FXML private Label lblErrorCorreo, lblErrorGeneral;
-    // NUEVO
     @FXML private Label lblErrorContrasena;
 
     private final Plataforma plataforma = Plataforma.getInstancia();
@@ -50,7 +48,6 @@ public class RegistroUsuarioViewController {
         String id = txtId.getText().trim();
         String nombre = txtNombre.getText().trim();
         String telefono = txtTelefono.getText().trim();
-        // NUEVO
         String contrasena = txtContrasena.getText();
         String confirmarContrasena = txtConfirmarContrasena.getText();
 
@@ -81,7 +78,6 @@ public class RegistroUsuarioViewController {
             return;
         }
 
-        // MODIFICADO
         plataforma.registrarUsuario(id, nombre, correo, telefono, "", contrasena);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

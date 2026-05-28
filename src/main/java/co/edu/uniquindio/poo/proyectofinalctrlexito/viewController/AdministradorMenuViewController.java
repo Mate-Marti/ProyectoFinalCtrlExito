@@ -35,8 +35,8 @@ public class AdministradorMenuViewController {
         cambiarVista("/co/edu/uniquindio/poo/proyectofinalctrlexito/Metrica.fxml", event);
     }
     @FXML
-    void abrirIncidencia(ActionEvent event) throws IOException {
-        cambiarVista("/co/edu/uniquindio/poo/proyectofinalctrlexito/Incidencia.fxml", event);
+    void abrirIncidenciaAdmin(ActionEvent event) throws IOException {
+        cambiarVista("/co/edu/uniquindio/poo/proyectofinalctrlexito/IncidenciaAdmin.fxml", event);
     }
     @FXML
     void abrirGestionUsuario(ActionEvent event) throws IOException {

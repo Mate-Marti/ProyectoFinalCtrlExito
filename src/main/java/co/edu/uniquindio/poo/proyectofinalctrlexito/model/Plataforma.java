@@ -14,6 +14,7 @@ public class Plataforma {
     private List<Evento> listaEventos;
     private List<Recinto> listaRecintos;
     private List<Asiento> listaAsientos;
+    private List<Incidencia> listaIncidencias;
 
     // ==========================================
     // SINGLETON
@@ -51,6 +52,7 @@ public class Plataforma {
         this.listaEventos = new ArrayList<>();
         this.listaRecintos = new ArrayList<>();
         this.listaAsientos = new ArrayList<>();
+        this.listaIncidencias = new ArrayList<>();
     }
 
     /**
@@ -469,6 +471,38 @@ public class Plataforma {
         return null;
     }
 
+    /**
+     * Registra una nueva incidencia en el sistema.
+     * Valida que la incidencia no sea nula antes de agregarla.
+     *
+     * @param incidencia Incidencia a registrar. No puede ser nula.
+     * @throws IllegalArgumentException si la incidencia es nula.
+     */
+    public void registrarIncidencia(Incidencia incidencia) {
+        if (incidencia == null) {
+            throw new IllegalArgumentException("La incidencia no puede ser nula.");
+        }
+        listaIncidencias.add(incidencia);
+        System.out.println("Incidencia registrada: " + incidencia);
+    }
+    /**
+     * Retorna la lista de todas las incidencias registradas.
+     *
+     * @return Lista de incidencias. No puede ser nula.
+     */
+    public List<Incidencia> consultarIncidencias() {
+        return listaIncidencias;
+    }
+    public void mostrarIncidencias() {
+        if (listaIncidencias.isEmpty()) {
+            System.out.println("No hay incidencias registradas.");
+            return;
+        }
+        for (Incidencia i : listaIncidencias) {
+            System.out.println(i);
+        }
+    }
+
     public List<Persona> getListaPersonas() {
         return listaPersonas;
     }
@@ -500,4 +534,8 @@ public class Plataforma {
     public void setListaAsientos(List<Asiento> listaAsientos) {
         this.listaAsientos = listaAsientos;
     }
+
+    public List<Incidencia> getListaIncidencias() {return listaIncidencias;}
+
+    public void setListaIncidencias(List<Incidencia> listaIncidencias) {this.listaIncidencias = listaIncidencias;}
 }

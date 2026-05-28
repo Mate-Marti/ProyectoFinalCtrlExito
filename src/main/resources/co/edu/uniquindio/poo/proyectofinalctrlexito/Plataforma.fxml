@@ -40,6 +40,8 @@
             <Button maxWidth="1.7976931348623157E308" onAction="#abrirCompra" prefHeight="38.0" style="-fx-background-color: transparent; -fx-text-fill: #4A5568; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text=" Adquirir / Comprar Boletas" />
             <Button maxWidth="1.7976931348623157E308" onAction="#abrirEvento" prefHeight="38.0" style="-fx-background-color: transparent; -fx-text-fill: #4A5568; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text=" Información de Eventos" />
             <Button maxWidth="1.7976931348623157E308" onAction="#abrirGestionCompraUsuario" prefHeight="38.0" style="-fx-background-color: transparent; -fx-text-fill: #4A5568; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text=" Historial de mis Compras" />
+            <Button maxWidth="1.7976931348623157E308" onAction="#abrirIncidencia" prefHeight="38.0" style="-fx-background-color: transparent; -fx-text-fill: #0c3e72; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text=" Reportar Incidencias" />
+
 
             <Button maxWidth="1.7976931348623157E308" onAction="#abrirRegistro" text="Registrarse como Usuario" style="-fx-background-color: #800020; -fx-text-fill: white; -fx-padding: 10; -fx-cursor: hand;"/>
 
