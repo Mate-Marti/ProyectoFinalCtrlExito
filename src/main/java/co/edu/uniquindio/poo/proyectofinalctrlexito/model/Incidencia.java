@@ -10,6 +10,7 @@ public class Incidencia {
     private TipoIncidencia tipo;
     private EntidadAfectada entidad;
     private EstadoIncidencia estado;
+    private String asunto;
 
     /**
      * Crea una nueva incidencia con su información básica
@@ -21,8 +22,7 @@ public class Incidencia {
      * @param tipo tipo de incidencia reportada.
      * @param entidad entidad afectada por la incidencia.
      */
-    public Incidencia(int idIncidencia, String descripcion, Date fechaIncidencia,
-                      TipoIncidencia tipo, EntidadAfectada entidad) {
+    public Incidencia(int idIncidencia, String descripcion, Date fechaIncidencia, TipoIncidencia tipo, EntidadAfectada entidad, EstadoIncidencia estado, String asunto) {
 
         this.idIncidencia = idIncidencia;
         this.descripcion = descripcion;
@@ -30,6 +30,8 @@ public class Incidencia {
         this.tipo = tipo;
         this.entidad = entidad;
         this.estado = EstadoIncidencia.ABIERTA;
+        this.asunto = asunto;
+
     }
 
     /**
@@ -95,6 +97,7 @@ public class Incidencia {
     public EstadoIncidencia getEstado() {
         return estado;
     }
+    public EstadoIncidencia getStatus() {return estado;}
 
     /**
      * Asigna un nuevo estado a la incidencia.
@@ -194,4 +197,14 @@ public class Incidencia {
     public void setFechaIncidencia(Date fechaIncidencia) {
         this.fechaIncidencia = fechaIncidencia;
     }
+
+    public String getAsunto() {
+        return asunto;
+    }
+
+    public void setAsunto(String asunto) {
+        this.asunto = asunto;
+    }
+
+
 }

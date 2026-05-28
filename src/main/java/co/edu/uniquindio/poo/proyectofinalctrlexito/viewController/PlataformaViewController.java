@@ -38,7 +38,6 @@ public class PlataformaViewController {
         return instancia;
     }
 
-    // ✅ NUEVO: carga los eventos al abrir la pantalla principal
     @FXML
     public void initialize() {
         Plataforma plataforma = Plataforma.getInstancia();
@@ -92,6 +91,11 @@ public class PlataformaViewController {
     }
 
     @FXML
+    void abrirIncidencia(ActionEvent event) {
+        cargarVistaExterna("/co/edu/uniquindio/poo/proyectofinalctrlexito/Incidencia.fxml");
+    }
+
+    @FXML
     void abrirRegistro(ActionEvent event) {
         cargarVistaExterna("/co/edu/uniquindio/poo/proyectofinalctrlexito/RegistroUsuario.fxml");
     }
@@ -113,7 +117,6 @@ public class PlataformaViewController {
         }
     }
 
-    // ✅ NUEVO: refresca las tarjetas del HBox con la lista de eventos
     public void cargarEventosActivos(List<Evento> eventos) {
         hboxEventosDisponibles.getChildren().clear();
 
