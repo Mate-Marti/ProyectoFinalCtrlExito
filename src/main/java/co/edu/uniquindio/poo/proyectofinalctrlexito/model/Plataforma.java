@@ -43,7 +43,6 @@ public class Plataforma {
      * @param descripcion descripción general de la plataforma.
      */
     public Plataforma(int idPlataforma, String tipo, String descripcion) {
-
         this.idPlataforma = idPlataforma;
         this.tipo = tipo;
         this.descripcion = descripcion;
@@ -137,13 +136,11 @@ public class Plataforma {
         for(Persona persona : listaPersonas){
             if(persona instanceof Usuario){
                 Usuario user = (Usuario) persona;
-
                 if(user.getId().equals(id)){
                     return true;
                 }
             }
         }
-
         return false;
     }
 
@@ -160,22 +157,12 @@ public class Plataforma {
     public void registrarUsuario(String id, String nombre,
                                  String correo, String telefono,
                                  String metodoPago){
-
         if (buscarUsuario(id)) {
             System.out.println("El usuario ya existe");
             return;
         }
-
-        Usuario nuevo = new Usuario(
-                id,
-                nombre,
-                correo,
-                telefono,
-                metodoPago
-        );
-
+        Usuario nuevo = new Usuario(id, nombre, correo, telefono, metodoPago);
         listaPersonas.add(nuevo);
-
         System.out.println("Usuario registrado correctamente");
     }
 
@@ -196,37 +183,27 @@ public class Plataforma {
                                      String nuevoCorreo,
                                      String nuevoTelefono,
                                      String nuevoMetodoPago) {
-
         for (Persona persona : listaPersonas) {
-
             if (persona instanceof Usuario) {
-
                 Usuario usuario = (Usuario) persona;
-
                 if (usuario.getId().equals(id)) {
-
                     if (nuevoNombre != null && !nuevoNombre.isEmpty()) {
                         usuario.setNombreCompleto(nuevoNombre);
                     }
-
                     if (nuevoCorreo != null && !nuevoCorreo.isEmpty()) {
                         usuario.setCorreo(nuevoCorreo);
                     }
-
                     if (nuevoMetodoPago != null && !nuevoMetodoPago.isEmpty()) {
                         usuario.setMetodoPago(nuevoMetodoPago);
                     }
-
                     if (nuevoTelefono != null && !nuevoTelefono.isEmpty()) {
                         usuario.setTelefono(nuevoTelefono);
                     }
-
                     System.out.println("Usuario actualizado exitosamente.");
                     return true;
                 }
             }
         }
-
         System.out.println("Usuario con ID " + id + " no encontrado.");
         return false;
     }
@@ -239,27 +216,18 @@ public class Plataforma {
      * false si no se encontró.
      */
     public boolean eliminarUsuario(String id) {
-
         Iterator<Persona> iterator = listaPersonas.iterator();
-
         while (iterator.hasNext()) {
-
             Persona persona = iterator.next();
-
             if (persona instanceof Usuario) {
-
                 Usuario usuario = (Usuario) persona;
-
                 if (usuario.getId().equals(id)) {
-
                     iterator.remove();
-
                     System.out.println("Usuario eliminado exitosamente.");
                     return true;
                 }
             }
         }
-
         System.out.println("Usuario con ID " + id + " no encontrado.");
         return false;
     }
@@ -272,14 +240,11 @@ public class Plataforma {
      * @return true si el evento existe, false en caso contrario.
      */
     public boolean buscarEvento(String id){
-
         for(Evento ev : listaEventos){
-
             if(ev.getIdEvento().equals(id)){
                 return true;
             }
         }
-
         return false;
     }
 
@@ -296,25 +261,14 @@ public class Plataforma {
                                 String nombre,
                                 String categoria,
                                 String descripcion) {
-
         for (Evento e : listaEventos) {
-
             if (e.getIdEvento().equals(idEvento)) {
-
                 System.out.println("Ya existe un evento con el ID: " + idEvento);
                 return;
             }
         }
-
-        Evento nuevo = new Evento(
-                idEvento,
-                nombre,
-                categoria,
-                descripcion
-        );
-
+        Evento nuevo = new Evento(idEvento, nombre, categoria, descripcion);
         listaEventos.add(nuevo);
-
         System.out.println("Evento registrado correctamente: " + nombre);
     }
 
@@ -326,26 +280,18 @@ public class Plataforma {
      * si no se encuentra.
      */
     public String estadoCompra(int idCompra) {
-
         for (Persona persona : listaPersonas) {
-
             if (persona instanceof Usuario) {
-
                 Usuario usuario = (Usuario) persona;
-
                 for (Compra compra : usuario.getCompras()) {
-
                     if (compra.getIdCompra() == idCompra) {
-
                         return "Estado de compra " + idCompra + ": "
                                 + compra.getEstadoCompra().mostrarEstado();
                     }
                 }
             }
         }
-
         System.out.println("No se encontró la compra con ID: " + idCompra);
-
         return null;
     }
 
@@ -354,15 +300,11 @@ public class Plataforma {
      * en la plataforma.
      */
     public void listarEventos() {
-
         if (listaEventos.isEmpty()) {
-
             System.out.println("No hay eventos registrados.");
             return;
         }
-
         for (Evento evento : listaEventos) {
-
             System.out.println(evento.obtenerDetalleEvento());
             System.out.println("----------------");
         }
@@ -374,21 +316,14 @@ public class Plataforma {
      * Si no existen usuarios registrados, se informa mediante un mensaje.
      */
     public void listarUsuarios() {
-
         boolean hayUsuarios = false;
-
         for (Persona persona : listaPersonas) {
-
             if (persona instanceof Usuario) {
-
                 Usuario usuario = (Usuario) persona;
-
                 System.out.println(usuario);
-
                 hayUsuarios = true;
             }
         }
-
         if (!hayUsuarios) {
             System.out.println("No hay usuarios registrados.");
         }
@@ -407,42 +342,26 @@ public class Plataforma {
     public boolean reasignarCompra(int idCompra,
                                    Entrada entradaVieja,
                                    Asiento nuevoAsiento) {
-
         if (nuevoAsiento == null || entradaVieja == null) {
-
             throw new IllegalArgumentException(
                     "La entrada y el asiento no pueden ser nulos."
             );
         }
-
         for (Persona persona : listaPersonas) {
-
             if (persona instanceof Usuario) {
-
                 Usuario usuario = (Usuario) persona;
-
                 for (Compra compra : usuario.getCompras()) {
-
                     if (compra.getIdCompra() == idCompra) {
-
                         compra.eliminarEntrada(entradaVieja);
-
                         entradaVieja.setAsiento(nuevoAsiento);
-
                         compra.agregarEntrada(entradaVieja);
-
-                        System.out.println(
-                                "Compra " + idCompra + " reasignada correctamente."
-                        );
-
+                        System.out.println("Compra " + idCompra + " reasignada correctamente.");
                         return true;
                     }
                 }
             }
         }
-
         System.out.println("No se encontró la compra con ID: " + idCompra);
-
         return false;
     }
 
@@ -454,24 +373,14 @@ public class Plataforma {
      * false si no se encontró el evento.
      */
     public boolean eliminarEvento(String idEvento) {
-
         boolean eliminado = listaEventos.removeIf(
                 e -> e.getIdEvento().equals(idEvento)
         );
-
         if (eliminado) {
-
-            System.out.println(
-                    "Evento " + idEvento + " eliminado correctamente."
-            );
-
+            System.out.println("Evento " + idEvento + " eliminado correctamente.");
         } else {
-
-            System.out.println(
-                    "No se encontró el evento con ID: " + idEvento
-            );
+            System.out.println("No se encontró el evento con ID: " + idEvento);
         }
-
         return eliminado;
     }
 
@@ -492,12 +401,7 @@ public class Plataforma {
                                 String nombre,
                                 String direccion,
                                 String ciudad) {
-        Recinto nuevo = new Recinto(
-                idRecinto,
-                nombre,
-                direccion,
-                ciudad
-        );
+        Recinto nuevo = new Recinto(idRecinto, nombre, direccion, ciudad);
         listaRecintos.add(nuevo);
         return nuevo;
     }
@@ -548,6 +452,21 @@ public class Plataforma {
                     .append("\n");
         }
         return sb.toString().trim();
+    }
+
+    /**
+     * Busca y retorna un recinto registrado en la plataforma por su identificador.
+     *
+     * @param idRecinto identificador del recinto a buscar.
+     * @return el objeto Recinto si se encuentra, null en caso contrario.
+     */
+    public Recinto buscarRecintoPorId(int idRecinto) {
+        for (Recinto recinto : listaRecintos) {
+            if (recinto.getIdRecinto() == idRecinto) {
+                return recinto;
+            }
+        }
+        return null;
     }
 
     public List<Persona> getListaPersonas() {

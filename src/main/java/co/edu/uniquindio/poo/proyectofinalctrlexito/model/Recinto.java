@@ -144,4 +144,8 @@ public class Recinto implements ComponenteRecinto, Visitor {
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
     }
+    @Override
+    public String toString() {
+        return "[" + idRecinto + "] " + nombre + " — " + ciudad+" — " + direccion;
+    }
 }

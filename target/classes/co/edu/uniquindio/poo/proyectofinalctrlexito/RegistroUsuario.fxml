@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="15.0" style="-fx-background-color: #FFFFFF; -fx-padding: 30;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="co.edu.uniquindio.poo.proyectofinalctrlexito.viewController.RegistroUsuarioViewController">
+    <Label text="REGISTRO DE NUEVO USUARIO" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <TextField fx:id="txtId" promptText="Cédula (Solo números)"/>
+    <TextField fx:id="txtNombre" promptText="Nombre Completo"/>
+    <TextField fx:id="txtCorreo" promptText="Correo Electrónico"/>
+
+    <Label fx:id="lblErrorCorreo" text="Error: el correo debe tener un @" textFill="RED" visible="false" style="-fx-font-size: 11px;"/>
+
+    <TextField fx:id="txtTelefono" promptText="Teléfono (Solo números)"/>
+    <Button fx:id="btnRegistrar" text="Registrar Usuario" onAction="#registrar" style="-fx-background-color: #800020; -fx-text-fill: white; -fx-cursor: hand;"/>
+</VBox>
