@@ -16,7 +16,7 @@
             <Label text="TABLERO DE MÉTRICAS Y RENDIMIENTO" textFill="#2B6CB0">
                <font><Font name="System Bold" size="26.0" /></font>
             </Label>
-            <Label text="Estadísticas en tiempo real basadas en los eventos, compras y los usuarios" textFill="#718096" />
+            <Label text="Estadísticas en tiempo real basadas en los eventos, compras e incidencias" textFill="#718096" />
          </children>
       </VBox>
 
@@ -27,26 +27,30 @@
                   <Label style="-fx-font-weight: bold;" text="Ventas de Entradas por Evento" textFill="#2D3748">
                      <font><Font size="14.0" /></font>
                   </Label>
-                  <PieChart fx:id="pieChartVentas" legendSide="BOTTOM" title="Distribución de Compras" VBox.vgrow="ALWAYS" />
+                  <PieChart fx:id="pieChartVentas" legendSide="BOTTOM" title="Distribución de Ingresos" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
 
             <VBox alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: #F7FAFC; -fx-padding: 15; -fx-background-radius: 12; -fx-border-color: #E2E8F0;" HBox.hgrow="SOMETIMES">
                <children>
-                  <Label style="-fx-font-weight: bold;" text="Tasa de Ocupación de Asientos" textFill="#2D3748">
+                  <Label style="-fx-font-weight: bold;" text="Estado de Incidencias" textFill="#2D3748">
                      <font><Font size="14.0" /></font>
                   </Label>
-                  <PieChart fx:id="pieChartAsientos" legendSide="BOTTOM" title="Disponibles vs Reservados" VBox.vgrow="ALWAYS" />
+                  <PieChart fx:id="pieChartIncidencias" legendSide="BOTTOM" title="Proporción por Estado" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
          </children>
       </HBox>
 
-      <HBox alignment="CENTER_RIGHT" prefHeight="40.0">
+      <HBox alignment="CENTER_RIGHT" prefHeight="40.0" spacing="15.0">
          <children>
-            <Button fx:id="btnActualizarMetricas" prefHeight="38.0" prefWidth="160.0" style="-fx-background-color: #3182CE; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-margin-right: 15;" text="🔄 Actualizar Datos" />
-            <Region prefWidth="15.0" />
-            <Button fx:id="btnVolver" onAction="#volver" prefHeight="38.0" prefWidth="100.0" style="-fx-background-color: #EDF2F7; -fx-text-fill: #4A5568; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Volver" />
+            <Button fx:id="btnDescargarPDF" onAction="#descargarPDF" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #38A169; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="📄 Descargar Reporte PDF" />
+
+            <Button fx:id="btnActualizarMetricas" onAction="#actualizarDatos" prefHeight="38.0" prefWidth="180.0" style="-fx-background-color: #3182CE; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="🔄 Actualizar Datos" />
+
+            <Region prefWidth="10.0" />
+
+            <Button fx:id="btnVolver" onAction="#volver" prefHeight="38.0" prefWidth="100.0" style="-fx-background-color: #EDF2F7; -fx-text-fill: #4A5568; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand; -fx-border-color: #CBD5E0; -fx-border-radius: 8;" text="Volver" />
          </children>
       </HBox>
    </children>

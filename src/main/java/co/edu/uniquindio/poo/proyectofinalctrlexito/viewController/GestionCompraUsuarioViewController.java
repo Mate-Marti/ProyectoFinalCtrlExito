@@ -38,11 +38,9 @@ public class GestionCompraUsuarioViewController {
 
     @FXML
     public void initialize() {
-        // 1. Configurar cómo se van a obtener los datos de cada columna mapeando con tu clase Compra
         colId.setCellValueFactory(new PropertyValueFactory<>("idCompra"));
         colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
 
-        // Configuración especial para el Evento porque es un objeto compuesto (Compra -> Evento -> String nombre)
         colEvento.setCellValueFactory(celda -> {
             if (celda.getValue().getEvento() != null) {
                 return new SimpleStringProperty(celda.getValue().getEvento().getNombre());
@@ -50,7 +48,6 @@ public class GestionCompraUsuarioViewController {
             return new SimpleStringProperty("Sin evento");
         });
 
-        // Configuración especial para el Estado porque utilizas el patrón State (Compra -> EstadoCompra -> String)
         colEstado.setCellValueFactory(celda -> {
             if (celda.getValue().getEstadoCompra() != null) {
                 return new SimpleStringProperty(celda.getValue().getEstadoCompra().mostrarEstado());
@@ -58,7 +55,6 @@ public class GestionCompraUsuarioViewController {
             return new SimpleStringProperty("Creada");
         });
 
-        // 2. Obtener la instancia de la Plataforma y buscar el usuario actual
         Plataforma plataforma = Plataforma.getInstancia();
         Usuario usuarioLogueado = null;
 
@@ -69,7 +65,6 @@ public class GestionCompraUsuarioViewController {
             }
         }
 
-        // 3. Si el usuario existe y tiene compras hechas, las cargamos al TableView
         if (usuarioLogueado != null && usuarioLogueado.getCompras() != null) {
             listaComprasObservable.addAll(usuarioLogueado.getCompras());
             tblCompras.setItems(listaComprasObservable);
@@ -79,6 +74,6 @@ public class GestionCompraUsuarioViewController {
     @FXML
     void volver(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/co/edu/uniquindio/poo/proyectofinalctrlexito/UsuarioMenu.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/co/edu/uniquindio/poo/proyectofinalctrlexito/Plataforma.fxml"))));
     }
 }
