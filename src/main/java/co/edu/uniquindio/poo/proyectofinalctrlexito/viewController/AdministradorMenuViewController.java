@@ -56,7 +56,7 @@ public class AdministradorMenuViewController {
     @FXML
     void volver(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/co/edu/uniquindio/poo/proyectofinalctrlexito/Administrador.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/co/edu/uniquindio/poo/proyectofinalctrlexito/Plataforma.fxml"));
         stage.setScene(new Scene(root));
     }
 }

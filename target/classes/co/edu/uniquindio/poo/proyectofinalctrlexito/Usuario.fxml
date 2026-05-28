@@ -33,8 +33,8 @@
                         <PasswordField fx:id="txtContrasenaCajero" prefHeight="40.0" promptText="••••••••" style="-fx-background-radius: 6; -fx-border-color: #CBD5E0; -fx-border-radius: 6;" />
                     </children>
                 </VBox>
-                <Button fx:id="btnEntrar" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="42.0" style="-fx-background-color: #3182CE; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;" text="Iniciar Sesión" />
-                <Button fx:id="btnVolver" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#volver" prefHeight="40.0" style="-fx-background-color: #EDF2F7; -fx-text-fill: #4A5568; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;" text="Regresar al Inicio" />
+                <!-- MODIFICADO: agrega onAction -->
+                <Button fx:id="btnEntrar" onAction="#iniciarSesion" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="42.0" style="-fx-background-color: #3182CE; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;" text="Iniciar Sesión" />
             </children>
         </VBox>
     </children>

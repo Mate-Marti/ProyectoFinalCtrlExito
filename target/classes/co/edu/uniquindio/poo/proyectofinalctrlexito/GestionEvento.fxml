@@ -2,41 +2,65 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="850.0" spacing="20.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyectofinalctrlexito.viewController.GestionEventoViewController">
-   <children>
-      <Label text="PANEL DE GESTIÓN DE EVENTOS" textFill="#800020">
-         <font><Font name="System Bold" size="26.0" /></font>
-      </Label>
-      <HBox spacing="20.0" VBox.vgrow="ALWAYS">
-         <children>
-            <VBox prefWidth="300.0" spacing="12.0" style="-fx-background-color: #F7FAFC; -fx-padding: 15; -fx-background-radius: 8; -fx-border-color: #E2E8F0;">
-               <children>
-                  <Label style="-fx-font-weight: bold;" text="Datos del Evento a añadir" textFill="#4A5568" />
-                  <TextField fx:id="txtNombreEvento" prefHeight="35.0" promptText="Nombre del Evento" style="-fx-background-radius: 4;" />
-                  <TextField fx:id="txtCiudadEvento" prefHeight="35.0" promptText="Ciudad" style="-fx-background-radius: 4;" />
-                  <DatePicker fx:id="datePickerEvento" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Fecha" />
-                  <ComboBox fx:id="comboRecinto" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Seleccionar Recinto" />
-                  <Button fx:id="btnCrearEvento" maxWidth="1.7976931348623157E308" prefHeight="38.0" style="-fx-background-color: #38A169; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;" text="Añadir Evento" />
-                  <Button fx:id="btnEliminarEvento" maxWidth="1.7976931348623157E308" prefHeight="38.0" style="-fx-background-color: #E53E3E; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;" text="Eliminar Seleccionado" />
-               </children>
-            </VBox>
-            <TableView fx:id="tablaGestionEventos" style="-fx-background-radius: 8;" HBox.hgrow="ALWAYS" />
-         </children>
-      </HBox>
-      <HBox alignment="CENTER_RIGHT">
-         <children>
-            <Button fx:id="btnVolver" onAction="#volver" prefHeight="38.0" prefWidth="120.0" style="-fx-background-color: #EDF2F7; -fx-text-fill: #4A5568; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Volver al Menú" />
-         </children>
-      </HBox>
-   </children>
-   <padding><Insets bottom="25.0" left="25.0" right="25.0" top="25.0" /></padding>
+<VBox alignment="TOP_CENTER" prefHeight="550.0" prefWidth="800.0" spacing="30.0"
+      style="-fx-background-color: #FFFFFF;"
+      xmlns="http://javafx.com/javafx/24.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="co.edu.uniquindio.poo.proyectofinalctrlexito.viewController.GestionEventoViewController">
+
+    <padding><Insets bottom="40.0" left="80.0" right="80.0" top="40.0" /></padding>
+
+    <children>
+
+        <Label text="GESTIÓN DE EVENTOS" textFill="#000000">
+            <font><Font name="System Bold" size="24.0" /></font>
+        </Label>
+
+        <Region prefHeight="10.0" />
+
+        <Button fx:id="btnCrearEvento"
+                maxWidth="1.7976931348623157E308" prefHeight="50.0"
+                mnemonicParsing="false" onAction="#abrirCrearEvento"
+                style="-fx-background-color: #F7FAFC; -fx-border-color: #CBD5E0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-size: 14px;"
+                text="Crear Evento" />
+
+        <Button fx:id="btnActualizarEvento"
+                maxWidth="1.7976931348623157E308" prefHeight="50.0"
+                mnemonicParsing="false" onAction="#abrirActualizarEvento"
+                style="-fx-background-color: #F7FAFC; -fx-border-color: #CBD5E0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-size: 14px;"
+                text="Actualizar Evento" />
+
+        <Button fx:id="btnEliminarEvento"
+                maxWidth="1.7976931348623157E808" prefHeight="50.0"
+                mnemonicParsing="false" onAction="#abrirEliminarEvento"
+                style="-fx-background-color: #FFF5F5; -fx-border-color: #FEB2B2; -fx-text-fill: #9B2C2C; -fx-font-weight: bold; -fx-border-radius: 8; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-size: 14px;"
+                text="Eliminar Evento" />
+
+        <Button fx:id="btnConsultarEvento"
+                maxWidth="1.7976931348623157E308" prefHeight="50.0"
+                mnemonicParsing="false" onAction="#abrirConsultarEvento"
+                style="-fx-background-color: #F7FAFC; -fx-border-color: #CBD5E0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-size: 14px;"
+                text="Consultar Evento" />
+
+        <Region VBox.vgrow="ALWAYS" />
+
+        <HBox alignment="CENTER_LEFT">
+            <children>
+                <Button fx:id="btnVolver"
+                        onAction="#volver"
+                        prefHeight="38.0" prefWidth="120.0"
+                        mnemonicParsing="false"
+                        style="-fx-background-color: #EDF2F7; -fx-text-fill: #4A5568; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;"
+                        text="← Volver" />
+            </children>
+        </HBox>
+
+    </children>
 </VBox>
+

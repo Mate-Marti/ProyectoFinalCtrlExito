@@ -10,6 +10,7 @@ public class Zona implements ComponenteRecinto, Visitor {
     private int capacidad;
     private double preciobase;
     private List<Asiento> listaAsientos;
+    private Recinto recinto; // NUEVO: relación con el recinto al que pertenece
 
     /**
      * Constructor de la clase Zona.
@@ -31,6 +32,7 @@ public class Zona implements ComponenteRecinto, Visitor {
         this.capacidad = capacidad;
         this.preciobase = preciobase;
         this.listaAsientos = new ArrayList<>();
+        this.recinto = null; // se asigna cuando se agrega al recinto
     }
 
     /**
@@ -231,5 +233,29 @@ public class Zona implements ComponenteRecinto, Visitor {
      */
     public List<Asiento> getListaAsientos() {
         return listaAsientos;
+    }
+
+    // NUEVO: Getter y Setter para la relación con Recinto
+
+    /**
+     * Obtiene el recinto al que pertenece esta zona.
+     *
+     * @return recinto al que pertenece la zona.
+     */
+    public Recinto getRecinto() {
+        return recinto;
+    }
+
+    /**
+     * Asigna el recinto al que pertenece esta zona.
+     *
+     * @param recinto recinto propietario de la zona.
+     */
+    public void setRecinto(Recinto recinto) {
+        this.recinto = recinto;
+    }
+    @Override
+    public String toString() {
+        return "[" + idZona + "] " + nombre + " — Capacidad: " + capacidad + " — Precio base: $" + preciobase;
     }
 }

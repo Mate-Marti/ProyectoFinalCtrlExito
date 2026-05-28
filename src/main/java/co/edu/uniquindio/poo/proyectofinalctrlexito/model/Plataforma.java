@@ -156,12 +156,12 @@ public class Plataforma {
      */
     public void registrarUsuario(String id, String nombre,
                                  String correo, String telefono,
-                                 String metodoPago){
+                                 String metodoPago, String contrasena) {
         if (buscarUsuario(id)) {
             System.out.println("El usuario ya existe");
             return;
         }
-        Usuario nuevo = new Usuario(id, nombre, correo, telefono, metodoPago);
+        Usuario nuevo = new Usuario(id, nombre, correo, telefono, metodoPago, contrasena);
         listaPersonas.add(nuevo);
         System.out.println("Usuario registrado correctamente");
     }

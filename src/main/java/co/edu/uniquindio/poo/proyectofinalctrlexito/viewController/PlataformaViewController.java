@@ -1,11 +1,13 @@
 package co.edu.uniquindio.poo.proyectofinalctrlexito.viewController;
 
 import co.edu.uniquindio.poo.proyectofinalctrlexito.model.Evento;
+import co.edu.uniquindio.poo.proyectofinalctrlexito.model.Plataforma;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -18,7 +20,7 @@ import java.util.List;
 public class PlataformaViewController {
 
     @FXML
-    private StackPane contentArea; // Asegúrate que el ID coincida con el FXML
+    private StackPane contentArea;
     @FXML
     private VBox menuLateral;
     @FXML
@@ -36,6 +38,15 @@ public class PlataformaViewController {
         return instancia;
     }
 
+    // ✅ NUEVO: carga los eventos al abrir la pantalla principal
+    @FXML
+    public void initialize() {
+        Plataforma plataforma = Plataforma.getInstancia();
+        if (plataforma != null && plataforma.getListaEventos() != null) {
+            cargarEventosActivos(plataforma.getListaEventos());
+        }
+    }
+
     @FXML
     void toggleMenu(ActionEvent event) {
         if (menuLateral != null) {
@@ -45,12 +56,8 @@ public class PlataformaViewController {
         }
     }
 
-    // --- MÉTODOS DE NAVEGACIÓN (AHORA TODOS CARGAN DENTRO DEL CENTRO) ---
-
     @FXML
     void mostrarInicio(ActionEvent event) {
-        // Para volver al inicio real (el ScrollPane con los eventos),
-        // simplemente limpiamos el contentArea de cualquier vista externa
         contentArea.getChildren().removeIf(node -> node != contentArea.getChildren().get(0));
     }
 
@@ -89,16 +96,12 @@ public class PlataformaViewController {
         cargarVistaExterna("/co/edu/uniquindio/poo/proyectofinalctrlexito/RegistroUsuario.fxml");
     }
 
-    // --- LÓGICA DE CARGA INTERNA ---
-
     public void cargarVistaExterna(String rutaFxml) {
         try {
             if (contentArea != null) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(rutaFxml));
                 Parent vistaSecundaria = loader.load();
 
-                // Importante: No limpiamos todo si queremos mantener el primer nodo (el inicio)
-                // Pero si queremos que la nueva vista cubra todo el centro, usamos:
                 if (contentArea.getChildren().size() > 1) {
                     contentArea.getChildren().remove(1);
                 }
@@ -110,29 +113,55 @@ public class PlataformaViewController {
         }
     }
 
-    /**
-     * Genera dinámicamente las tarjetas de eventos en el HBox
-     */
+    // ✅ NUEVO: refresca las tarjetas del HBox con la lista de eventos
     public void cargarEventosActivos(List<Evento> eventos) {
         hboxEventosDisponibles.getChildren().clear();
+
+        if (eventos == null || eventos.isEmpty()) {
+            Label sinEventos = new Label("No hay eventos disponibles en este momento.");
+            sinEventos.setStyle("-fx-text-fill: #718096; -fx-font-size: 13px;");
+            hboxEventosDisponibles.getChildren().add(sinEventos);
+            return;
+        }
+
         for (Evento ev : eventos) {
-            VBox tarjeta = new VBox();
-            tarjeta.setPrefSize(180, 180);
-            tarjeta.setStyle("-fx-background-color: white; -fx-border-color: #CBD5E0; -fx-background-radius: 10; -fx-border-radius: 10; -fx-padding: 10;");
+            VBox tarjeta = new VBox(8);
+            tarjeta.setPrefSize(190, 190);
+            tarjeta.setStyle(
+                    "-fx-background-color: white;" +
+                            "-fx-border-color: #BEE3F8;" +
+                            "-fx-background-radius: 10;" +
+                            "-fx-border-radius: 10;" +
+                            "-fx-padding: 12;" +
+                            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 6, 0, 0, 2);"
+            );
 
             Label titulo = new Label(ev.getNombre());
-            titulo.setStyle("-fx-font-weight: bold; -fx-text-fill: #2D3748;");
+            titulo.setStyle("-fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #2B6CB0;");
+            titulo.setWrapText(true);
+
+            Label tipo = new Label("🎭 " + ev.getCategoria());
+            tipo.setStyle("-fx-font-size: 10px; -fx-text-fill: #4A5568;");
+
+            Label estado = new Label("● " + ev.getEstado().toString());
+            estado.setStyle("-fx-font-size: 10px; -fx-text-fill: #276749; -fx-font-weight: bold;");
 
             Label desc = new Label(ev.getDescripcion());
             desc.setWrapText(true);
             desc.setStyle("-fx-font-size: 10px; -fx-text-fill: #718096;");
 
-            tarjeta.getChildren().addAll(titulo, desc);
+            Button btnVer = new Button("Ver detalles");
+            btnVer.setStyle(
+                    "-fx-background-color: #2B6CB0; -fx-text-fill: white;" +
+                            "-fx-background-radius: 6; -fx-cursor: hand; -fx-font-size: 10px;"
+            );
+            btnVer.setOnAction(e -> abrirEvento(null));
+
+            tarjeta.getChildren().addAll(titulo, tipo, estado, desc, btnVer);
             hboxEventosDisponibles.getChildren().add(tarjeta);
         }
     }
 
-    // Mantenemos este por si alguna acción realmente requiere cambiar TODA la ventana (como un Logout)
     private void cambiarVistaCompleta(String ruta, ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(ruta));
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();

@@ -22,7 +22,7 @@
                 <TextField fx:id="txtPerfilNombre" prefHeight="38.0" promptText="Nombre Completo" />
                 <TextField fx:id="txtPerfilCorreo" prefHeight="38.0" promptText="Correo Electrónico" />
                 <TextField fx:id="txtPerfilTelefono" prefHeight="38.0" promptText="Teléfono Celular" />
-                <Button fx:id="btnGuardarCambios" maxWidth="1.7976931348623157E308" prefHeight="40.0" style="-fx-background-color: #3182CE; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;" text="Guardar Información" />
+                <Button fx:id="btnGuardarCambios" onAction="#guardarCambios" maxWidth="1.7976931348623157E308" prefHeight="40.0" style="-fx-background-color: #3182CE; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;" text="Guardar Información" />
             </children>
         </VBox>
         <Button fx:id="btnVolver" onAction="#volver" prefHeight="38.0" prefWidth="120.0" style="-fx-background-color: #EDF2F7; -fx-text-fill: #4A5568; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Regresar" />

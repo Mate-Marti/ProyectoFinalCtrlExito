@@ -3,6 +3,7 @@ module co.edu.uniquindio.poo.proyectofinalctrlexito {
     requires javafx.fxml;
     requires java.base;
     requires java.desktop;
+    requires javafx.graphics;
 
     opens co.edu.uniquindio.poo.proyectofinalctrlexito to javafx.fxml;
     opens co.edu.uniquindio.poo.proyectofinalctrlexito.viewController to javafx.fxml;

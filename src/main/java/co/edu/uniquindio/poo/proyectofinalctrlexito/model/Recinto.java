@@ -34,16 +34,18 @@ public class Recinto implements ComponenteRecinto, Visitor {
     }
 
     /**
-     * Agrega una nueva zona al recinto.
+     * Agrega una nueva zona al recinto y establece
+     * la referencia bidireccional zona → recinto.
      *
      * @param nuevaZona zona que será agregada al recinto.
      */
     public void agregarZona(Zona nuevaZona) {
+        nuevaZona.setRecinto(this); // NUEVO: relación bidireccional
         this.listaZonas.add(nuevaZona);
     }
 
     /**
-     * Calcula la disponibilidad total del recinto
+     * Calculates la disponibilidad total del recinto
      * sumando la disponibilidad de todas sus zonas.
      *
      * @return cantidad total de espacios disponibles.
@@ -144,8 +146,112 @@ public class Recinto implements ComponenteRecinto, Visitor {
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
     }
+
     @Override
     public String toString() {
-        return "[" + idRecinto + "] " + nombre + " — " + ciudad+" — " + direccion;
+        return "[" + idRecinto + "] " + nombre + " — " + ciudad + " — " + direccion;
+    }
+
+    // ==========================================================
+    // MÉTODOS DE GESTIÓN DE ZONAS
+    // ==========================================================
+
+    /**
+     * Crea e integra una nueva zona directamente al listado del recinto,
+     * estableciendo la relación bidireccional zona → recinto.
+     *
+     * @param idZona identificador único de la zona.
+     * @param nombre nombre descriptivo de la zona (ej: VIP, General).
+     * @param capacidad capacidad máxima de asientos de la zona.
+     * @param preciobase precio base asignado a la zona.
+     */
+    public void crearZona(int idZona, String nombre, int capacidad, double preciobase) {
+        Zona nueva = new Zona(idZona, nombre, capacidad, preciobase);
+        agregarZona(nueva); // agregarZona ya asigna this como recinto de la zona
+    }
+
+    /**
+     * Busca una zona específica en el recinto por su identificador.
+     *
+     * @param idZona identificador de la zona a consultar.
+     * @return El objeto Zona si se encuentra, null en caso contrario.
+     */
+    public Zona consultarZona(int idZona) {
+        for (Zona zona : listaZonas) {
+            if (zona.getIdZona() == idZona) {
+                return zona;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Actualiza los datos de una zona existente utilizando el método interno de Zona.
+     *
+     * @param idZona identificador de la zona a modificar.
+     * @param nuevoNombre nuevo nombre descriptivo de la zona.
+     * @param nuevaCapacidad nueva capacidad máxima de la zona.
+     * @param nuevoPreciobase nuevo precio base aplicable a la zona.
+     * @return true si la zona fue encontrada y actualizada, false de lo contrario.
+     */
+    public boolean actualizarZona(int idZona, String nuevoNombre, int nuevaCapacidad, double nuevoPreciobase) {
+        Zona zona = consultarZona(idZona);
+        if (zona != null) {
+            zona.actualizarZona(nuevoNombre, nuevaCapacidad, nuevoPreciobase);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Elimina una zona de la lista del recinto a partir de su identificador.
+     *
+     * @param idZona identificador de la zona a remover.
+     * @return true si la zona fue removida exitosamente, false si no existía.
+     */
+    public boolean eliminarZona(int idZona) {
+        return listaZonas.removeIf(zona -> zona.getIdZona() == idZona);
+    }
+
+    /**
+     * Consulta la ocupación detallada por cada zona imprimiendo su
+     * disponibilidad actual individual en formato de texto.
+     *
+     * @return Reporte consolidado de ocupación de todas las zonas.
+     */
+    public String consultarOcupacionPorZona() {
+        if (listaZonas.isEmpty()) {
+            return "El recinto '" + nombre + "' no tiene zonas registradas.";
+        }
+
+        StringBuilder reporte = new StringBuilder();
+        reporte.append("--- Reporte de Ocupación: ").append(nombre).append(" ---\n");
+
+        for (Zona zona : listaZonas) {
+            reporte.append("Zona: ").append(zona.getNombre())
+                    .append(" (ID: ").append(zona.getIdZona()).append(")")
+                    .append(" — Disponibles: ").append(zona.obtenerDisponibilidad())
+                    .append("\n");
+        }
+
+        return reporte.toString().trim();
+    }
+
+    /**
+     * Obtiene la lista de zonas del recinto.
+     *
+     * @return lista de zonas.
+     */
+    public List<Zona> getListaZonas() {
+        return listaZonas;
+    }
+
+    /**
+     * Asigna una lista de zonas al recinto.
+     *
+     * @param listaZonas nueva lista de zonas.
+     */
+    public void setListaZonas(List<Zona> listaZonas) {
+        this.listaZonas = listaZonas;
     }
 }
