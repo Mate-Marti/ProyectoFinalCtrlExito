@@ -4,33 +4,106 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="550.0" prefWidth="750.0" spacing="25.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyectofinalctrlexito.viewController.CompraViewController">
-   <children>
-      <Label fx:id="lblTituloCompra" text="COMPRAR BOLETOS" textFill="#2B6CB0">
-         <font><Font name="System Bold" size="28.0" /></font>
-      </Label>
-      <Label text="Módulo de Selección de boletos para reserva de Entradas a Eventos" textFill="#718096" />
+<VBox alignment="TOP_CENTER" prefHeight="650.0" prefWidth="800.0" spacing="20.0"
+      style="-fx-background-color: #FFFFFF;"
+      xmlns="http://javafx.com/javafx/24.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="co.edu.uniquindio.poo.proyectofinalctrlexito.viewController.CompraViewController">
 
-      <VBox alignment="CENTER" maxWidth="450.0" spacing="15.0" style="-fx-background-color: #F7FAFC; -fx-border-color: #E2E8F0; -fx-background-radius: 12; -fx-border-radius: 12; -fx-padding: 25;" VBox.vgrow="NEVER">
-         <children>
-            <Label maxWidth="Infinity" text="Seleccionar Evento Disponible:" textFill="#4A5568" alignment="CENTER_LEFT">
-               <font><Font name="System Bold" size="14.0" /></font>
-            </Label>
-            <ComboBox fx:id="cbEventos" prefHeight="40.0" prefWidth="400.0" promptText="-- Elige un evento de la cartelera --" style="-fx-background-color: #FFFFFF; -fx-border-color: #CBD5E0; -fx-background-radius: 6; -fx-border-radius: 6;" />
+    <padding><Insets bottom="30.0" left="30.0" right="30.0" top="30.0" /></padding>
 
-            <Label maxWidth="Infinity" text="Seleccionar Método de Pago:" textFill="#4A5568" alignment="CENTER_LEFT">
-               <font><Font name="System Bold" size="14.0" /></font>
-            </Label>
-            <ComboBox fx:id="cbTipoPago" prefHeight="40.0" prefWidth="400.0" promptText="-- Elige cómo deseas pagar --" style="-fx-background-color: #FFFFFF; -fx-border-color: #CBD5E0; -fx-background-radius: 6; -fx-border-radius: 6;" />
+    <children>
 
-            <VBox prefHeight="10.0" /> <Button fx:id="btnComprar" onAction="#procesarCompra" prefHeight="45.0" prefWidth="400.0" style="-fx-background-color: #2B6CB0; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-size: 14px;" text="🛒 Confirmar y Adquirir Boleto" />
-         </children>
-      </VBox>
+        <Label fx:id="lblTituloCompra" text="COMPRAR BOLETOS" textFill="#2B6CB0">
+            <font><Font name="System Bold" size="28.0" /></font>
+        </Label>
+        <Label text="Módulo de Selección de boletos para reserva de Entradas a Eventos" textFill="#718096" />
 
-      <Button fx:id="btnVolver" onAction="#volver" prefHeight="38.0" prefWidth="120.0" style="-fx-background-color: #EDF2F7; -fx-text-fill: #4A5568; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Volver" />
-   </children>
-   <padding><Insets bottom="30.0" left="30.0" right="30.0" top="30.0" /></padding>
+        <!-- Tarjeta de selección -->
+        <VBox alignment="CENTER" spacing="15.0"
+              style="-fx-background-color: #F7FAFC; -fx-border-color: #E2E8F0; -fx-background-radius: 12; -fx-border-radius: 12; -fx-padding: 25;">
+            <children>
+
+                <!-- Evento -->
+                <Label maxWidth="Infinity" text="Seleccionar Evento Disponible:" textFill="#4A5568">
+                    <font><Font name="System Bold" size="14.0" /></font>
+                </Label>
+                <ComboBox fx:id="cbEventos" prefHeight="40.0" maxWidth="1.7976931348623157E308"
+                          promptText="-- Elige un evento de la cartelera --"
+                          onAction="#onEventoSeleccionado"
+                          style="-fx-background-color: #FFFFFF; -fx-border-color: #CBD5E0; -fx-background-radius: 6; -fx-border-radius: 6;" />
+
+                <!-- Zona -->
+                <Label maxWidth="Infinity" text="Seleccionar Zona:" textFill="#4A5568">
+                    <font><Font name="System Bold" size="14.0" /></font>
+                </Label>
+                <ComboBox fx:id="cbZonas" prefHeight="40.0" maxWidth="1.7976931348623157E308"
+                          promptText="-- Elige una zona --"
+                          onAction="#onZonaSeleccionada"
+                          style="-fx-background-color: #FFFFFF; -fx-border-color: #CBD5E0; -fx-background-radius: 6; -fx-border-radius: 6;" />
+
+                <!-- Método de pago -->
+                <Label maxWidth="Infinity" text="Seleccionar Método de Pago:" textFill="#4A5568">
+                    <font><Font name="System Bold" size="14.0" /></font>
+                </Label>
+                <ComboBox fx:id="cbTipoPago" prefHeight="40.0" maxWidth="1.7976931348623157E308"
+                          promptText="-- Elige cómo deseas pagar --"
+                          style="-fx-background-color: #FFFFFF; -fx-border-color: #CBD5E0; -fx-background-radius: 6; -fx-border-radius: 6;" />
+
+            </children>
+        </VBox>
+
+        <!-- Mapa de asientos -->
+        <VBox spacing="10.0"
+              style="-fx-background-color: #F7FAFC; -fx-border-color: #E2E8F0; -fx-background-radius: 12; -fx-border-radius: 12; -fx-padding: 20;">
+            <children>
+
+                <Label text="Mapa de Asientos:" textFill="#4A5568">
+                    <font><Font name="System Bold" size="14.0" /></font>
+                </Label>
+
+                <!-- Leyenda -->
+                <HBox spacing="20.0" alignment="CENTER_LEFT">
+                    <children>
+                        <Label text="■ DISPONIBLE" textFill="#276221" style="-fx-font-weight: bold;" />
+                        <Label text="■ VENDIDO"    textFill="#9B2C2C" style="-fx-font-weight: bold;" />
+                        <Label text="■ BLOQUEADO"  textFill="#7B6000" style="-fx-font-weight: bold;" />
+                    </children>
+                </HBox>
+
+                <ScrollPane fitToWidth="true" prefHeight="200.0"
+                            style="-fx-background-color: transparent; -fx-border-color: transparent;">
+                    <content>
+                        <GridPane fx:id="gridAsientos" hgap="6.0" vgap="6.0" alignment="CENTER">
+                            <padding><Insets bottom="10.0" left="10.0" right="10.0" top="10.0" /></padding>
+                        </GridPane>
+                    </content>
+                </ScrollPane>
+
+                <Label fx:id="lblAsientoSeleccionado"
+                       text="Asiento seleccionado: ninguno"
+                       textFill="#2B6CB0"
+                       style="-fx-font-weight: bold; -fx-font-size: 13px;" />
+
+            </children>
+        </VBox>
+
+        <!-- Botón confirmar -->
+        <Button fx:id="btnComprar" onAction="#procesarCompra"
+                prefHeight="45.0" maxWidth="1.7976931348623157E308"
+                style="-fx-background-color: #2B6CB0; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-size: 14px;"
+                text="🛒 Confirmar y Adquirir Boleto" />
+
+        <Button fx:id="btnVolver" onAction="#volver"
+                prefHeight="38.0" prefWidth="120.0"
+                style="-fx-background-color: #EDF2F7; -fx-text-fill: #4A5568; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;"
+                text="Volver" />
+
+    </children>
 </VBox>

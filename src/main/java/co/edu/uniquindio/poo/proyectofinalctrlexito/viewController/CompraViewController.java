@@ -1,147 +1,267 @@
 package co.edu.uniquindio.poo.proyectofinalctrlexito.viewController;
 
-import co.edu.uniquindio.poo.proyectofinalctrlexito.model.Compra;
-import co.edu.uniquindio.poo.proyectofinalctrlexito.model.Evento;
-import co.edu.uniquindio.poo.proyectofinalctrlexito.model.EstadoEvento;
-import co.edu.uniquindio.poo.proyectofinalctrlexito.model.Plataforma;
-import co.edu.uniquindio.poo.proyectofinalctrlexito.model.TipoPago;
-import co.edu.uniquindio.poo.proyectofinalctrlexito.model.Usuario;
+import co.edu.uniquindio.poo.proyectofinalctrlexito.model.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class CompraViewController {
 
-    @FXML
-    private ComboBox<Evento> cbEventos;
+    @FXML private ComboBox<Evento>    cbEventos;
+    @FXML private ComboBox<Zona>      cbZonas;
+    @FXML private ComboBox<TipoPago>  cbTipoPago;
+    @FXML private GridPane            gridAsientos;
+    @FXML private Label               lblAsientoSeleccionado;
 
-    @FXML
-    private ComboBox<TipoPago> cbTipoPago;
+    private Asiento asientoSeleccionado = null;
+    private final Map<String, Integer> mapaFilas = new HashMap<>();
 
+    // -------------------------------------------------------
+    // Inicialización
+    // -------------------------------------------------------
     @FXML
     public void initialize() {
         Plataforma plataforma = Plataforma.getInstancia();
 
-        // Cargar los eventos registrados en la plataforma
         cbEventos.setItems(FXCollections.observableArrayList(plataforma.getListaEventos()));
-
-        // Formatear visualmente las celdas del ComboBox de Eventos
         cbEventos.setCellFactory(param -> new ListCell<>() {
             @Override
             protected void updateItem(Evento item, boolean empty) {
                 super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    setText(item.getNombre() + " [" + item.getEstado() + "]");
-                }
+                setText((empty || item == null) ? null : item.getNombre() + " [" + item.getEstado() + "]");
             }
         });
         cbEventos.setConverter(new StringConverter<>() {
-            @Override
-            public String toString(Evento item) {
+            @Override public String toString(Evento item) {
                 return item == null ? "" : item.getNombre() + " [" + item.getEstado() + "]";
             }
-            @Override
-            public Evento fromString(String string) {
-                return null;
-            }
+            @Override public Evento fromString(String s) { return null; }
         });
 
-        // Cargar los valores de tu Enum TipoPago directamente al ComboBox
+        cbZonas.setConverter(new StringConverter<>() {
+            @Override public String toString(Zona z) {
+                return z == null ? "" : z.getNombre() + " — $" + z.getPreciobase();
+            }
+            @Override public Zona fromString(String s) { return null; }
+        });
+
         cbTipoPago.setItems(FXCollections.observableArrayList(TipoPago.values()));
     }
 
+    // -------------------------------------------------------
+    // Al seleccionar evento → cargar zonas
+    // -------------------------------------------------------
+    @FXML
+    void onEventoSeleccionado(ActionEvent event) {
+        Evento ev = cbEventos.getValue();
+        cbZonas.getItems().clear();
+        gridAsientos.getChildren().clear();
+        asientoSeleccionado = null;
+        lblAsientoSeleccionado.setText("Asiento seleccionado: ninguno");
+
+        if (ev != null && ev.getRecinto() != null) {
+            cbZonas.setItems(FXCollections.observableArrayList(ev.getRecinto().getListaZonas()));
+        }
+    }
+
+    // -------------------------------------------------------
+    // Al seleccionar zona → cargar mapa
+    // -------------------------------------------------------
+    @FXML
+    void onZonaSeleccionada(ActionEvent event) {
+        Zona zona = cbZonas.getValue();
+        asientoSeleccionado = null;
+        lblAsientoSeleccionado.setText("Asiento seleccionado: ninguno");
+
+        if (zona != null) {
+            cargarMapaAsientos(zona.getListaAsientos());
+        }
+    }
+
+    // -------------------------------------------------------
+    // Cargar mapa de asientos dinámicamente
+    // -------------------------------------------------------
+    public void cargarMapaAsientos(List<Asiento> asientos) {
+        gridAsientos.getChildren().clear();
+        mapaFilas.clear();
+
+        if (asientos == null || asientos.isEmpty()) return;
+
+        int filaIndex = 0;
+        for (Asiento a : asientos) {
+            String fila = a.getFila().toUpperCase();
+            if (!mapaFilas.containsKey(fila)) {
+                mapaFilas.put(fila, filaIndex);
+                filaIndex++;
+            }
+        }
+
+        for (Asiento a : asientos) {
+            Button btn = crearBotonAsiento(a);
+            int row = mapaFilas.get(a.getFila().toUpperCase());
+            int col = Integer.parseInt(a.getNumero()) - 1;
+            gridAsientos.add(btn, col, row);
+        }
+    }
+
+    // -------------------------------------------------------
+    // Crear botón por asiento
+    // -------------------------------------------------------
+    private Button crearBotonAsiento(Asiento asiento) {
+        Button btn = new Button(asiento.getFila() + asiento.getNumero());
+        btn.setPrefWidth(50.0);
+        btn.setPrefHeight(40.0);
+
+        actualizarColorBoton(btn, asiento);
+
+        boolean disponible = asiento.getEstado() == EstadoAsiento.DISPONIBLE;
+        btn.setDisable(!disponible);
+
+        if (disponible) {
+            btn.setOnAction(e -> {
+                asientoSeleccionado = asiento;
+                lblAsientoSeleccionado.setText(
+                        "Asiento seleccionado: " + asiento.getFila() + asiento.getNumero()
+                );
+            });
+        }
+
+        btn.setTooltip(new Tooltip(
+                "Asiento: " + asiento.getFila() + "-" + asiento.getNumero() +
+                        "\nEstado: " + asiento.getEstado()
+        ));
+
+        return btn;
+    }
+
+    // -------------------------------------------------------
+    // Actualizar color del botón según estado
+    // -------------------------------------------------------
+    public void actualizarColorBoton(Button btn, Asiento asiento) {
+        String color;
+        if (asiento.getEstado() == EstadoAsiento.DISPONIBLE) {
+            color = "#38A169";
+        } else if (asiento.getEstado() == EstadoAsiento.VENDIDO) {
+            color = "#E53E3E";
+        } else {
+            color = "#D69E2E";
+        }
+        btn.setStyle(
+                "-fx-background-color: " + color + ";" +
+                        "-fx-text-fill: white;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-font-size: 11px;" +
+                        "-fx-background-radius: 6;"
+        );
+    }
+
+    // -------------------------------------------------------
+    // Procesar compra
+    // -------------------------------------------------------
     @FXML
     void procesarCompra(ActionEvent event) {
-        // 1. Validar selección del evento
-        Evento eventoSeleccionado = cbEventos.getSelectionModel().getSelectedItem();
+        Evento eventoSeleccionado = cbEventos.getValue();
         if (eventoSeleccionado == null) {
-            mostrarAlerta("Error", "Selección Requerida", "Por favor, selecciona un evento de la cartelera.");
+            mostrarAlerta("Error", "Selección Requerida", "Por favor, selecciona un evento.");
             return;
         }
 
-        // 2. NUEVA VALIDACIÓN: Validar que el evento esté estrictamente PUBLICADO
         if (eventoSeleccionado.getEstado() != EstadoEvento.PUBLICADO) {
             mostrarAlerta("Venta No Disponible", "Evento Inhabilitado",
-                    "Lo sentimos, solo se pueden adquirir boletas para eventos en estado PUBLICADO.\n" +
-                            "El estado actual de este evento es: " + eventoSeleccionado.getEstado());
+                    "Solo se pueden adquirir boletas para eventos en estado PUBLICADO.\n" +
+                            "Estado actual: " + eventoSeleccionado.getEstado());
             return;
         }
 
-        // 3. Validar selección del método de pago
-        TipoPago pagoSeleccionado = cbTipoPago.getSelectionModel().getSelectedItem();
+        if (cbZonas.getValue() == null) {
+            mostrarAlerta("Error", "Selección Requerida", "Por favor, selecciona una zona.");
+            return;
+        }
+
+        if (asientoSeleccionado == null) {
+            mostrarAlerta("Error", "Selección Requerida", "Por favor, selecciona un asiento del mapa.");
+            return;
+        }
+
+        TipoPago pagoSeleccionado = cbTipoPago.getValue();
         if (pagoSeleccionado == null) {
             mostrarAlerta("Error", "Selección Requerida", "Por favor, selecciona un método de pago.");
             return;
         }
 
-        // 4. NUEVA LÓGICA: Obtener el precio real dinámico desde el Recinto y sus Zonas
-        double precioRealBoleto = 0.0;
-
-        if (eventoSeleccionado.getRecinto() != null && !eventoSeleccionado.getRecinto().getListaZonas().isEmpty()) {
-            // Extraemos el precio base de la zona del recinto (usando el formato de tu Recinto.java)
-            precioRealBoleto = eventoSeleccionado.getRecinto().getListaZonas().get(0).getPreciobase();
-        } else {
-            // Alerta de seguridad por si el administrador creó el evento pero olvidó asignarle recinto o zonas
-            mostrarAlerta("Error de Configuración", "Recinto sin Zonas",
-                    "Este evento no tiene un precio asignado porque su recinto no cuenta con zonas registradas.");
-            return;
-        }
+        double precio = cbZonas.getValue().getPreciobase();
 
         Plataforma plataforma = Plataforma.getInstancia();
-
-        // ===============================================================
-        // AQUÍ ESTÁ EL CAMBIO PRINCIPAL: USAR EL USUARIO DE LA SESIÓN
-        // ===============================================================
         Usuario usuarioLogueado = plataforma.getUsuarioSesionActiva();
 
-        // Validamos que realmente haya alguien logueado por seguridad
         if (usuarioLogueado == null) {
             mostrarAlerta("Sesión Requerida", "Acceso Denegado", "Debes iniciar sesión para realizar una compra.");
             return;
         }
 
-        // Generar un ID aleatorio de compra
-        int idCompraAleatorio = new Random().nextInt(90000) + 10000;
+        // Marcar asiento como vendido
+        asientoSeleccionado.venderAsiento();
 
-        // Construcción de la transacción pasándole la opción seleccionada y el precio real calculados dinámicamente
+        // Actualizar color en el grid
+        for (javafx.scene.Node node : gridAsientos.getChildren()) {
+            if (node instanceof Button) {
+                Button b = (Button) node;
+                if (b.getText().equals(asientoSeleccionado.getFila() + asientoSeleccionado.getNumero())) {
+                    actualizarColorBoton(b, asientoSeleccionado);
+                    b.setDisable(true);
+                    b.setOnAction(null);
+                    break;
+                }
+            }
+        }
+
+        int idCompra = new Random().nextInt(90000) + 10000;
+
         Compra nuevaCompra = new Compra.Builder()
-                .setIdCompra(idCompraAleatorio)
+                .setIdCompra(idCompra)
                 .setEvento(eventoSeleccionado)
                 .setUsuario(usuarioLogueado)
                 .setTipoPago(pagoSeleccionado)
-                .setTotal(precioRealBoleto) // ASIGNADO: Ahora usa el precio base configurado en la zona del recinto
+                .setTotal(precio)
                 .build();
 
-        // Guardar oficialmente la compra en la lista interna de tu modelo Usuario
         usuarioLogueado.agregarCompra(nuevaCompra);
 
-        mostrarAlerta("Éxito", "Boleto Adquirido", "¡Compra exitosa para " + usuarioLogueado.getNombreCompleto() + "!\n\n" +
-                " ID Compra: #" + idCompraAleatorio + "\n" +
-                " Evento: " + eventoSeleccionado.getNombre() + "\n" +
-                " Total Pagado: $" + precioRealBoleto + "\n" +
-                " Medio de Pago: " + pagoSeleccionado);
+        mostrarAlerta("Éxito", "Boleto Adquirido",
+                "¡Compra exitosa para " + usuarioLogueado.getNombreCompleto() + "!\n\n" +
+                        " ID Compra: #" + idCompra + "\n" +
+                        " Evento: " + eventoSeleccionado.getNombre() + "\n" +
+                        " Asiento: " + asientoSeleccionado.getFila() + asientoSeleccionado.getNumero() + "\n" +
+                        " Total Pagado: $" + precio + "\n" +
+                        " Medio de Pago: " + pagoSeleccionado);
 
-        // Limpiar selecciones de la pantalla
-        cbEventos.getSelectionModel().clearSelection();
+        asientoSeleccionado = null;
+        lblAsientoSeleccionado.setText("Asiento seleccionado: ninguno");
         cbTipoPago.getSelectionModel().clearSelection();
     }
 
+    // -------------------------------------------------------
+    // Volver
+    // -------------------------------------------------------
     @FXML
     void volver(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/co/edu/uniquindio/poo/proyectofinalctrlexito/Plataforma.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource(
+                "/co/edu/uniquindio/poo/proyectofinalctrlexito/Plataforma.fxml"
+        ))));
     }
 
     private void mostrarAlerta(String titulo, String encabezado, String contenido) {

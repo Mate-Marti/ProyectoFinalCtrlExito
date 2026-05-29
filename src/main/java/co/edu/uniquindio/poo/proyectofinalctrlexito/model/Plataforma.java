@@ -547,4 +547,10 @@ public class Plataforma {
     public void cerrarSesion() {
         this.usuarioSesionActiva = null;
     }
+    public Asiento crearAsiento(int idAsiento, String fila, String numero, Zona zona) {
+        Asiento nuevo = new Asiento(idAsiento, fila, numero);
+        listaAsientos.add(nuevo);
+        zona.getListaAsientos().add(nuevo);
+        return nuevo;
+    }
 }

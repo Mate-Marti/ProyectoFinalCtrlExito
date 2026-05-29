@@ -10,41 +10,40 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class AdministradorMenuViewController {
+
     @FXML
     void abrirGestionEvento(ActionEvent event) throws IOException {
         cambiarVista("/co/edu/uniquindio/poo/proyectofinalctrlexito/GestionEvento.fxml", event);
     }
+
     @FXML
     void abrirGestionZona(ActionEvent event) throws IOException {
         cambiarVista("/co/edu/uniquindio/poo/proyectofinalctrlexito/GestionZona.fxml", event);
     }
+
     @FXML
     void abrirGestionRecinto(ActionEvent event) throws IOException {
         cambiarVista("/co/edu/uniquindio/poo/proyectofinalctrlexito/GestionRecinto.fxml", event);
     }
+
     @FXML
     void abrirGestionAsiento(ActionEvent event) throws IOException {
         cambiarVista("/co/edu/uniquindio/poo/proyectofinalctrlexito/GestionAsiento.fxml", event);
     }
-    @FXML
-    void abrirGestionCompra(ActionEvent event) throws IOException {
-        cambiarVista("/co/edu/uniquindio/poo/proyectofinalctrlexito/GestionCompra.fxml", event);
-    }
+
     @FXML
     void abrirMetrica(ActionEvent event) throws IOException {
         cambiarVista("/co/edu/uniquindio/poo/proyectofinalctrlexito/Metrica.fxml", event);
     }
+
     @FXML
     void abrirIncidenciaAdmin(ActionEvent event) throws IOException {
         cambiarVista("/co/edu/uniquindio/poo/proyectofinalctrlexito/IncidenciaAdmin.fxml", event);
     }
+
     @FXML
     void abrirGestionUsuario(ActionEvent event) throws IOException {
         cambiarVista("/co/edu/uniquindio/poo/proyectofinalctrlexito/GestionUsuario.fxml", event);
-    }
-    @FXML
-    void abrirHistorialCompra(ActionEvent event) throws IOException {
-        cambiarVista("/co/edu/uniquindio/poo/proyectofinalctrlexito/HistorialCompra.fxml", event);
     }
 
     private void cambiarVista(String ruta, ActionEvent event) throws IOException {

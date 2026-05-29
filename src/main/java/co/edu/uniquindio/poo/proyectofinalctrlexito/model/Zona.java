@@ -36,28 +36,6 @@ public class Zona implements ComponenteRecinto, Visitor {
     }
 
     /**
-     * Crea una nueva instancia de una zona.
-     *
-     * @param idZona identificador único de la zona.
-     * @param nombre nombre de la zona.
-     * @param capacidad capacidad máxima de la zona.
-     * @param preciobase precio base de la zona.
-     * @return nueva instancia de Zona.
-     */
-    public static Zona crearZona(int idZona,
-                                 String nombre,
-                                 int capacidad,
-                                 double preciobase) {
-
-        return new Zona(
-                idZona,
-                nombre,
-                capacidad,
-                preciobase
-        );
-    }
-
-    /**
      * Actualiza la información básica de la zona.
      *
      * @param nombre nuevo nombre de la zona.
