@@ -7,6 +7,7 @@ public class Usuario extends Persona implements Observer, Visitor{
 
     private String metodoPago;
     private List<Compra> compras;
+    private double saldo = 0.0;
     // NUEVO
     private String contrasena;
 
@@ -133,4 +134,7 @@ public class Usuario extends Persona implements Observer, Visitor{
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
+    public double getSaldo() { return saldo; }
+    public void setSaldo(double saldo) { this.saldo = saldo; }
+    public void agregarSaldo(double monto) { this.saldo += monto; }
 }

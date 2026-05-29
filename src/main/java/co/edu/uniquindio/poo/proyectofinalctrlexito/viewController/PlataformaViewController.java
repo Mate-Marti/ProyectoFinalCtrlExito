@@ -88,7 +88,7 @@ public class PlataformaViewController {
 
     @FXML
     void abrirGestionCompraUsuario(ActionEvent event) {
-        cargarVistaExterna("/co/edu/uniquindio/poo/proyectofinalctrlexito/GestionCompraUsuario.fxml");
+        cargarVistaExterna("/co/edu/uniquindio/poo/proyectofinalctrlexito/HistorialCompra.fxml");
     }
 
     @FXML
