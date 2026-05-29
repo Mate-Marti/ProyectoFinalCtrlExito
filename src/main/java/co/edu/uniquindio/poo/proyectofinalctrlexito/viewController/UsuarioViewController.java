@@ -51,7 +51,9 @@ public class UsuarioViewController {
             return;
         }
 
-        // Guarda el usuario en sesión antes de navegar
+        plataforma.setUsuarioSesionActiva(encontrado);
+
+        // Dejamos tu código original intacto por si usas Session en otra ventana
         Session.setUsuarioActual(encontrado);
 
         // Navega a la vista principal
@@ -69,14 +71,12 @@ public class UsuarioViewController {
     @FXML
     void abrirUsuarioMenu(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource(
-                "/co/edu/uniquindio/poo/proyectofinalctrlexito/UsuarioMenu.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/co/edu/uniquindio/poo/proyectofinalctrlexito/UsuarioMenu.fxml"))));
     }
 
     @FXML
     void volver(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource(
-                "/co/edu/uniquindio/poo/proyectofinalctrlexito/Plataforma.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/co/edu/uniquindio/poo/proyectofinalctrlexito/Plataforma.fxml"))));
     }
 }

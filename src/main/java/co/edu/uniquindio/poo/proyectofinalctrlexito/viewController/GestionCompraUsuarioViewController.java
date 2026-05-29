@@ -19,20 +19,11 @@ import java.io.IOException;
 
 public class GestionCompraUsuarioViewController {
 
-    @FXML
-    private TableView<Compra> tblCompras;
-
-    @FXML
-    private TableColumn<Compra, Integer> colId;
-
-    @FXML
-    private TableColumn<Compra, String> colEvento;
-
-    @FXML
-    private TableColumn<Compra, Double> colTotal;
-
-    @FXML
-    private TableColumn<Compra, String> colEstado;
+    @FXML private TableView<Compra> tblCompras;
+    @FXML private TableColumn<Compra, Integer> colId;
+    @FXML private TableColumn<Compra, String> colEvento;
+    @FXML private TableColumn<Compra, Double> colTotal;
+    @FXML private TableColumn<Compra, String> colEstado;
 
     private ObservableList<Compra> listaComprasObservable = FXCollections.observableArrayList();
 
@@ -55,15 +46,16 @@ public class GestionCompraUsuarioViewController {
             return new SimpleStringProperty("Creada");
         });
 
-        Plataforma plataforma = Plataforma.getInstancia();
-        Usuario usuarioLogueado = null;
+        Usuario usuarioLogueado = Plataforma.getInstancia().getUsuarioSesionActiva();
 
-        for (Object p : plataforma.getListaPersonas()) {
-            if (p instanceof Usuario) {
-                usuarioLogueado = (Usuario) p;
-                break; // Tomamos el usuario en sesión
-            }
+        System.out.println("--- ABRIENDO HISTORIAL DE COMPRAS ---");
+        if (usuarioLogueado != null) {
+            System.out.println("DEBUG: El sistema cree que el usuario logueado es: " + usuarioLogueado.getNombreCompleto());
+            System.out.println("DEBUG: Cédula de este usuario: " + usuarioLogueado.getId());
+        } else {
+            System.out.println("DEBUG: ¡ATENCIÓN! No hay nadie en la sesión activa.");
         }
+        System.out.println("-------------------------------------");
 
         if (usuarioLogueado != null && usuarioLogueado.getCompras() != null) {
             listaComprasObservable.addAll(usuarioLogueado.getCompras());
@@ -74,6 +66,6 @@ public class GestionCompraUsuarioViewController {
     @FXML
     void volver(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/co/edu/uniquindio/poo/proyectofinalctrlexito/Plataforma.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/co/edu/uniquindio/poo/proyectofinalctrlexito/UsuarioMenu.fxml"))));
     }
 }

@@ -386,10 +386,6 @@ public class Plataforma {
         return eliminado;
     }
 
-    // ==========================================
-    // NUEVOS MÉTODOS ADAPTADOS PARA RECINTOS
-    // ==========================================
-
     /**
      * Crea una nueva instancia de un recinto y lo almacena en la lista de la plataforma.
      *
@@ -439,7 +435,7 @@ public class Plataforma {
     }
 
     /**
-     * Retorna en formato texto la información básica de todos los recintos registrados.
+     * Retorna en formato texto la información básica de todos recintos registrados.
      *
      * @return información agregada de los recintos en formato String.
      */
@@ -537,4 +533,18 @@ public class Plataforma {
     public List<Incidencia> getListaIncidencias() {return listaIncidencias;}
 
     public void setListaIncidencias(List<Incidencia> listaIncidencias) {this.listaIncidencias = listaIncidencias;}
+
+    private Usuario usuarioSesionActiva;
+
+    public Usuario getUsuarioSesionActiva() {
+        return usuarioSesionActiva;
+    }
+
+    public void setUsuarioSesionActiva(Usuario usuario) {
+        this.usuarioSesionActiva = usuario;
+    }
+
+    public void cerrarSesion() {
+        this.usuarioSesionActiva = null;
+    }
 }

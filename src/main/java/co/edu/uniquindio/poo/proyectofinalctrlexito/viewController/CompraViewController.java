@@ -2,6 +2,7 @@ package co.edu.uniquindio.poo.proyectofinalctrlexito.viewController;
 
 import co.edu.uniquindio.poo.proyectofinalctrlexito.model.Compra;
 import co.edu.uniquindio.poo.proyectofinalctrlexito.model.Evento;
+import co.edu.uniquindio.poo.proyectofinalctrlexito.model.EstadoEvento;
 import co.edu.uniquindio.poo.proyectofinalctrlexito.model.Plataforma;
 import co.edu.uniquindio.poo.proyectofinalctrlexito.model.TipoPago;
 import co.edu.uniquindio.poo.proyectofinalctrlexito.model.Usuario;
@@ -25,13 +26,13 @@ public class CompraViewController {
     private ComboBox<Evento> cbEventos;
 
     @FXML
-    private ComboBox<TipoPago> cbTipoPago; // NUEVO: Enlazado con el FXML
+    private ComboBox<TipoPago> cbTipoPago;
 
     @FXML
     public void initialize() {
         Plataforma plataforma = Plataforma.getInstancia();
 
-        // 1. Cargar los eventos registrados en la plataforma
+        // Cargar los eventos registrados en la plataforma
         cbEventos.setItems(FXCollections.observableArrayList(plataforma.getListaEventos()));
 
         // Formatear visualmente las celdas del ComboBox de Eventos
@@ -42,14 +43,14 @@ public class CompraViewController {
                 if (empty || item == null) {
                     setText(null);
                 } else {
-                    setText(item.getNombre() + " (" + item.getCategoria() + ")");
+                    setText(item.getNombre() + " [" + item.getEstado() + "]");
                 }
             }
         });
         cbEventos.setConverter(new StringConverter<>() {
             @Override
             public String toString(Evento item) {
-                return item == null ? "" : item.getNombre() + " (" + item.getCategoria() + ")";
+                return item == null ? "" : item.getNombre() + " [" + item.getEstado() + "]";
             }
             @Override
             public Evento fromString(String string) {
@@ -57,67 +58,80 @@ public class CompraViewController {
             }
         });
 
-        // 2. NUEVO: Cargar los valores de tu Enum TipoPago directamente al ComboBox
+        // Cargar los valores de tu Enum TipoPago directamente al ComboBox
         cbTipoPago.setItems(FXCollections.observableArrayList(TipoPago.values()));
     }
 
     @FXML
     void procesarCompra(ActionEvent event) {
-        // Validar selección del evento
+        // 1. Validar selección del evento
         Evento eventoSeleccionado = cbEventos.getSelectionModel().getSelectedItem();
         if (eventoSeleccionado == null) {
             mostrarAlerta("Error", "Selección Requerida", "Por favor, selecciona un evento de la cartelera.");
             return;
         }
 
-        // NUEVO: Validar selección del método de pago
+        // 2. NUEVA VALIDACIÓN: Validar que el evento esté estrictamente PUBLICADO
+        if (eventoSeleccionado.getEstado() != EstadoEvento.PUBLICADO) {
+            mostrarAlerta("Venta No Disponible", "Evento Inhabilitado",
+                    "Lo sentimos, solo se pueden adquirir boletas para eventos en estado PUBLICADO.\n" +
+                            "El estado actual de este evento es: " + eventoSeleccionado.getEstado());
+            return;
+        }
+
+        // 3. Validar selección del método de pago
         TipoPago pagoSeleccionado = cbTipoPago.getSelectionModel().getSelectedItem();
         if (pagoSeleccionado == null) {
             mostrarAlerta("Error", "Selección Requerida", "Por favor, selecciona un método de pago.");
             return;
         }
 
-        Plataforma plataforma = Plataforma.getInstancia();
+        // 4. NUEVA LÓGICA: Obtener el precio real dinámico desde el Recinto y sus Zonas
+        double precioRealBoleto = 0.0;
 
-        // Buscar el usuario activo en el sistema
-        Usuario usuarioLogueado = null;
-        for (Object p : plataforma.getListaPersonas()) {
-            if (p instanceof Usuario) {
-                usuarioLogueado = (Usuario) p;
-                break;
-            }
+        if (eventoSeleccionado.getRecinto() != null && !eventoSeleccionado.getRecinto().getListaZonas().isEmpty()) {
+            // Extraemos el precio base de la zona del recinto (usando el formato de tu Recinto.java)
+            precioRealBoleto = eventoSeleccionado.getRecinto().getListaZonas().get(0).getPreciobase();
+        } else {
+            // Alerta de seguridad por si el administrador creó el evento pero olvidó asignarle recinto o zonas
+            mostrarAlerta("Error de Configuración", "Recinto sin Zonas",
+                    "Este evento no tiene un precio asignado porque su recinto no cuenta con zonas registradas.");
+            return;
         }
 
-        // Si no hay usuarios registrados, creamos uno de prueba para la simulación
+        Plataforma plataforma = Plataforma.getInstancia();
+
+        // ===============================================================
+        // AQUÍ ESTÁ EL CAMBIO PRINCIPAL: USAR EL USUARIO DE LA SESIÓN
+        // ===============================================================
+        Usuario usuarioLogueado = plataforma.getUsuarioSesionActiva();
+
+        // Validamos que realmente haya alguien logueado por seguridad
         if (usuarioLogueado == null) {
-            plataforma.registrarUsuario("999", "Cliente Demo Éxito", "demo@mail.com", "3150000", "Efectivo", "1234");
-            for (Object p : plataforma.getListaPersonas()) {
-                if (p instanceof Usuario) {
-                    usuarioLogueado = (Usuario) p;
-                    break;
-                }
-            }
+            mostrarAlerta("Sesión Requerida", "Acceso Denegado", "Debes iniciar sesión para realizar una compra.");
+            return;
         }
 
         // Generar un ID aleatorio de compra
         int idCompraAleatorio = new Random().nextInt(90000) + 10000;
 
-        // Construcción de la transacción pasándole la opción seleccionada dinámicamente
+        // Construcción de la transacción pasándole la opción seleccionada y el precio real calculados dinámicamente
         Compra nuevaCompra = new Compra.Builder()
                 .setIdCompra(idCompraAleatorio)
                 .setEvento(eventoSeleccionado)
                 .setUsuario(usuarioLogueado)
-                .setTipoPago(pagoSeleccionado) // ASIGNADO: El TipoPago elegido por el usuario
-                .setTotal(75000.0) // Tarifa estándar simulada
+                .setTipoPago(pagoSeleccionado)
+                .setTotal(precioRealBoleto) // ASIGNADO: Ahora usa el precio base configurado en la zona del recinto
                 .build();
 
         // Guardar oficialmente la compra en la lista interna de tu modelo Usuario
         usuarioLogueado.agregarCompra(nuevaCompra);
 
-        mostrarAlerta("Éxito", "Boleto Adquirido", "¡Compra exitosa!\n\n" +
-                "🎫 ID Compra: #" + idCompraAleatorio + "\n" +
-                "📅 Evento: " + eventoSeleccionado.getNombre() + "\n" +
-                "💳 Medio de Pago: " + pagoSeleccionado);
+        mostrarAlerta("Éxito", "Boleto Adquirido", "¡Compra exitosa para " + usuarioLogueado.getNombreCompleto() + "!\n\n" +
+                " ID Compra: #" + idCompraAleatorio + "\n" +
+                " Evento: " + eventoSeleccionado.getNombre() + "\n" +
+                " Total Pagado: $" + precioRealBoleto + "\n" +
+                " Medio de Pago: " + pagoSeleccionado);
 
         // Limpiar selecciones de la pantalla
         cbEventos.getSelectionModel().clearSelection();

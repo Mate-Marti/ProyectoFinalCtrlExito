@@ -1,6 +1,8 @@
 package co.edu.uniquindio.poo.proyectofinalctrlexito.viewController;
 
+import co.edu.uniquindio.poo.proyectofinalctrlexito.model.Persona;
 import co.edu.uniquindio.poo.proyectofinalctrlexito.model.Plataforma;
+import co.edu.uniquindio.poo.proyectofinalctrlexito.model.Usuario;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.TextFormatter;
@@ -66,7 +68,6 @@ public class RegistroUsuarioViewController {
             return;
         }
 
-        // NUEVO
         if (!contrasena.equals(confirmarContrasena)) {
             lblErrorContrasena.setVisible(true);
             return;
@@ -79,6 +80,13 @@ public class RegistroUsuarioViewController {
         }
 
         plataforma.registrarUsuario(id, nombre, correo, telefono, "", contrasena);
+
+        for (Persona p : plataforma.getListaPersonas()) {
+            if (p instanceof Usuario && p.getId().equals(id)) {
+                plataforma.setUsuarioSesionActiva((Usuario) p);
+                break;
+            }
+        }
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Registro Exitoso");
