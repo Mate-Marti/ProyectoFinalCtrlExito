@@ -1,8 +1,6 @@
 package co.edu.uniquindio.poo.proyectofinalctrlexito.viewController;
 
-import co.edu.uniquindio.poo.proyectofinalctrlexito.model.EstadoEvento;
-import co.edu.uniquindio.poo.proyectofinalctrlexito.model.Evento;
-import co.edu.uniquindio.poo.proyectofinalctrlexito.model.Plataforma;
+import co.edu.uniquindio.poo.proyectofinalctrlexito.model.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,56 +13,34 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ActualizarEventoViewController implements Initializable {
 
-    // ── Búsqueda ─────────────────────────────────────────────────
-    @FXML private TextField          txtIdBuscar;
-
-    // ── Datos editables ──────────────────────────────────────────
-    @FXML private TextField          txtNombre;
-    @FXML private TextField          txtDescripcion;
-    @FXML private TextField          txtCategoria;
-
-    // ── Estado ───────────────────────────────────────────────────
-    @FXML private Label              lblEstadoActual;
+    @FXML private TextField              txtIdBuscar;
+    @FXML private TextField              txtNombre;
+    @FXML private TextField              txtDescripcion;
+    @FXML private TextField              txtCategoria;
+    @FXML private Label                  lblEstadoActual;
     @FXML private ComboBox<EstadoEvento> comboEstado;
 
-    // ── Evento cargado actualmente ───────────────────────────────
     private Evento eventoActual;
-
     private final Plataforma plataforma = Plataforma.getInstancia();
 
-    // ============================================================
-    // INICIALIZACIÓN
-    // ============================================================
-
-    /**
-     * Carga los valores del enum EstadoEvento en el ComboBox de estado.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         comboEstado.setItems(FXCollections.observableArrayList(EstadoEvento.values()));
     }
 
-    // ============================================================
-    // ACCIONES
-    // ============================================================
-
-    /**
-     * Busca el evento por ID y carga sus datos en el formulario.
-     */
     @FXML
     void buscarEvento(ActionEvent event) {
-
         String id = txtIdBuscar.getText().trim();
         if (id.isEmpty()) {
             mostrarAlerta("Campo vacío", "Ingresa el ID del evento a buscar.");
             return;
         }
 
-        // Buscar en la lista de eventos de la plataforma
         Evento encontrado = null;
         for (Evento e : plataforma.getListaEventos()) {
             if (e.getIdEvento().equals(id)) {
@@ -79,7 +55,6 @@ public class ActualizarEventoViewController implements Initializable {
             return;
         }
 
-        // Cargar datos en el formulario
         eventoActual = encontrado;
         txtNombre.setText(eventoActual.getNombre());
         txtDescripcion.setText(eventoActual.getDescripcion());
@@ -88,13 +63,8 @@ public class ActualizarEventoViewController implements Initializable {
         comboEstado.setValue(eventoActual.getEstado());
     }
 
-    /**
-     * Actualiza nombre, categoría y descripción del evento
-     * llamando a {@link Evento#actualizarEvento}.
-     */
     @FXML
     void actualizarEvento(ActionEvent event) {
-
         if (eventoActual == null) {
             mostrarAlerta("Sin evento", "Primero busca un evento por ID.");
             return;
@@ -107,8 +77,6 @@ public class ActualizarEventoViewController implements Initializable {
             return;
         }
 
-        // Llama al método del modelo — la fecha se mantiene con new Date() ya que
-        // actualizarEvento() la recibe pero el constructor la inicializa igual
         eventoActual.actualizarEvento(
                 txtNombre.getText().trim(),
                 txtCategoria.getText().trim(),
@@ -120,14 +88,9 @@ public class ActualizarEventoViewController implements Initializable {
                 "El evento \"" + eventoActual.getNombre() + "\" fue actualizado correctamente.");
     }
 
-    /**
-     * Cambia el estado del evento usando los métodos específicos de Evento
-     * (publicarEvento, pausarEvento, cancelarEvento, finalizarEvento).
-     * Esto activa el patrón Observer notificando a los usuarios suscritos.
-     */
+    // ✅ onAction="#cambiarEstado" — debe tener ActionEvent como parámetro
     @FXML
     void cambiarEstado(ActionEvent event) {
-
         if (eventoActual == null) {
             mostrarAlerta("Sin evento", "Primero busca un evento por ID.");
             return;
@@ -139,33 +102,33 @@ public class ActualizarEventoViewController implements Initializable {
             return;
         }
 
-        // Usa el método correspondiente del modelo para activar el Observer
         switch (nuevoEstado) {
             case PUBLICADO:
                 eventoActual.publicarEvento();
+                notificarTodosLosUsuarios("📢 El evento \"" + eventoActual.getNombre() + "\" ha sido PUBLICADO.");
                 break;
             case PAUSADO:
                 eventoActual.pausarEvento();
+                notificarTodosLosUsuarios("⏸ El evento \"" + eventoActual.getNombre() + "\" ha sido PAUSADO.");
                 break;
             case CANCELADO:
                 eventoActual.cancelarEvento();
+                notificarTodosLosUsuarios("❌ El evento \"" + eventoActual.getNombre() + "\" ha sido CANCELADO.");
                 break;
             case FINALIZADO:
                 eventoActual.finalizarEvento();
+                notificarTodosLosUsuarios("✅ El evento \"" + eventoActual.getNombre() + "\" ha FINALIZADO.");
                 break;
             case BORRADOR:
+                // Solo cambia estado, sin notificar
                 eventoActual.setEstado(EstadoEvento.BORRADOR);
                 break;
         }
 
         lblEstadoActual.setText("Estado actual: " + eventoActual.getEstado());
-        mostrarAlerta("Estado actualizado",
-                "Estado cambiado a: " + nuevoEstado);
+        mostrarAlerta("Estado actualizado", "Estado cambiado a: " + nuevoEstado);
     }
 
-    /**
-     * Regresa a la vista de gestión de eventos.
-     */
     @FXML
     void volver(ActionEvent event) {
         try {
@@ -183,9 +146,16 @@ public class ActualizarEventoViewController implements Initializable {
         }
     }
 
-    // ============================================================
-    // UTILIDADES
-    // ============================================================
+    private void notificarTodosLosUsuarios(String mensaje) {
+        List<Persona> personas = plataforma.getListaPersonas();
+        if (personas == null) return;
+        for (Persona p : personas) {
+            if (p instanceof Usuario) {
+                GestorNotificaciones.getInstancia()
+                        .agregarNotificacion(((Usuario) p).getId(), mensaje);
+            }
+        }
+    }
 
     private void limpiarFormulario() {
         eventoActual = null;

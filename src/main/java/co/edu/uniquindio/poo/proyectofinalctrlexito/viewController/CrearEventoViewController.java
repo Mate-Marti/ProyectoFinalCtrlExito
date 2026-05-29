@@ -14,11 +14,10 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
-
 public class CrearEventoViewController implements Initializable {
 
-    // ── Formulario ──────────────────────────────────────────────
     @FXML private TextField         txtIdEvento;
     @FXML private TextField         txtNombreEvento;
     @FXML private TextField         txtDescripcionEvento;
@@ -26,7 +25,6 @@ public class CrearEventoViewController implements Initializable {
     @FXML private TextField         txtIdRecinto;
     @FXML private Label             lblRecintoInfo;
 
-    // ── Tabla ────────────────────────────────────────────────────
     @FXML private TableView<Evento>           tablaEventos;
     @FXML private TableColumn<Evento, String> colId;
     @FXML private TableColumn<Evento, String> colNombre;
@@ -34,7 +32,6 @@ public class CrearEventoViewController implements Initializable {
     @FXML private TableColumn<Evento, String> colEstado;
     @FXML private TableColumn<Evento, String> colDesc;
 
-    // ── Singleton ────────────────────────────────────────────────
     private final Plataforma plataforma = Plataforma.getInstancia();
 
     @Override
@@ -118,7 +115,6 @@ public class CrearEventoViewController implements Initializable {
         Evento nuevoEvento = factory.crearEvento(idEvento, nombre, descripcion, new Date());
         plataforma.getListaEventos().add(nuevoEvento);
 
-        // Asociar recinto si se ingresó ID
         String idRecintoTexto = txtIdRecinto.getText().trim();
         if (!idRecintoTexto.isEmpty()) {
             try {
@@ -142,10 +138,17 @@ public class CrearEventoViewController implements Initializable {
                     "El evento \"" + nombre + "\" (" + tipo + ") fue creado con estado: BORRADOR.");
         }
 
+        // Solo notifica si el evento NO está en BORRADOR
+        if (nuevoEvento.getEstado() != EstadoEvento.BORRADOR) {
+            notificarUsuariosSobreEvento(
+                    "📅 Nuevo evento: \"" + nuevoEvento.getNombre()
+                            + "\" (" + nuevoEvento.getCategoria() + ") — Estado: "
+                            + nuevoEvento.getEstado().toString()
+            );
+        }
+
         refrescarTabla();
         limpiarFormulario();
-
-        // ✅ NUEVO: notifica a la pantalla principal para que refresque las tarjetas
         notificarPlataforma();
     }
 
@@ -166,7 +169,17 @@ public class CrearEventoViewController implements Initializable {
         }
     }
 
-    // ✅ NUEVO: avisa al PlataformaViewController que refresque el HBox
+    private void notificarUsuariosSobreEvento(String mensaje) {
+        List<Persona> personas = plataforma.getListaPersonas();
+        if (personas == null) return;
+        for (Persona p : personas) {
+            if (p instanceof Usuario) {
+                GestorNotificaciones.getInstancia()
+                        .agregarNotificacion(((Usuario) p).getId(), mensaje);
+            }
+        }
+    }
+
     private void notificarPlataforma() {
         PlataformaViewController plataformaVC = PlataformaViewController.getInstancia();
         if (plataformaVC != null) {

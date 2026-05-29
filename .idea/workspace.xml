@@ -5,19 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fe85cae1-292e-4066-8370-ead08f3a35a3" name="Changes" comment="mejoras">
-      <change afterPath="$PROJECT_DIR$/src/test/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/AdministradorTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/AsientoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/CompraTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/EntradaTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/IncidenciaTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/MedioPagoAdapterTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/PlataformaTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/RecintoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/UsuarioTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/VerificacionAdminTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/ZonaTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/GestorNotificaciones.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/NotificacionViewController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/co/edu/uniquindio/poo/proyectofinalctrlexito/Notificacion.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/EventoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/EventoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Administrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Administrador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Evento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Evento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Incidencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Incidencia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Plataforma.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Plataforma.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Recinto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Recinto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/ActualizarEventoViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/ActualizarEventoViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/CrearEventoViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/CrearEventoViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/CrearZonaViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/CrearZonaViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/IncidenciaAdminViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/IncidenciaAdminViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/IncidenciaViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/IncidenciaViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/PlataformaViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/PlataformaViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/SolucionIncidenciaViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/SolucionIncidenciaViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/co/edu/uniquindio/poo/proyectofinalctrlexito/Plataforma.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/co/edu/uniquindio/poo/proyectofinalctrlexito/Plataforma.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/AdministradorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/AdministradorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/IncidenciaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/co/edu/uniquindio/poo/proyectofinalctrlexito/model/IncidenciaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/AdministradorMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/AdministradorMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/Compra.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/Compra.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/GestionCompraUsuario.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/GestionCompraUsuario.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/Incidencia.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/Incidencia.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/Plataforma.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/Plataforma.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Administrador.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Administrador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Evento.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Evento.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Incidencia.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Incidencia.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Plataforma.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/model/Plataforma.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/AdministradorMenuViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/AdministradorMenuViewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/CompraViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/CompraViewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/CrearEventoViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/CrearEventoViewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/GestionCompraUsuarioViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/GestionCompraUsuarioViewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/IncidenciaViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/IncidenciaViewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/PlataformaViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/PlataformaViewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/RegistroUsuarioViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/edu/uniquindio/poo/proyectofinalctrlexito/viewController/RegistroUsuarioViewController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -280,7 +302,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779984302029</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="mejoras">
+      <option name="closed" value="true" />
+      <created>1779997652557</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1779997652557</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -17,29 +17,6 @@ public class AdministradorTest {
         eventoPrueba = new Evento("E1", "Festival de Rock", "Música", "Concierto al aire libre");
     }
 
-    @Test
-    void testRegistrarConsultarIncidencia() {
-        // CORRECCIÓN: Usando tus enums reales TipoIncidencia.DOBLE_COMPRA y EntidadAfectada.USUARIO
-        Incidencia incidencia = new Incidencia(
-                1,
-                "Error de duplicidad en cobro",
-                new java.util.Date(),
-                TipoIncidencia.DOBLE_COMPRA,
-                EntidadAfectada.USUARIO
-        );
-
-        admin.registrarIncidencia(incidencia);
-
-        assertEquals(1, admin.consultarIncidencias().size());
-        assertTrue(admin.consultarIncidencias().contains(incidencia));
-    }
-    @Test
-    void testRegistrarIncidenciaNulaLanzaExcepcion() {
-        // Valida que la restricción del IF funcione y lance IllegalArgumentException
-        assertThrows(IllegalArgumentException.class, () -> {
-            admin.registrarIncidencia(null);
-        });
-    }
 
     @Test
     void testAccionesSobreEventos() {

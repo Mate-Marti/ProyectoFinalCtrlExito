@@ -1,5 +1,6 @@
 package co.edu.uniquindio.poo.proyectofinalctrlexito.viewController;
 
+import co.edu.uniquindio.poo.proyectofinalctrlexito.model.GestorNotificaciones;
 import co.edu.uniquindio.poo.proyectofinalctrlexito.model.Incidencia;
 import co.edu.uniquindio.poo.proyectofinalctrlexito.model.EstadoIncidencia;
 import javafx.event.ActionEvent;
@@ -41,6 +42,13 @@ public class SolucionIncidenciaViewController {
 
         if (i != null) {
             i.setEstado(EstadoIncidencia.RESUELTA);
+
+            // ✅ NUEVO: enviar notificación al usuario que reportó la incidencia
+            if (i.getIdUsuarioReportante() != null) {
+                String mensaje = "✅ Tu incidencia \"" + i.getAsunto() + "\" ha sido resuelta.\n"
+                        + "Respuesta del soporte: " + txtSolucion.getText().trim();
+                GestorNotificaciones.getInstancia().agregarNotificacion(i.getIdUsuarioReportante(), mensaje);
+            }
         }
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

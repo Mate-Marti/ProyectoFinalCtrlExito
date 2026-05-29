@@ -47,6 +47,11 @@ public class IncidenciaViewController {
                 asunto
         );
 
+        // ✅ NUEVO: guardar quién reportó la incidencia
+        if (Session.getUsuarioActual() != null) {
+            nuevaIncidencia.setIdUsuarioReportante(Session.getUsuarioActual().getId());
+        }
+
         Plataforma.getInstancia().getListaIncidencias().add(nuevaIncidencia);
 
         Alert alertExito = new Alert(Alert.AlertType.INFORMATION);

@@ -34,12 +34,6 @@ public class CrearZonaViewController {
 
     private Recinto recintoActual;
 
-    /**
-     * Inicializa los componentes de la interfaz de JavaFX de manera automática.
-     * Configura dinámicamente las columnas de la tabla mapeándolas con la clase Zona.
-     * Además carga todas las zonas existentes de todos los recintos para mostrar
-     * el estado actualizado cada vez que se entra a la vista.
-     */
     @FXML
     public void initialize() {
         TableColumn<Zona, Integer> colId = new TableColumn<>("ID");
@@ -62,16 +56,11 @@ public class CrearZonaViewController {
         tablaZonas.getColumns().addAll(colId, colNombre, colCapacidad, colPrecio);
         tablaZonas.setItems(zonaObservableList);
 
-        // NUEVO: carga todas las zonas de todos los recintos al entrar a la vista
         for (Recinto recinto : Plataforma.getInstancia().getListaRecintos()) {
             zonaObservableList.addAll(recinto.getListaZonas());
         }
     }
 
-    /**
-     * Captura el evento del botón "Guardar Zona", procesa la información de los text fields,
-     * registra el objeto en el Recinto y lo añade al listado visual.
-     */
     @FXML
     void onAgregarZona(ActionEvent event) {
         try {
@@ -112,11 +101,16 @@ public class CrearZonaViewController {
                 return;
             }
 
+            // ✅ NUEVO: validar que la capacidad no supere la del recinto
+            if (capacidad > recintoActual.getCapacidadMaxima()) {
+                mostrarAlerta("Capacidad Inválida",
+                        "La capacidad de la zona (" + capacidad + ") no puede superar " +
+                                "la capacidad máxima del recinto (" + recintoActual.getCapacidadMaxima() + ").");
+                return;
+            }
+
             recintoActual.crearZona(id, nombre, capacidad, precio);
-
-            // MODIFICADO: se agrega directamente el objeto del modelo para mantener consistencia
             zonaObservableList.add(recintoActual.consultarZona(id));
-
             limpiarCampos();
 
         } catch (NumberFormatException e) {
@@ -124,9 +118,6 @@ public class CrearZonaViewController {
         }
     }
 
-    /**
-     * Limpia los inputs del formulario una vez culminado el registro exitoso.
-     */
     private void limpiarCampos() {
         txtIdRecinto.clear();
         txtIdZona.clear();
@@ -136,9 +127,6 @@ public class CrearZonaViewController {
         recintoActual = null;
     }
 
-    /**
-     * Despliega mensajes emergentes de advertencia o error en pantalla.
-     */
     private void mostrarAlerta(String titulo, String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.WARNING);
         alerta.setTitle(titulo);
@@ -147,9 +135,6 @@ public class CrearZonaViewController {
         alerta.showAndWait();
     }
 
-    /**
-     * Modifica el Recinto de trabajo asignado al controlador actual para coordinar los CRUD.
-     */
     public void setRecintoActual(Recinto recinto) {
         this.recintoActual = recinto;
     }

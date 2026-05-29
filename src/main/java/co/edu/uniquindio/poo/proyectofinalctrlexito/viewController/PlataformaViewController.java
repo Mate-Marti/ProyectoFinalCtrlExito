@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -98,6 +99,32 @@ public class PlataformaViewController {
     @FXML
     void abrirRegistro(ActionEvent event) {
         cargarVistaExterna("/co/edu/uniquindio/poo/proyectofinalctrlexito/RegistroUsuario.fxml");
+    }
+
+    // ✅ NUEVO: abre la vista de notificaciones en ventana modal
+    @FXML
+    void abrirNotificaciones(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/co/edu/uniquindio/poo/proyectofinalctrlexito/Notificacion.fxml")
+            );
+            Parent root = loader.load();
+
+            NotificacionViewController controller = loader.getController();
+
+            Stage stage = new Stage();
+            stage.setTitle("Notificaciones");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+
+            controller.setStage(stage);
+            stage.show();
+
+        } catch (IOException e) {
+            System.err.println("Error cargando vista: Notificacion.fxml");
+            e.printStackTrace();
+        }
     }
 
     public void cargarVistaExterna(String rutaFxml) {

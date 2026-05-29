@@ -20,9 +20,9 @@
    </VBox>
    <VBox maxWidth="500.0" spacing="15.0" style="-fx-background-color: #FFF5F5; -fx-padding: 20; -fx-background-radius: 10; -fx-border-color: #FEB2B2;">
       <children>
-         <TextField fx:id="txtAsunto" prefHeight="35.0" promptText="Asunto crítico del fallo" />
+         <TextField fx:id="txtAsunto"  prefHeight="35.0" promptText="Asunto crítico del fallo" />
          <TextArea fx:id="txtDescripcion" prefHeight="150.0" promptText="Escribe detalladamente la incidencia...." wrapText="true" />
-         <Button fx:id="btnEnviarReporte" maxWidth="1.7976931348623157E308" prefHeight="40.0" style="-fx-background-color: #E53E3E; -fx-text-fill: white; -fx-font-weight: bold;" text="Enviar Reporte a Soporte" />
+         <Button fx:id="btnEnviarReporte" onAction="#enviarReporte" maxWidth="1.7976931348623157E308" prefHeight="40.0" style="-fx-background-color: #E53E3E; -fx-text-fill: white; -fx-font-weight: bold;" text="Enviar Reporte a Soporte" />
       </children>
    </VBox>
    <Button fx:id="btnVolver" onAction="#volver" prefHeight="38.0" prefWidth="120.0" style="-fx-background-color: #EDF2F7; -fx-text-fill: #4A5568; -fx-font-weight: bold; -fx-background-radius: 8;" text="Regresar" />

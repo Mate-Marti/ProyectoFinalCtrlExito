@@ -399,11 +399,10 @@ public class Plataforma {
      * @param ciudad ciudad donde se encuentra el recinto.
      * @return nuevo objeto Recinto creado.
      */
-    public Recinto crearRecinto(int idRecinto,
-                                String nombre,
-                                String direccion,
-                                String ciudad) {
-        Recinto nuevo = new Recinto(idRecinto, nombre, direccion, ciudad);
+    public Recinto crearRecinto(int idRecinto, String nombre,
+                                String direccion, String ciudad,
+                                int capacidadMaxima) {
+        Recinto nuevo = new Recinto(idRecinto, nombre, direccion, ciudad, capacidadMaxima);
         listaRecintos.add(nuevo);
         return nuevo;
     }

@@ -113,14 +113,13 @@ public class CrearRecintoViewController implements Initializable {
     // -------------------------------------------------------
     // Acción: Registrar Recinto
     // -------------------------------------------------------
-
     @FXML
     void guardarRecinto(ActionEvent event) {
 
         String nombre    = txtNombreRecinto.getText().trim();
         String capacidad = txtCapacidadMax.getText().trim();
-        String direccion = txtDireccion.getText().trim();   // NUEVO
-        String ciudad    = txtCiudad.getText().trim();      // NUEVO
+        String direccion = txtDireccion.getText().trim();
+        String ciudad    = txtCiudad.getText().trim();
 
         if (nombre.isEmpty() || capacidad.isEmpty() || direccion.isEmpty() || ciudad.isEmpty()) {
             mostrarAlerta("Campos vacíos", "Por favor completa todos los campos.");
@@ -128,20 +127,18 @@ public class CrearRecintoViewController implements Initializable {
         }
 
         int nuevoId = Plataforma.getInstancia().getListaRecintos().size() + 1;
+        int capacidadMaxima = Integer.parseInt(capacidad); // ✅ convertir
 
         Recinto nuevoRecinto = Plataforma.getInstancia().crearRecinto(
-                nuevoId,
-                nombre,
-                direccion,   // ANTES era ""
-                ciudad       // ANTES era ""
+                nuevoId, nombre, direccion, ciudad, capacidadMaxima // ✅ pasar capacidad
         );
 
         listaObservable.add(nuevoRecinto);
 
         txtNombreRecinto.clear();
         txtCapacidadMax.clear();
-        txtDireccion.clear();   // NUEVO
-        txtCiudad.clear();      // NUEVO
+        txtDireccion.clear();
+        txtCiudad.clear();
 
         mostrarAlerta("Éxito", "Recinto \"" + nombre + "\" registrado correctamente.");
     }

@@ -1,5 +1,6 @@
 package co.edu.uniquindio.poo.proyectofinalctrlexito.viewController;
 
+import co.edu.uniquindio.poo.proyectofinalctrlexito.model.GestorNotificaciones;
 import co.edu.uniquindio.poo.proyectofinalctrlexito.model.Incidencia;
 import co.edu.uniquindio.poo.proyectofinalctrlexito.model.Plataforma;
 import co.edu.uniquindio.poo.proyectofinalctrlexito.model.EstadoIncidencia;
@@ -31,7 +32,7 @@ public class IncidenciaAdminViewController {
     public void initialize() {
         colAsunto.setCellValueFactory(new PropertyValueFactory<>("asunto"));
         colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-        colEstado.setCellValueFactory(new PropertyValueFactory<>("estado")); // Vinculación con el atributo 'estado'
+        colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
 
         if (Plataforma.getInstancia().getListaIncidencias() != null) {
             tablaIncidencias.getItems().addAll(Plataforma.getInstancia().getListaIncidencias());
@@ -68,6 +69,14 @@ public class IncidenciaAdminViewController {
             alert.setContentText("Por favor, selecciona una incidencia de la tabla para posponerla.");
             alert.showAndWait();
             return;
+        }
+
+        seleccionada.ponerEnRevision();
+
+        // ✅ NUEVO: enviar notificación de "en revisión" al usuario
+        if (seleccionada.getIdUsuarioReportante() != null) {
+            String mensaje = "🔍 Tu incidencia \"" + seleccionada.getAsunto() + "\" está siendo revisada por el equipo de soporte.";
+            GestorNotificaciones.getInstancia().agregarNotificacion(seleccionada.getIdUsuarioReportante(), mensaje);
         }
 
         Alert alertPospuesto = new Alert(Alert.AlertType.INFORMATION);
