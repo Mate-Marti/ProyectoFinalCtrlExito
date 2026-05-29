@@ -19,10 +19,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import java.util.Random;
+
 public class CrearZonaViewController {
 
     @FXML private TextField txtIdRecinto;
-    @FXML private TextField txtIdZona;
+    // txtIdZona ELIMINADO — el ID se genera automáticamente
     @FXML private TextField txtNombreZona;
     @FXML private TextField txtCapacidad;
     @FXML private TextField txtPrecioBase;
@@ -34,6 +36,21 @@ public class CrearZonaViewController {
 
     private Recinto recintoActual;
 
+    // ─────────────────────────────────────────────────────────────
+    //  Genera un ID de zona aleatorio (100-999) que no esté en uso
+    // ─────────────────────────────────────────────────────────────
+    private int generarIdZona() {
+        Random random = new Random();
+        int id;
+        do {
+            id = 100 + random.nextInt(900); // rango 100 – 999
+        } while (recintoActual != null && recintoActual.consultarZona(id) != null);
+        return id;
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    //  Inicialización de la tabla (sin cambios respecto al original)
+    // ─────────────────────────────────────────────────────────────
     @FXML
     public void initialize() {
         TableColumn<Zona, Integer> colId = new TableColumn<>("ID");
@@ -61,11 +78,16 @@ public class CrearZonaViewController {
         }
     }
 
+    // ─────────────────────────────────────────────────────────────
+    //  Acción del botón "Guardar Zona"
+    // ─────────────────────────────────────────────────────────────
     @FXML
     void onAgregarZona(ActionEvent event) {
         try {
-            if (txtIdRecinto.getText().isEmpty() || txtIdZona.getText().isEmpty() ||
-                    txtNombreZona.getText().isEmpty() || txtCapacidad.getText().isEmpty() ||
+            // Validación de campos (ya NO incluye txtIdZona)
+            if (txtIdRecinto.getText().isEmpty() ||
+                    txtNombreZona.getText().isEmpty() ||
+                    txtCapacidad.getText().isEmpty()  ||
                     txtPrecioBase.getText().isEmpty()) {
                 mostrarAlerta("Campos Incompletos", "Por favor rellene todos los campos de texto.");
                 return;
@@ -78,11 +100,10 @@ public class CrearZonaViewController {
             }
 
             int idRecinto = Integer.parseInt(txtIdRecinto.getText().trim());
-            int id        = Integer.parseInt(txtIdZona.getText().trim());
             int capacidad = Integer.parseInt(txtCapacidad.getText().trim());
             double precio = Double.parseDouble(txtPrecioBase.getText().trim());
 
-            if (idRecinto < 0 || id < 0 || capacidad < 0 || precio < 0) {
+            if (idRecinto < 0 || capacidad < 0 || precio < 0) {
                 mostrarAlerta("Valores Inválidos", "No se permiten números negativos.");
                 return;
             }
@@ -101,7 +122,6 @@ public class CrearZonaViewController {
                 return;
             }
 
-            // ✅ NUEVO: validar que la capacidad no supere la del recinto
             if (capacidad > recintoActual.getCapacidadMaxima()) {
                 mostrarAlerta("Capacidad Inválida",
                         "La capacidad de la zona (" + capacidad + ") no puede superar " +
@@ -109,24 +129,32 @@ public class CrearZonaViewController {
                 return;
             }
 
-            recintoActual.crearZona(id, nombre, capacidad, precio);
-            zonaObservableList.add(recintoActual.consultarZona(id));
+            // ID de zona generado automáticamente (ya no se toma del campo de texto)
+            int idZona = generarIdZona();
+
+            recintoActual.crearZona(idZona, nombre, capacidad, precio);
+            zonaObservableList.add(recintoActual.consultarZona(idZona));
             limpiarCampos();
 
         } catch (NumberFormatException e) {
-            mostrarAlerta("Error de Formato", "Asegúrese de ingresar solo números enteros en ID/Capacidad, y números decimales en Precio.");
+            mostrarAlerta("Error de Formato", "Asegúrese de ingresar solo números enteros en ID Recinto/Capacidad, y números decimales en Precio.");
         }
     }
 
+    // ─────────────────────────────────────────────────────────────
+    //  Limpia los campos del formulario (sin txtIdZona)
+    // ─────────────────────────────────────────────────────────────
     private void limpiarCampos() {
         txtIdRecinto.clear();
-        txtIdZona.clear();
         txtNombreZona.clear();
         txtCapacidad.clear();
         txtPrecioBase.clear();
         recintoActual = null;
     }
 
+    // ─────────────────────────────────────────────────────────────
+    //  Helpers (sin cambios respecto al original)
+    // ─────────────────────────────────────────────────────────────
     private void mostrarAlerta(String titulo, String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.WARNING);
         alerta.setTitle(titulo);

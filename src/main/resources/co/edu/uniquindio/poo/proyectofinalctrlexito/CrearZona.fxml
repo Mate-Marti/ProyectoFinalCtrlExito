@@ -23,8 +23,8 @@
                 <VBox prefWidth="280.0" spacing="12.0"
                       style="-fx-background-color: #F7FAFC; -fx-padding: 15; -fx-background-radius: 8; -fx-border-color: #E2E8F0;">
                     <children>
+                        <!-- Solo se pide el ID del Recinto; el ID de Zona se genera automáticamente -->
                         <TextField fx:id="txtIdRecinto"  prefHeight="35.0" promptText="ID del Recinto al que pertenece" />
-                        <TextField fx:id="txtIdZona"     prefHeight="35.0" promptText="ID de la Zona (Ej: 1)" />
                         <TextField fx:id="txtNombreZona" prefHeight="35.0" promptText="Nombre Zona (Ej: VIP)" />
                         <TextField fx:id="txtCapacidad"  prefHeight="35.0" promptText="Capacidad Máxima (Ej: 500)" />
                         <TextField fx:id="txtPrecioBase" prefHeight="35.0" promptText="Precio Base de Entrada ($)" />
